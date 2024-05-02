@@ -134,7 +134,7 @@
                 <p><div style="background:white;padding:9px;border-radius:10px;display:inline-block">{!! $qrCode !!}</div></p>
                 <div>
                     <p style="font-size:15px">
-                        Fadila Fitra Kusuma Jaya
+                        Fadila Fitra Kusuma Jaya Anjay
                     </p>
                     <p style="font-size:15px">
                         NISN : 0011306181
