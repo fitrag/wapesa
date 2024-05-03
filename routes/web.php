@@ -16,5 +16,6 @@ use App\Http\Controllers\{IndexController, AuthController};
 
 Route::get('/', IndexController::class.'@index');
 Route::get('/login', AuthController::class.'@login');
+Route::get('/admin/dashboard', IndexController::class.'@dashboard');
 
 Route::get('/qrcode', IndexController::class.'@qrcode');

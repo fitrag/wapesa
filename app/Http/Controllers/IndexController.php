@@ -15,4 +15,7 @@ class IndexController extends Controller
         $qrCode = QrCode::size(80)->generate('0011306181');
         return view('qrcode', compact('qrCode'));
     }
+    public function dashboard(){
+        return view('admin.dashboard');
+    }
 }
