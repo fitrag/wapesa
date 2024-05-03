@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\IndexController;
+use App\Http\Controllers\{IndexController, AuthController};
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +15,6 @@ use App\Http\Controllers\IndexController;
 */
 
 Route::get('/', IndexController::class.'@index');
+Route::get('/login', AuthController::class.'@login');
+
 Route::get('/qrcode', IndexController::class.'@qrcode');
