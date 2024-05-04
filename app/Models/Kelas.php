@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Kelas extends Model
 {
     use HasFactory;
+
+    public function index ()
+    {
+        
+    }
 }
