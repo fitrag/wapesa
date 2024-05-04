@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{IndexController, AuthController, UserController};
+use App\Http\Controllers\{IndexController, AuthController, UserController, KelasController};
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +24,8 @@ Route::get('/logout', AuthController::class.'@logout')->name('logout');
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/dashboard', IndexController::class.'@dashboard')->name('dashboard');
     Route::get('/admin/user', UserController::class.'@index')->name('data-user');
+    
+    Route::resource('/kelas', KelasController::class);
 });
 
 Route::get('/qrcode', IndexController::class.'@qrcode');
