@@ -24,6 +24,7 @@ Route::get('/logout', AuthController::class.'@logout')->name('logout');
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/dashboard', IndexController::class.'@dashboard')->name('dashboard');
     Route::get('/admin/user', UserController::class.'@index')->name('data-user');
+    Route::post('/admin/user', UserController::class.'@store')->name('store-user');
 });
 
 Route::get('/qrcode', IndexController::class.'@qrcode');
