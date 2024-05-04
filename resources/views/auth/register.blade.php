@@ -26,13 +26,28 @@
               <img src="{{ asset('img/logo1.png') }}" alt="logo" width="100" class="shadow-light rounded-circle">
             </div>
             <h4 class="text-center mb-4">Sistem Informasi Manajemen</h4>
-
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
             <div class="card card-primary">
               <div class="card-header"><h4>Register</h4></div>
 
               <div class="card-body">
                 <form method="POST" action="{{ route('register-store') }}" class="needs-validation" novalidate="">
                   @csrf
+                  <div class="form-group">
+                    <label for="name">Nama</label>
+                    <input id="name" type="name" class="form-control" name="name" tabindex="1" required autofocus>
+                    @error('name')
+                      <div class="alert alert-danger">Mohon di isi nama anda</div>
+                    @enderror
+                    <div class="invalid-feedback">
+                      Mohon di isi name anda
+                    </div>
+                  </div>
                   <div class="form-group">
                     <label for="username">Username</label>
                     <input id="username" type="username" class="form-control" name="username" tabindex="1" required autofocus>

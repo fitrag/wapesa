@@ -100,6 +100,14 @@
                 <form method="POST" action="{{ route('store-user') }}" class="needs-validation" novalidate="">
                   @csrf
                   <div class="form-group">
+                    <label for="name">Nama</label>
+                    <input id="name" type="name" class="form-control" name="name" tabindex="1" required autofocus>
+                    <div class="invalid-feedback">
+                      Mohon di isi name anda
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
                     <label for="username">Username</label>
                     <input id="username" type="username" class="form-control" name="username" tabindex="1" required autofocus>
                     <div class="invalid-feedback">

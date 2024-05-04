@@ -22,7 +22,7 @@ class UserController extends Controller
         ]);
 
         $user = User::create([
-            'name'      => $req->username,
+            'name'      => $req->name,
             'username'  => $req->username,
             'level'     => $req->level,
             'is_walas'  => $req->is_walas,
