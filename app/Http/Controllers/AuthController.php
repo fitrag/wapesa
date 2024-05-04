@@ -34,15 +34,15 @@ class AuthController extends Controller
         ]);
 
         $user = User::create([
-            'name'      => $req->name,
+            'name'      => $req->username,
             'username'  => $req->username,
             'password'  => Hash::make($req->password),
         ]);
 
         if($user){
-            return redirect()->route('login')->with('success', 'Berhasil mendaftarkan akun, silahkan login');
+            return redirect()->route('login');
         }else{
-            return redirect()->back()->with('error', 'Gagal mendaftarkan akun, silahkan coba lagi');
+            return redirect()->back();
         }
     }
     public function logout(){

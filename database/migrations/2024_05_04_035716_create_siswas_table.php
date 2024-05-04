@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('no_tlp',15)->nullable();
             $table->string('nm_ayah',200)->nullable();
             $table->foreignId('kelas_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('siswa_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

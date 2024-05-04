@@ -26,11 +26,8 @@
               <img src="{{ asset('img/logo1.png') }}" alt="logo" width="100" class="shadow-light rounded-circle">
             </div>
             <h4 class="text-center mb-4">Sistem Informasi Manajemen</h4>
-            @if(session('success'))
-                    <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
             @if(session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
+              <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
             <div class="card card-primary">
               <div class="card-header"><h4>Login</h4></div>
