@@ -34,6 +34,16 @@
                 <form method="POST" action="{{ route('register-store') }}" class="needs-validation" novalidate="">
                   @csrf
                   <div class="form-group">
+                    <label for="name">Nama</label>
+                    <input id="name" type="name" class="form-control" name="name" tabindex="1" required autofocus>
+                    @error('name')
+                      <div class="alert alert-danger">Mohon di isi nama anda</div>
+                    @enderror
+                    <div class="invalid-feedback">
+                      Mohon di isi name anda
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label for="username">Username</label>
                     <input id="username" type="username" class="form-control" name="username" tabindex="1" required autofocus>
                     @error('username')
