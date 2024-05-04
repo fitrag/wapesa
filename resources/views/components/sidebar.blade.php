@@ -17,7 +17,7 @@
         <li><a class="nav-link"><i class="fas fa-user-tie"></i> <span>Data Guru</span></a></li>
         
         <li class="menu-header">Absensi</li>
-        <li><a class="nav-link"><i class="fas fa-qrcode"></i> <span>Scan Kartu</span></a></li>
+        <li class="{{ request()->is('admin/absensi*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('scan-absensi') }}"><i class="fas fa-qrcode"></i> <span>Scan Kartu</span></a></li>
         <li><a class="nav-link"><i class="fas fa-fingerprint"></i> <span>Tambah Absensi</span></a></li>
         <li><a class="nav-link"><i class="fas fa-calendar"></i> <span>Lihat Absensi</span></a></li>
         <li><a class="nav-link"><i class="fas fa-print"></i> <span>Cetak Absensi</span></a></li>
