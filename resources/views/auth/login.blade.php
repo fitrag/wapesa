@@ -25,7 +25,7 @@
             <div class="login-brand">
               <img src="{{ asset('img/logo1.png') }}" alt="logo" width="100" class="shadow-light rounded-circle">
             </div>
-            <h4 class="text-center mb-4">Sistem Informasi Akademik</h4>
+            <h4 class="text-center mb-4">Sistem Informasi Manajemen</h4>
 
             <div class="card card-primary">
               <div class="card-header"><h4>Login</h4></div>
