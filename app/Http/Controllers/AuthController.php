@@ -40,9 +40,9 @@ class AuthController extends Controller
         ]);
 
         if($user){
-            return redirect()->route('login');
+            return redirect()->route('login')->with('success', 'Berhasil mendaftarkan akun, silahkan login');
         }else{
-            return redirect()->back();
+            return redirect()->back()->with('error', 'Gagal mendaftarkan akun, silahkan coba lagi');
         }
     }
     public function logout(){
