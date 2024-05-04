@@ -25,7 +25,7 @@
     <div class="section-body">
     <h2 class="section-title">Data User</h2>
     <p class="section-lead">
-        We use 'DataTables' made by @SpryMedia. You can check the full documentation <a href="https://datatables.net/">here</a>.
+        Semua data user yang digunakan untuk masuk ke sistem
     </p>
 
     <div class="row">
