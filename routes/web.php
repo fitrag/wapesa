@@ -14,7 +14,7 @@ use App\Http\Controllers\{IndexController, AuthController, UserController};
 |
 */
 
-Route::get('/', IndexController::class.'@index');
+Route::get('/', IndexController::class.'@index')->name('index');
 Route::get('/login', AuthController::class.'@login')->name('login');
 Route::post('/login', AuthController::class.'@auth')->name('auth');
 Route::get('/register', AuthController::class.'@register')->name('register');
