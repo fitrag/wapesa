@@ -37,8 +37,8 @@
             <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
         <div class="card">
-            <div class="card-header">
-            <button class="btn btn-primary" data-target="#exampleModal" data-toggle="modal">Tambah data user</button>
+            <div class="">
+            <button class="btn btn-primary float-right mb-4" data-target="#exampleModal" data-toggle="modal">Tambah data user</button>
             </div>
             <div class="card-body">
             <div class="table-responsive">
