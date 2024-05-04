@@ -32,7 +32,18 @@ class UserController extends Controller
         if($user){
             return redirect()->route('data-user')->with('success', 'Berhasil menambahkan data');
         }else{
-            return redirect()->back()->with('success', 'Gagal menambahkan data');;
+            return redirect()->back()->with('success', 'Gagal menambahkan data');
+        }
+    }
+    public function edit(User $user){
+        return view('admin.user.edit', compact('user'));
+    }
+    public function update(Request $req, User $user){
+        $update = $user->update($req->all());
+        if($update){
+            return redirect()->route('data-user')->with('success', 'Berhasil memperbarui data');
+        }else{
+            return redirect()->back()->with('success', 'Gagal memperbarui data');
         }
     }
     public function destroy(User $user){

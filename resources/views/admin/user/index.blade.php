@@ -66,7 +66,7 @@
                             <td>{{ $user->is_walas }}</td>
                             <td>{{ $user->level }}</td>
                             <td>
-                                <a href="" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="{{ route('edit-user', ['user' => $user->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
                                 <form action="{{ route('delete-user', ['user' => $user->id]) }}" method="post">
                                     @csrf
                                     @method('DELETE')

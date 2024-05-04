@@ -23,8 +23,12 @@ Route::get('/logout', AuthController::class.'@logout')->name('logout');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/dashboard', IndexController::class.'@dashboard')->name('dashboard');
+
+
     Route::get('/admin/user', UserController::class.'@index')->name('data-user');
     Route::post('/admin/user', UserController::class.'@store')->name('store-user');
+    Route::get('/admin/user/{user:id}/edit', UserController::class.'@edit')->name('edit-user');
+    Route::put('/admin/user/{user:id}/update', UserController::class.'@update')->name('update-user');
     Route::delete('/admin/user/{user:id}/delete', UserController::class.'@destroy')->name('delete-user');
 });
 
