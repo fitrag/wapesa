@@ -13,6 +13,16 @@
         <li><a class="nav-link" href="{{ route('data-user') }}"><i class="fas fa-users"></i> <span>Data User</span></a></li>
         <li><a class="nav-link"><i class="fas fa-user-graduate"></i> <span>Data Siswa</span></a></li>
         <li><a class="nav-link"><i class="fas fa-user-tie"></i> <span>Data Guru</span></a></li>
+        
+        <li class="menu-header">Absensi</li>
+        <li><a class="nav-link"><i class="fas fa-qrcode"></i> <span>Scan Kartu</span></a></li>
+        <li><a class="nav-link"><i class="fas fa-fingerprint"></i> <span>Tambah Absensi</span></a></li>
+        <li><a class="nav-link"><i class="fas fa-calendar"></i> <span>Lihat Absensi</span></a></li>
+        <li><a class="nav-link"><i class="fas fa-print"></i> <span>Cetak Absensi</span></a></li>
+
+
+        <li class="menu-header">Lainnya</li>
+        <li><a class="nav-link"><i class="fas fa-cog"></i> <span>Pengaturan</span></a></li>
         <li class="dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
             <ul class="dropdown-menu">
@@ -21,15 +31,19 @@
                 <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
             </ul>
         </li>
-        <li><a class="nav-link"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
-        <li class="menu-header">Lainnya</li>
-        <li><a class="nav-link"><i class="fas fa-cog"></i> <span>Pengaturan</span></a></li>
+        @endif
+        @if(auth()->user()->is_walas)
+        <li class="menu-header">Absensi</li>
+        <li><a class="nav-link"><i class="fas fa-qrcode"></i> <span>Scan Kartu</span></a></li>
+        <li><a class="nav-link"><i class="fas fa-fingerprint"></i> <span>Tambah Absensi</span></a></li>
+        <li><a class="nav-link"><i class="fas fa-calendar"></i> <span>Lihat Absensi</span></a></li>
+        <li><a class="nav-link"><i class="fas fa-print"></i> <span>Cetak Absensi</span></a></li>
         @endif
     </ul>
 
     <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-    <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
-        <i class="fas fa-rocket"></i> Documentation
+    <a href="#" class="btn btn-primary btn-lg btn-block btn-icon-split">
+        <i class="fas fa-desktop"></i> v1.0.0
     </a>
     </div>
 </aside>
