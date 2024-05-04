@@ -9,7 +9,7 @@
         <li class="menu-header">Dashboard</li>
         <li class="active"><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Dashboard</span></a></li>
         <li class="menu-header">Data Master</li>
-        <li><a class="nav-link"><i class="fas fa-users"></i> <span>Data User</span></a></li>
+        <li><a class="nav-link" href="{{ route('data-user') }}"><i class="fas fa-users"></i> <span>Data User</span></a></li>
         <li><a class="nav-link"><i class="fas fa-user-graduate"></i> <span>Data Siswa</span></a></li>
         <li><a class="nav-link"><i class="fas fa-user-tie"></i> <span>Data Guru</span></a></li>
         <li class="dropdown">
