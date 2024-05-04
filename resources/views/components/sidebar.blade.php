@@ -1,6 +1,6 @@
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-    <a href="index.html">SIAKAD WAPESA</a>
+    <a href="index.html">SIM WAPESA</a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
     <a href="index.html">SW</a>
