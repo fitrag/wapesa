@@ -32,6 +32,12 @@
 
         <div class="row">
             <div class="col-12">
+                @if(session('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
+                @if(session('error'))
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
                 <div class="card">
                     <div class="card-header">
                         <a href="" class="btn btn-primary" data-toggle="modal" data-target="#bukaModal">Tambah Data User</a>
@@ -62,7 +68,12 @@
                                         <td>{{ $user->level }}</td>
                                         <td>{{ $user->is_walas }}</td>
                                         <td>
-                                            <a href="" class="btn btn-primary">Lihat</a>
+                                            <a href="" class="btn m-1 btn-primary"><i class="fas fa-pencil-alt"></i></a>
+                                            <form action="{{ route('delete-user', ['user' => $user->id]) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn m-1 btn-danger"><i class="fas fa-trash"></i></button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -104,7 +115,6 @@
                         <option value="">-- Pilih level user --</option>
                         <option value="admin">Admin</option>
                         <option value="guru">Guru</option>
-                        <option value="siswa">Siswa</option>
                     </select>
                     <div class="invalid-feedback">
                       Mohon di isi level anda
@@ -124,11 +134,11 @@
                     	<label for="" class="control-label">Status Wali Kelas :</label>
                     </div>
                     <div class="custom-control custom-radio">
-                      <input type="radio" id="customRadio1" value="0" name="is_walas" class="custom-control-input">
+                      <input type="radio" id="customRadio1" value="0" name="is_walas" required class="custom-control-input">
                       <label class="custom-control-label" for="customRadio1">Tidak</label>
                     </div>
                     <div class="custom-control custom-radio">
-                      <input type="radio" id="customRadio2" value="1" name="is_walas" class="custom-control-input">
+                      <input type="radio" id="customRadio2" value="1" name="is_walas" required class="custom-control-input">
                       <label class="custom-control-label" for="customRadio2">Iya</label>
                     </div>
                     <div class="invalid-feedback">

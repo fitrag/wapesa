@@ -25,6 +25,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/dashboard', IndexController::class.'@dashboard')->name('dashboard');
     Route::get('/admin/user', UserController::class.'@index')->name('data-user');
     Route::post('/admin/user', UserController::class.'@store')->name('store-user');
+    Route::delete('/admin/user/{user:id}/delete', UserController::class.'@destroy')->name('delete-user');
 });
 
 Route::get('/qrcode', IndexController::class.'@qrcode');
