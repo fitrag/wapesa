@@ -22,7 +22,7 @@ class AuthController extends Controller
             return redirect()->route('dashboard');
         }
 
-        return back();
+        return back()->with('error', 'Akun tidak ditemukan, silahkan hubungi administrator');
     }
     public function register(){
         return view('auth.register');
@@ -44,5 +44,11 @@ class AuthController extends Controller
         }else{
             return redirect()->back();
         }
+    }
+    public function logout(){
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect()->route('login');
     }
 }
