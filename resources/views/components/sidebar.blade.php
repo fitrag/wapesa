@@ -20,7 +20,6 @@
         <li class="{{ request()->is('admin/siswa*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.siswa') }}"><i class="fas fa-user-graduate"></i> <span>Data Siswa</span></a></li>
         <li><a class="nav-link"><i class="fas fa-school"></i> <span>Data Kelas</span></a></li>
         <li class="{{ request()->is('admin/jenis-bayar*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.jenis-bayar') }}"><i class="fas fa-money-check"></i> <span>Data Jenis Bayar</span></a></li>
->>>>>>> 717df61348c35cf01ec54056fa9dfadb9380c3de
         <li><a class="nav-link"><i class="fas fa-chalkboard"></i> <span>Data Tahun Pelajaran</span></a></li>
         <li><a class="nav-link"><i class="fas fa-user-tie"></i> <span>Data Guru</span></a></li>
         
