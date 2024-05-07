@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Data Jenis Bayar'])
+@extends('layouts.app', ['title' => 'Data Siswa'])
 
 @push('scripts')
 <!-- JS Libraies -->
@@ -55,10 +55,10 @@
                     @foreach($siswas as $siswa)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $siswa }}</td>
-                            <td>{{ $siswa}}</td>
-                            <td>{{ $siswa }}</td>
-                            <td>{{ $siswa }}</td>
+                            <td>{{ $siswa->nis }}</td>
+                            <td>{{ $siswa->nisn}}</td>
+                            <td>{{ $siswa->nm_siswa }}</td>
+                            <td>{{ $siswa->kelas_id }}</td>
                             <td>
                                 <a href="{{ route('admin.jenis-bayar.edit', ['siswa' => $siswa->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
                                 <form action="{{ route('admin.jenis-bayar.delete', ['siswa' => $siswa->id]) }}" method="post">
@@ -129,6 +129,40 @@
                     @enderror
                     <div class="invalid-feedback">
                       Mohon di isi keterangan
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                      Tambah
+                    </button>
+                    <input type="reset" value="Reset" class="btn btn-danger btn-lg btn-block">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" tabindex="-1" role="dialog" id="importExcel">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Import data via excel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form method="POST" action="{{ route('admin.jenis-bayar.store') }}" class="needs-validation" novalidate="">
+                  @csrf
+                  <div class="form-group">
+                    <label for="name">Pilih file</label>
+                    <input id="file" type="file" class="form-control" name="file" tabindex="1" required>
+                    @error('file')
+                      <div class="alert alert-danger">Mohon di filenya</div>
+                    @enderror
+                    <div class="invalid-feedback">
+                      Mohon di isi filenya
                     </div>
                   </div>
 
