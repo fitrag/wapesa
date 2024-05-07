@@ -14,17 +14,15 @@
 
 <section class="section">
     <div class="section-header">
-    <h1>Data Jenis Bayar</h1>
+    <h1>Data Jenis Pembayaran</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
         <div class="breadcrumb-item"><a href="#">Data Master</a></div>
-        <div class="breadcrumb-item">Data Jenis Bayar</div>
+        <div class="breadcrumb-item">Data Jenis Pembayaran</div>
     </div>
     </div>
 
     <div class="section-body">
-    <h2 class="section-title">Data Jenis Bayar</h2>
-
     <div class="row">
         <div class="col-12">
             @if(session('success'))
@@ -34,7 +32,7 @@
             <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
         <div class="card">
-            <div class="">
+            <div class="p-3">
             <button class="btn btn-primary float-right mb-4" data-target="#exampleModal" data-toggle="modal">Tambah jenis pembayaran</button>
             </div>
             <div class="card-body">

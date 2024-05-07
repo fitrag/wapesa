@@ -12,7 +12,7 @@
         <li class="menu-header">Data Master</li>
         <li class="{{ request()->is('admin/user*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('data-user') }}"><i class="fas fa-users"></i> <span>Data User</span></a></li>
         <li><a class="nav-link"><i class="fas fa-user-graduate"></i> <span>Data Siswa</span></a></li>
-        <li><a class="nav-link"><i class="fas fa-money-check"></i> <span>Data Jenis Bayar</span></a></li>
+        <li class="{{ request()->is('admin/jenis-bayar*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.jenis-bayar') }}"><i class="fas fa-money-check"></i> <span>Data Jenis Bayar</span></a></li>
         <li><a class="nav-link"><i class="fas fa-chalkboard"></i> <span>Data Tahun Pelajaran</span></a></li>
         <li><a class="nav-link"><i class="fas fa-user-tie"></i> <span>Data Guru</span></a></li>
         

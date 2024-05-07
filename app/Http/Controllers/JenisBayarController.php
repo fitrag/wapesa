@@ -38,7 +38,7 @@ class JenisBayarController extends Controller
 
         $jenisbayar = Jenisbayar::create($request->all());
         if($jenisbayar){
-            return redirect()->route('admin.jenis-bayar.index')->with('success', 'Berhasil menambahkan data jenis pembayaran');
+            return redirect()->route('admin.jenis-bayar')->with('success', 'Berhasil menambahkan data jenis pembayaran');
         }else{
             return redirect()->back()->with('success', 'Gagal menambahkan data jenis pembayaran');
         }

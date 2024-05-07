@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
     
     Route::get('/admin/absensi/scan', AbsensiController::class.'@scan')->name('scan-absensi');
     Route::resource('admin/jenis-bayar', JenisBayarController::class)
-    ->name('index', 'admin.jenis-bayar.index')
+    ->name('index', 'admin.jenis-bayar')
     ->name('store', 'admin.jenis-bayar.store');
 });
 
