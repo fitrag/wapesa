@@ -32,7 +32,9 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/admin/user/{user:id}/delete', UserController::class.'@destroy')->name('delete-user');
     
     Route::get('/admin/absensi/scan', AbsensiController::class.'@scan')->name('scan-absensi');
-    Route::resource('admin/jenis-bayar', JenisBayarController::class);
+    Route::resource('admin/jenis-bayar', JenisBayarController::class)
+    ->name('index', 'admin.jenis-bayar.index')
+    ->name('store', 'admin.jenis-bayar.store');
 });
 
 Route::get('/qrcode', IndexController::class.'@qrcode');

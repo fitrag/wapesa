@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Jenisbayar;
 
 class JenisBayarController extends Controller
 {
@@ -11,7 +12,8 @@ class JenisBayarController extends Controller
      */
     public function index()
     {
-        //
+        $jenis_bayars = Jenisbayar::all();
+        return view('admin.jenis-bayar.index', compact('jenis_bayars'));
     }
 
     /**
@@ -27,7 +29,20 @@ class JenisBayarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nm_jenis'      => 'required',
+            'biaya'         => 'required',
+            'kelas'         => 'required',
+            'ket'           => 'required',
+        ]);
+
+        $jenisbayar = Jenisbayar::create($request->all());
+        if($jenisbayar){
+            return redirect()->route('admin.jenis-bayar.index')->with('success', 'Berhasil menambahkan data jenis pembayaran');
+        }else{
+            return redirect()->back()->with('success', 'Gagal menambahkan data jenis pembayaran');
+        }
+
     }
 
     /**
