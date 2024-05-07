@@ -12,7 +12,7 @@ class JenisBayarController extends Controller
      */
     public function index()
     {
-        $jenis_bayars = Jenisbayar::all();
+        $jenis_bayars = Jenisbayar::orderBy('kelas')->get();
         return view('admin.jenis-bayar.index', compact('jenis_bayars'));
     }
 
@@ -72,8 +72,13 @@ class JenisBayarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Jenisbayar $jenis_bayar)
     {
-        //
+        $delete = $jenis_bayar->delete();
+        if($delete){
+            return redirect()->route('admin.jenis-bayar')->with('success', 'Berhasil menghapus data jenis pembayaran');
+        }else{
+            return redirect()->back()->with('success', 'Gagal menghapus data jenis pembayaran');
+        }
     }
 }

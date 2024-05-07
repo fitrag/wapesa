@@ -60,7 +60,7 @@
                             <td>{{ $jenis_bayar->ket }}</td>
                             <td>
                                 <a href="" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
-                                <form action="" method="post">
+                                <form action="{{ route('admin.jenis-bayar.delete', ['jenis_bayar' => $jenis_bayar->id]) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger m-1"><i class="fas fa-trash"></i></button>
