@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 
 class KelasController extends Controller
@@ -11,7 +12,8 @@ class KelasController extends Controller
      */
     public function index()
     {
-        //
+        $kelas = Kelas::all();
+        return view('admin.kelas.index_kls', compact('kelas'));
     }
 
     /**
@@ -27,7 +29,17 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nm_kls'      => 'required',
+            'alias'         => 'required',
+        ]);
+
+        $kelas = Kelas::create($request->all());
+        if($kelas){
+            return redirect()->route('admin.kelas')->with('success', 'Berhasil menambahkan data kelas');
+        }else{
+            return redirect()->back()->with('success', 'Gagal menambahkan data kelas');
+        }
     }
 
     /**

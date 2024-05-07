@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, SiswaController, JenisBayarController};
+use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, SiswaController, JenisBayarController, KelasController};
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +39,13 @@ Route::middleware(['auth'])->group(function () {
     ->name('edit', 'admin.siswa.edit')
     ->name('update', 'admin.siswa.update')
     ->name('destroy', 'admin.siswa.delete');
+    
+    Route::resource('admin/kelas', KelasController::class)
+    ->name('index', 'admin.kelas')
+    ->name('store', 'admin.kelas.store')
+    ->name('edit', 'admin.kelas.edit')
+    ->name('update', 'admin.kelas.update')
+    ->name('destroy', 'admin.kelas.delete');
 
     Route::resource('admin/jenis-bayar', JenisBayarController::class)
     ->name('index', 'admin.jenis-bayar')

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->double('biaya');
             $table->string('kelas',6);
             $table->string('ket',50);
+            $table->string('tp_id',8);
             $table->timestamps();
         });
     }

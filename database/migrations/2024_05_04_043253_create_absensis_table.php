@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nis',15);
             $table->foreignId('kelas_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('tp_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('siswa_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('semester',8);
             $table->enum('hadir',['h','s','i','a','al']);
             $table->string('ket',25)->nullable();
