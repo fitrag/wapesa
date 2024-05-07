@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController};
+use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, JenisBayarController};
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/admin/user/{user:id}/delete', UserController::class.'@destroy')->name('delete-user');
     
     Route::get('/admin/absensi/scan', AbsensiController::class.'@scan')->name('scan-absensi');
+    Route::resource('admin/jenis-bayar', JenisBayarController::class);
 });
 
 Route::get('/qrcode', IndexController::class.'@qrcode');
