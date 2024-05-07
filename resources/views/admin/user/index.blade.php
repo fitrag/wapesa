@@ -66,8 +66,8 @@
                             <td>{{ $user->is_walas }}</td>
                             <td>{{ $user->level }}</td>
                             <td>
-                                <a href="{{ route('edit-user', ['user' => $user->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
-                                <form action="{{ route('delete-user', ['user' => $user->id]) }}" method="post">
+                                <a href="{{ route('admin.user.edit', ['user' => $user->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
+                                <form action="{{ route('admin.user.delete', ['user' => $user->id]) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger m-1"><i class="fas fa-trash"></i></button>
@@ -95,7 +95,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form method="POST" action="{{ route('store-user') }}" class="needs-validation" novalidate="">
+                <form method="POST" action="{{ route('admin.user.store') }}" class="needs-validation" novalidate="">
                   @csrf
                   <div class="form-group">
                     <label for="name">Nama</label>

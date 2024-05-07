@@ -34,7 +34,7 @@
             @endif
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="{{ route('update-user', ['user' => $user->id]) }}" class="needs-validation" novalidate="">
+                <form method="POST" action="{{ route('admin.user.update', ['user' => $user->id]) }}" class="needs-validation" novalidate="">
                   @csrf
                   @method('PUT')
                   <div class="form-group">

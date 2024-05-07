@@ -30,7 +30,7 @@ class UserController extends Controller
         ]);
 
         if($user){
-            return redirect()->route('data-user')->with('success', 'Berhasil menambahkan data');
+            return redirect()->route('admin.user')->with('success', 'Berhasil menambahkan data');
         }else{
             return redirect()->back()->with('success', 'Gagal menambahkan data');
         }
@@ -41,7 +41,7 @@ class UserController extends Controller
     public function update(Request $req, User $user){
         $update = $user->update($req->all());
         if($update){
-            return redirect()->route('data-user')->with('success', 'Berhasil memperbarui data');
+            return redirect()->route('admin.user')->with('success', 'Berhasil memperbarui data');
         }else{
             return redirect()->back()->with('success', 'Gagal memperbarui data');
         }
@@ -49,7 +49,7 @@ class UserController extends Controller
     public function destroy(User $user){
         $delete = $user->delete();
         if($delete){
-            return redirect()->route('data-user')->with('success', 'Data berhasil dihapus');
+            return redirect()->route('admin.user')->with('success', 'Data berhasil dihapus');
         }else{
             return redirect()->back()->with('success', 'Gagal menambahkan data');;
         }
