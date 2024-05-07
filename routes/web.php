@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, KelasController};
+use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController};
 
 /*
 |--------------------------------------------------------------------------
@@ -30,10 +30,22 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/user/{user:id}/edit', UserController::class.'@edit')->name('edit-user');
     Route::put('/admin/user/{user:id}/update', UserController::class.'@update')->name('update-user');
     Route::delete('/admin/user/{user:id}/delete', UserController::class.'@destroy')->name('delete-user');
-
-    Route::resource('/kelas', KelasController::class);
     
     Route::get('/admin/absensi/scan', AbsensiController::class.'@scan')->name('scan-absensi');
+
+    Route::resource('admin/siswa', SiswaController::class)
+    ->name('index', 'admin.siswa')
+    ->name('store', 'admin.siswa.store')
+    ->name('edit', 'admin.siswa.edit')
+    ->name('update', 'admin.siswa.update')
+    ->name('destroy', 'admin.siswa.delete');
+
+    Route::resource('admin/jenis-bayar', JenisBayarController::class)
+    ->name('index', 'admin.jenis-bayar')
+    ->name('store', 'admin.jenis-bayar.store')
+    ->name('edit', 'admin.jenis-bayar.edit')
+    ->name('update', 'admin.jenis-bayar.update')
+    ->name('destroy', 'admin.jenis-bayar.delete');
 });
 
 Route::get('/qrcode', IndexController::class.'@qrcode');

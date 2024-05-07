@@ -5,18 +5,31 @@
 <script type="text/javascript" src="{{ asset('instascan.min.js') }}"></script>
 <script type="text/javascript">
     let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+    var videoSelect = document.querySelector('select#videoSource');
     scanner.addListener('scan', function (content) {
         document.getElementById('hasil').innerHTML = content
     });
     Instascan.Camera.getCameras().then(function (cameras) {
+        cameras.map((el, id) => {
+            const option = document.createElement('option');
+            option.value = id;
+            option.text = el.name
+            videoSelect.appendChild(option)
+        })
+
+        
         if (cameras.length > 0) {
-        scanner.start(cameras[0]);
-    } else {
-        console.error('No cameras found.');
-    }
+            scanner.start(cameras[0]);
+        } else {
+            console.error('No cameras found.');
+        }
     }).catch(function (e) {
-    console.error(e);
+        console.error(e);
     });
+    videoSelect.addEventListener('change', function(e){
+        e.preventDefault();
+        console.log(this.value)
+    })
 </script>
 @endpush
 
@@ -45,7 +58,14 @@
         <div class="card">
             <div class="card-body">
                 <div class="text-center">
+                    <div class="select mb-4">
+                        <label for="videoSource">Video source: </label><select id="videoSource" class="form-control"></select>
+                    </div>
                     <video id="preview" class="mw-100"></video>
+                </div>
+                <div class="my-2">
+                    <h3>Nama : </h3>
+                    <h3>NIS : <span id="hasil"></span></h3>
                 </div>
             </div>
         </div>

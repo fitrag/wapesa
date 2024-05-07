@@ -10,10 +10,17 @@
         <li class="{{ request()->is('admin/dashboard') ? 'active' : '' }}"><a class="nav-link" href="{{ route('dashboard') }}"><i class="far fa-square"></i> <span>Dashboard</span></a></li>
         @if(auth()->user()->level == 'admin')
         <li class="menu-header">Data Master</li>
+<<<<<<< HEAD
         <li class="{{ request()->is('admin/user*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('data-user') }}"><i class="fas fa-users"></i> <span>Data User</span></a></li>
         <li><a class="{{ request()->is('admin/user*') ? 'active' : '' }}"><i class="fas fa-user-graduate"></i> <span>Data Siswa</span></a></li>
         <li><a class="nav-link"><i class="fas fa-user-graduate"></i> <span>Data Kelas</span></a></li>
         <li><a class="nav-link"><i class="fas fa-money-check"></i> <span>Data Jenis Bayar</span></a></li>
+=======
+        <li class="{{ request()->is('admin/user*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.user') }}"><i class="fas fa-users"></i> <span>Data User</span></a></li>
+        <li class="{{ request()->is('admin/siswa*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.siswa') }}"><i class="fas fa-user-graduate"></i> <span>Data Siswa</span></a></li>
+        <li><a class="nav-link"><i class="fas fa-school"></i> <span>Data Kelas</span></a></li>
+        <li class="{{ request()->is('admin/jenis-bayar*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.jenis-bayar') }}"><i class="fas fa-money-check"></i> <span>Data Jenis Bayar</span></a></li>
+>>>>>>> 717df61348c35cf01ec54056fa9dfadb9380c3de
         <li><a class="nav-link"><i class="fas fa-chalkboard"></i> <span>Data Tahun Pelajaran</span></a></li>
         <li><a class="nav-link"><i class="fas fa-user-tie"></i> <span>Data Guru</span></a></li>
         
@@ -35,7 +42,7 @@
             </ul>
         </li>
         @endif
-        @if(auth()->user()->is_walas)
+        @if(auth()->user()->level != 'admin' AND auth()->user()->is_walas)
         <li class="menu-header">Absensi</li>
         <li><a class="nav-link"><i class="fas fa-qrcode"></i> <span>Scan Kartu</span></a></li>
         <li><a class="nav-link"><i class="fas fa-fingerprint"></i> <span>Tambah Absensi</span></a></li>

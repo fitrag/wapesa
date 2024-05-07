@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Data User'])
+@extends('layouts.app', ['title' => 'Data Jenis Bayar'])
 
 @push('scripts')
 <!-- JS Libraies -->
@@ -14,20 +14,15 @@
 
 <section class="section">
     <div class="section-header">
-    <h1>Data User</h1>
+    <h1>Data Jenis Pembayaran</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
         <div class="breadcrumb-item"><a href="#">Data Master</a></div>
-        <div class="breadcrumb-item">Data User</div>
+        <div class="breadcrumb-item">Data Jenis Pembayaran</div>
     </div>
     </div>
 
     <div class="section-body">
-    <h2 class="section-title">Data User</h2>
-    <p class="section-lead">
-        Semua data user yang digunakan untuk masuk ke sistem
-    </p>
-
     <div class="row">
         <div class="col-12">
             @if(session('success'))
@@ -37,8 +32,8 @@
             <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
         <div class="card">
-            <div class="">
-            <button class="btn btn-primary float-right mb-4" data-target="#exampleModal" data-toggle="modal">Tambah data user</button>
+            <div class="p-3">
+            <button class="btn btn-primary float-right mb-4" data-target="#exampleModal" data-toggle="modal">Tambah jenis pembayaran</button>
             </div>
             <div class="card-body">
             <div class="table-responsive">
@@ -49,25 +44,23 @@
                         #
                     </th>
                     <th>Nama</th>
-                    <th>Username</th>
-                    <th>Password</th>
-                    <th>Wali Kelas</th>
-                    <th>Level</th>
+                    <th>Biaya</th>
+                    <th>Kelas</th>
+                    <th>Keterangan</th>
                     <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>                                 
-                    @foreach($users as $user)
+                    @foreach($jenis_bayars as $jenis_bayar)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->username }}</td>
-                            <td>{{ $user->password }}</td>
-                            <td>{{ $user->is_walas }}</td>
-                            <td>{{ $user->level }}</td>
+                            <td>{{ $jenis_bayar->nm_jenis }}</td>
+                            <td>Rp {{ number_format($jenis_bayar->biaya, 0, '','.')}}</td>
+                            <td>{{ $jenis_bayar->kelas }}</td>
+                            <td>{{ $jenis_bayar->ket }}</td>
                             <td>
-                                <a href="{{ route('admin.user.edit', ['user' => $user->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
-                                <form action="{{ route('admin.user.delete', ['user' => $user->id]) }}" method="post">
+                                <a href="{{ route('admin.jenis-bayar.edit', ['jenis_bayar' => $jenis_bayar->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
+                                <form action="{{ route('admin.jenis-bayar.delete', ['jenis_bayar' => $jenis_bayar->id]) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger m-1"><i class="fas fa-trash"></i></button>
@@ -89,72 +82,52 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Tambah data user</h5>
+                <h5 class="modal-title">Tambah jenis pembayaran</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <form method="POST" action="{{ route('admin.user.store') }}" class="needs-validation" novalidate="">
+                <form method="POST" action="{{ route('admin.jenis-bayar.store') }}" class="needs-validation" novalidate="">
                   @csrf
                   <div class="form-group">
-                    <label for="name">Nama</label>
-                    <input id="name" type="name" class="form-control" name="name" tabindex="1" required autofocus>
-                    @error('name')
+                    <label for="name">Nama Jenis Pembayaran</label>
+                    <input id="name" type="text" class="form-control" name="nm_jenis" tabindex="1" required autofocus>
+                    @error('nm_jenis')
                       <div class="alert alert-danger">Mohon di isi nama anda</div>
                     @enderror
                     <div class="invalid-feedback">
-                      Mohon di isi nama anda
+                      Mohon di isi jenis pembayaran
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="username">Username</label>
-                    <input id="username" type="username" class="form-control" name="username" tabindex="1" required autofocus>
-                    @error('username')
-                      <div class="alert alert-danger">Mohon di isi username anda</div>
+                    <label for="biaya">Biaya</label>
+                    <input id="biaya" type="number" class="form-control" name="biaya" tabindex="1" required autofocus>
+                    @error('biaya')
+                      <div class="alert alert-danger">Mohon di isi biaya anda</div>
                     @enderror
                     <div class="invalid-feedback">
-                      Mohon di isi username anda
+                      Mohon di isi biaya
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="level">Level</label>
-                    <select id="level" type="level" class="form-control" name="level" tabindex="1" required>
-                        <option value="">-- Pilih level user --</option>
-                        <option value="admin">Admin</option>
-                        <option value="guru">Guru</option>
-                    </select>
-                    @error('level')
-                      <div class="alert alert-danger">Mohon di isi level anda</div>
+                    <label for="kelas">Kelas</label>
+                    <input id="kelas" type="text" class="form-control" name="kelas" tabindex="1" required autofocus>
+                    @error('kelas')
+                      <div class="alert alert-danger">Mohon di isi kelas anda</div>
                     @enderror
                     <div class="invalid-feedback">
-                      Mohon di isi level anda
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="d-block">
-                    	<label for="password" class="control-label">Password</label>
-                    </div>
-                    <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
-                    <div class="invalid-feedback">
-                      Mohon di isi password anda
+                      Mohon di isi kelas
                     </div>
                   </div>
                   <div class="form-group">
-                    <div class="d-block">
-                    	<label for="password" class="control-label">Sebagai Wali Kelas</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" id="customRadio1" name="is_walas" value="0" class="custom-control-input" required>
-                      <label class="custom-control-label" for="customRadio1">Tidak</label>
-                    </div>
-                    <div class="custom-control custom-radio">
-                      <input type="radio" id="customRadio2" name="is_walas" value="1" class="custom-control-input" required>
-                      <label class="custom-control-label" for="customRadio2">Iya</label>
-                    </div>
+                    <label for="keterangan">Keterangan</label>
+                    <input id="keterangan" type="text" class="form-control" name="ket" tabindex="1" required autofocus>
+                    @error('keterangan')
+                      <div class="alert alert-danger">Mohon di isi keterangan anda</div>
+                    @enderror
                     <div class="invalid-feedback">
-                      Mohon di isi walas anda
+                      Mohon di isi keterangan
                     </div>
                   </div>
 

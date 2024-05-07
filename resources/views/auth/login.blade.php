@@ -39,7 +39,7 @@
                 <form method="POST" action="{{ route('auth') }}" class="needs-validation" novalidate="">
                   @csrf
                   <div class="form-group">
-                    <label for="username">Username</label>
+                    <label for="username">Username/NIS</label>
                     <input id="username" type="username" class="form-control" name="username" tabindex="1" required autofocus>
                     <div class="invalid-feedback">
                       Mohon di isi username anda
