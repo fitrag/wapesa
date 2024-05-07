@@ -59,7 +59,7 @@
                             <td>{{ $jenis_bayar->kelas }}</td>
                             <td>{{ $jenis_bayar->ket }}</td>
                             <td>
-                                <a href="" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="{{ route('admin.jenis-bayar.edit', ['jenis_bayar' => $jenis_bayar->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
                                 <form action="{{ route('admin.jenis-bayar.delete', ['jenis_bayar' => $jenis_bayar->id]) }}" method="post">
                                     @csrf
                                     @method('DELETE')

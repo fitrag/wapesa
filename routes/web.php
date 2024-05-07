@@ -35,6 +35,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('admin/jenis-bayar', JenisBayarController::class)
     ->name('index', 'admin.jenis-bayar')
     ->name('store', 'admin.jenis-bayar.store')
+    ->name('edit', 'admin.jenis-bayar.edit')
+    ->name('update', 'admin.jenis-bayar.update')
     ->name('destroy', 'admin.jenis-bayar.delete');
 });
 

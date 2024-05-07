@@ -56,17 +56,22 @@ class JenisBayarController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Jenisbayar $jenis_bayar)
     {
-        //
+        return view('admin.jenis-bayar.edit', compact('jenis_bayar'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Jenisbayar $jenis_bayar)
     {
-        //
+        $update = $jenis_bayar->update($request->all());
+        if($update){
+            return redirect()->route('admin.jenis-bayar')->with('success', 'Berhasil memperbarui data jenis pembayaran');
+        }else{
+            return redirect()->back()->with('success', 'Gagal memperbarui data jenis pembayaran');
+        }
     }
 
     /**
