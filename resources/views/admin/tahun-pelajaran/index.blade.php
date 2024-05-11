@@ -53,7 +53,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $tahun_pelajaran->nm_tp }}</td>
-                            <td>{{ $tahun_pelajaran->status }}</td>
+                            <td>{{ ($tahun_pelajaran->status) ? 'Aktif' : 'Tidak Aktif' }}</td>
                             <td>
                                 <a href="{{ route('admin.tahun-pelajaran.edit', ['tahun_pelajaran' => $tahun_pelajaran->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
                                 <form action="{{ route('admin.tahun-pelajaran.delete', ['tahun_pelajaran' => $tahun_pelajaran->id]) }}" method="post">
