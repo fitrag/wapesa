@@ -33,8 +33,9 @@
             @endif
         <div class="card">
             <div class="p-3">
-              <button class="btn btn-primary float-right mx-1" data-target="#exampleModal" data-toggle="modal">Tambah data siswa</button>
-              <button class="btn btn-success float-right mx-1" data-target="#importExcel" data-toggle="modal">Import via Excel</button>
+              <button class="btn btn-primary float-right mx-1 my-1" data-target="#exampleModal" data-toggle="modal">Tambah data siswa</button>
+              <button class="btn btn-success float-right mx-1 my-1" data-target="#importExcel" data-toggle="modal">Import via Excel</button>
+              <a href="{{ asset('/excel/formatimportsiswa.xlsx') }}" class="btn btn-primary float-right mx-1 my-1" download><i class="fas fa-download mr-1"></i> Download Format Template Excel</a>
             </div>
             <div class="card-body">
             <div class="table-responsive">
