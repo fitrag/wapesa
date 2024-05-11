@@ -96,7 +96,7 @@
                   <input type="hidden" name="tp_id" value="{{ (isset($tp->id)) ? $tp->id : '' }}">
                   <div class="form-group">
                     <label for="name">Nama Jenis Pembayaran</label>
-                    <input id="name" type="text" class="form-control" name="nm_jenis" tabindex="1" required autofocus>
+                    <input id="name" type="text" placeholder="Contoh : Kesiswaan" class="form-control" name="nm_jenis" tabindex="1" required autofocus>
                     @error('nm_jenis')
                       <div class="alert alert-danger">Mohon di isi nama anda</div>
                     @enderror
@@ -106,7 +106,7 @@
                   </div>
                   <div class="form-group">
                     <label for="biaya">Biaya</label>
-                    <input id="biaya" type="number" class="form-control" name="biaya" tabindex="1" required autofocus>
+                    <input id="biaya" type="number" placeholder="Contoh : 1000000" class="form-control" name="biaya" tabindex="1" required autofocus>
                     @error('biaya')
                       <div class="alert alert-danger">Mohon di isi biaya anda</div>
                     @enderror
@@ -116,7 +116,7 @@
                   </div>
                   <div class="form-group">
                     <label for="kelas">Kelas</label>
-                    <input id="kelas" type="text" class="form-control" name="kelas" tabindex="1" required autofocus>
+                    <input id="kelas" type="text" placeholder="Contoh : X" class="form-control" name="kelas" tabindex="1" required autofocus>
                     @error('kelas')
                       <div class="alert alert-danger">Mohon di isi kelas anda</div>
                     @enderror
@@ -126,7 +126,7 @@
                   </div>
                   <div class="form-group">
                     <label for="keterangan">Keterangan</label>
-                    <input id="keterangan" type="text" class="form-control" name="ket" tabindex="1" required autofocus>
+                    <input id="keterangan" type="text" placeholder="Contoh : -" class="form-control" name="ket" tabindex="1" required autofocus>
                     @error('keterangan')
                       <div class="alert alert-danger">Mohon di isi keterangan anda</div>
                     @enderror
