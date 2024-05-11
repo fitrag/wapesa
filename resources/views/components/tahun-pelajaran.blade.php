@@ -1,1 +1,1 @@
-<li class="bg-info"><a href="#" class="nav-link nav-link-lg mt-1">{{ (isset($tp->nm_tp)) ? $tp->nm_tp : 'Belum ada tahun pelajaran aktif' }}</a></li>
+<li class=""><a href="#" class="nav-link nav-link-lg mt-1">{{ (isset($tp->nm_tp)) ? $tp->nm_tp : 'Belum ada tahun pelajaran aktif' }}</a></li>
