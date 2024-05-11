@@ -7,6 +7,7 @@ use App\Models\Siswa;
 use App\Imports\SiswaImport;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use File;
 
 class SiswaController extends Controller
 {
@@ -33,9 +34,14 @@ class SiswaController extends Controller
         // membuat nama file unik
         
         if($request->hasFile('file')){
-            $nama_file = $file->hashName();
-            $file->storeAs('public/excel', $nama_file);
-            Excel::import(new SiswaImport(), Storage::url('public/excel/').$nama_file);
+            $nama_file = $file->getClientOriginalName();
+            $file_path = $file->move('excel/',$nama_file);
+            $import = Excel::import(new SiswaImport(), $file_path);
+
+            if($import){
+                File::delete($file_path);
+                return redirect()->route('admin.siswa')->with('success', 'Berhasil mengimport data');
+            }
         }
     }
     public function store(Request $request)

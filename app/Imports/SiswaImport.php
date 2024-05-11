@@ -2,10 +2,12 @@
 
 namespace App\Imports;
 
-use App\Models\Siswa;
+use App\Models\{Siswa, User};
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class SiswaImport implements ToModel
+class SiswaImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -14,9 +16,18 @@ class SiswaImport implements ToModel
     */
     public function model(array $row)
     {
-        dd($row);
+        $user = User::create([
+            'name'      => $row['nama'],
+            'username'  => $row['nisn'],
+            'password'  => Hash::make($row['nisn']),
+            'level'     => 'siswa'
+        ]);
         return new Siswa([
-            
+            'nisn'          => $row['nisn'],
+            'nis'           => $row['nis'],
+            'nm_siswa'      => $row['nama'],
+            'kelas_id'      => $row['kelas_id'],
+            'user_id'       => $user->id,
         ]);
     }
 }
