@@ -35,6 +35,7 @@ class GuruController extends Controller
             'nip'       => 'required',
             'nuptk'     => 'required',
             'nama'      => 'required',
+            'is_walas'  => 'required',
         ]);
 
         $user = User::create([
@@ -42,6 +43,7 @@ class GuruController extends Controller
             'username'      => $request->username,
             'password'      => $request->username,
             'level'         => 'guru',
+            'is_walas'      => $request->is_walas,
         ]);
 
         $guru = Guru::create([
@@ -82,8 +84,12 @@ class GuruController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Guru $guru)
     {
-        //
+        $delete = $guru->delete();
+        if($delete){
+            $guru->user->delete();
+            return redirect()->route('admin.guru')->with('success','Berhasil menghapus data');
+        }
     }
 }

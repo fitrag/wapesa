@@ -47,6 +47,7 @@
                     <th>Nama</th>
                     <th>NIP</th>
                     <th>NUPTK</th>
+                    <th>Sebagai Wali Kelas</th>
                     <th>Aksi</th>
                     </tr>
                 </thead>
@@ -58,8 +59,9 @@
                             <td>{{ $guru->nm_guru }}</td>
                             <td>{{ $guru->nip }}</td>
                             <td>{{ $guru->nuptk }}</td>
+                            <td>{{ ($guru->user->is_walas) ? 'Iya' : 'Tidak' }}</td>
                             <td>
-                                <a href="{{ route('admin.guru.edit', ['guru' => $guru->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="{{ route('admin.user.edit', ['user' => $guru->user->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
                                 <form action="{{ route('admin.guru.delete', ['guru' => $guru->id]) }}" method="post">
                                     @csrf
                                     @method('DELETE')
@@ -102,7 +104,7 @@
                   </div>
                   <div class="form-group">
                     <label for="nip">NIP</label>
-                    <input id="nip" type="text" class="form-control" name="nip" tabindex="1" required autofocus>
+                    <input id="nip" type="text" class="form-control" name="nip" tabindex="1" required>
                     @error('nip')
                       <div class="alert alert-danger">Mohon di isi nip anda</div>
                     @enderror
@@ -112,7 +114,7 @@
                   </div>
                   <div class="form-group">
                     <label for="nuptk">NUPTK</label>
-                    <input id="nuptk" type="text" class="form-control" name="nuptk" tabindex="1" required autofocus>
+                    <input id="nuptk" type="text" class="form-control" name="nuptk" tabindex="1" required>
                     @error('nuptk')
                       <div class="alert alert-danger">Mohon di isi nuptk anda</div>
                     @enderror
@@ -122,12 +124,26 @@
                   </div>
                   <div class="form-group">
                     <label for="nama">Nama</label>
-                    <input id="nama" type="text" class="form-control" name="nama" tabindex="1" required autofocus>
+                    <input id="nama" type="text" class="form-control" name="nama" tabindex="1" required>
                     @error('nama')
                       <div class="alert alert-danger">Mohon di isi nama anda</div>
                     @enderror
                     <div class="invalid-feedback">
                       Mohon di isi nama
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="is_walas">Sebagai Wali Kelas</label>
+                    <select id="is_walas" type="text" class="form-control" name="is_walas" tabindex="1" required>
+                        <option value="">-- Pilih --</option>
+                        <option value="1">Iya</option>
+                        <option value="0">Tidak</option>
+                    </select>
+                    @error('is_walas')
+                      <div class="alert alert-danger">Mohon di isi wali kelas anda</div>
+                    @enderror
+                    <div class="invalid-feedback">
+                      Mohon di isi is_walas
                     </div>
                   </div>
 
