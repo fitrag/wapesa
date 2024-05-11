@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\{User, Guru};
+use Illuminate\Support\Facades\Hash;
 
 class GuruController extends Controller
 {
@@ -11,7 +13,8 @@ class GuruController extends Controller
      */
     public function index()
     {
-        //
+        $gurus = Guru::all();
+        return view('admin.guru.index', compact('gurus'));
     }
 
     /**
@@ -27,7 +30,29 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'username'  => 'required',
+            'nip'       => 'required',
+            'nuptk'     => 'required',
+            'nama'      => 'required',
+        ]);
+
+        $user = User::create([
+            'name'          => $request->nama,
+            'username'      => $request->username,
+            'password'      => $request->username,
+            'level'         => 'guru',
+        ]);
+
+        $guru = Guru::create([
+            'user_id'       => $user->id,
+            'nip'           => $request->nip,
+            'nuptk'         => $request->nuptk,
+            'nm_guru'       => $request->nama,
+        ]);
+        if($guru && $user){
+            return redirect()->route('admin.guru')->with('success','Berhasil menambahkan data');
+        }
     }
 
     /**
