@@ -8,7 +8,7 @@
         </div>
 
         <div class="section-body">
-            @if(auth()->user()->level != 'admin')
+            @if(auth()->user()->level == 'guru')
             <div class="card">
                 <div class="card-body">
                     <div class="row">
