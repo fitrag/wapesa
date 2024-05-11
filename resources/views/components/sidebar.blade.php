@@ -14,7 +14,7 @@
         <li class="{{ request()->is('admin/siswa*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.siswa') }}"><i class="fas fa-user-graduate"></i> <span>Data Siswa</span></a></li>
         <li class="{{ request()->is('admin/kelas*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.kelas') }}"><i class="fas fa-user-graduate"></i> <span>Data Kelas</span></a></li>
         <li class="{{ request()->is('admin/jenis-bayar*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.jenis-bayar') }}"><i class="fas fa-money-check"></i> <span>Data Jenis Bayar</span></a></li>
-        <li><a class="nav-link"><i class="fas fa-chalkboard"></i> <span>Data Tahun Pelajaran</span></a></li>
+        <li class="{{ request()->is('admin/tahun-pelajaran*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.tahun-pelajaran') }}"><i class="fas fa-chalkboard"></i> <span>Data Tahun Pelajaran</span></a></li>
         <li><a class="nav-link"><i class="fas fa-user-tie"></i> <span>Data Guru</span></a></li>
         
         <li class="menu-header">Absensi</li>

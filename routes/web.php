@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, SiswaController, JenisBayarController, KelasController};
+use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, SiswaController, JenisBayarController, KelasController, TpController};
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +53,13 @@ Route::middleware(['auth'])->group(function () {
     ->name('edit', 'admin.jenis-bayar.edit')
     ->name('update', 'admin.jenis-bayar.update')
     ->name('destroy', 'admin.jenis-bayar.delete');
+
+    Route::resource('admin/tahun-pelajaran', TpController::class)
+    ->name('index', 'admin.tahun-pelajaran')
+    ->name('store', 'admin.tahun-pelajaran.store')
+    ->name('edit', 'admin.tahun-pelajaran.edit')
+    ->name('update', 'admin.tahun-pelajaran.update')
+    ->name('destroy', 'admin.tahun-pelajaran.delete');
 });
 
 Route::get('/qrcode', IndexController::class.'@qrcode');
