@@ -66,6 +66,7 @@ class TpController extends Controller
         ]);
         $update = $tahun_pelajaran->update($validate);
         if($update){
+            Tp::where('id','!=', $tahun_pelajaran->id)->update(['status' => 0]);
             return redirect()->route('admin.tahun-pelajaran')->with('success','Berhasil memperbarui data');
         }
     }
