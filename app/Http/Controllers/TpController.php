@@ -29,7 +29,14 @@ class TpController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'nm_tp'     => 'required',
+            'status'    => 'required',
+        ]);
+        $insert = Tp::create($validate);
+        if($insert){
+            return redirect()->route('admin.tahun-pelajaran')->with('success','Berhasil menambahkan data');
+        }
     }
 
     /**
@@ -43,24 +50,34 @@ class TpController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Tp $tahun_pelajaran)
     {
-        //
+        return view('admin.tahun-pelajaran.edit', compact('tahun_pelajaran'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Tp $tahun_pelajaran)
     {
-        //
+        $validate = $request->validate([
+            'nm_tp'     => 'required',
+            'status'    => 'required',
+        ]);
+        $update = $tahun_pelajaran->update($validate);
+        if($update){
+            return redirect()->route('admin.tahun-pelajaran')->with('success','Berhasil memperbarui data');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Tp $tahun_pelajaran)
     {
-        //
+        $delete = $tahun_pelajaran->delete();
+        if($delete){
+            return redirect()->route('admin.tahun-pelajaran')->with('success','Berhasil menghapus data');
+        }
     }
 }
