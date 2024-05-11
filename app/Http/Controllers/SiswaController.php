@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Siswa;
+use App\Imports\SiswaImport;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
 {
@@ -24,9 +27,17 @@ class SiswaController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function import(Request $request){
+        $file = $request->file('file');
+
+        // membuat nama file unik
+        
+        if($request->hasFile('file')){
+            $nama_file = $file->hashName();
+            $file->storeAs('public/excel', $nama_file);
+            Excel::import(new SiswaImport(), Storage::url('public/excel/').$nama_file);
+        }
+    }
     public function store(Request $request)
     {
         //

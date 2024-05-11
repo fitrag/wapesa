@@ -153,7 +153,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                <form method="POST" action="{{ route('admin.jenis-bayar.store') }}" class="needs-validation" novalidate="">
+                <form method="POST" action="{{ route('admin.siswa.import') }}" class="needs-validation" novalidate="" enctype="multipart/form-data">
                   @csrf
                   <div class="form-group">
                     <label for="name">Pilih file</label>

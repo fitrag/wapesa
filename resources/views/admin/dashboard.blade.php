@@ -8,6 +8,7 @@
         </div>
 
         <div class="section-body">
+            @if(auth()->user()->level != 'admin')
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -36,6 +37,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </section>
 

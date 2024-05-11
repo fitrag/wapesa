@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
     ->name('edit', 'admin.siswa.edit')
     ->name('update', 'admin.siswa.update')
     ->name('destroy', 'admin.siswa.delete');
+    Route::post('admin/siswa/import', SiswaController::class.'@import')->name('admin.siswa.import');
     
     Route::resource('admin/kelas', KelasController::class)
     ->name('index', 'admin.kelas')
