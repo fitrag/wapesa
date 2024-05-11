@@ -31,6 +31,9 @@
             @if(session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
+            @error('tp_id')
+            <div class="alert alert-danger">Gagal menambahkan data jenis pembayaran, karena belum ada tahun pelajaran yang aktif</div>
+            @enderror
         <div class="card">
             <div class="p-3">
             <button class="btn btn-primary float-right mb-4" data-target="#exampleModal" data-toggle="modal">Tambah jenis pembayaran</button>
@@ -90,6 +93,7 @@
               <div class="modal-body">
                 <form method="POST" action="{{ route('admin.jenis-bayar.store') }}" class="needs-validation" novalidate="">
                   @csrf
+                  <input type="hidden" name="tp_id" value="{{ (isset($tp->id)) ? $tp->id : '' }}">
                   <div class="form-group">
                     <label for="name">Nama Jenis Pembayaran</label>
                     <input id="name" type="text" class="form-control" name="nm_jenis" tabindex="1" required autofocus>

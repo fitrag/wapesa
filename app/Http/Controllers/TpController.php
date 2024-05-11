@@ -35,6 +35,7 @@ class TpController extends Controller
         ]);
         $insert = Tp::create($validate);
         if($insert){
+            Tp::where('id','!=', $insert->id)->update(['status' => 0]);
             return redirect()->route('admin.tahun-pelajaran')->with('success','Berhasil menambahkan data');
         }
     }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Jenisbayar;
+use App\Models\{Jenisbayar, Tp};
 
 class JenisBayarController extends Controller
 {
@@ -12,8 +12,9 @@ class JenisBayarController extends Controller
      */
     public function index()
     {
+        $tp = Tp::where('status','1')->first();
         $jenis_bayars = Jenisbayar::orderBy('kelas')->get();
-        return view('admin.jenis-bayar.index', compact('jenis_bayars'));
+        return view('admin.jenis-bayar.index', compact('jenis_bayars','tp'));
     }
 
     /**
@@ -29,17 +30,22 @@ class JenisBayarController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nm_jenis'      => 'required',
-            'biaya'         => 'required',
-            'kelas'         => 'required',
-            'ket'           => 'required',
-        ]);
-
-        $jenisbayar = Jenisbayar::create($request->all());
-        if($jenisbayar){
-            return redirect()->route('admin.jenis-bayar')->with('success', 'Berhasil menambahkan data jenis pembayaran');
-        }else{
+        try{
+            $request->validate([
+                'nm_jenis'      => 'required',
+                'biaya'         => 'required',
+                'kelas'         => 'required',
+                'ket'           => 'required',
+                'tp_id'         => 'required'
+            ]);
+            
+            $jenisbayar = Jenisbayar::create($request->all());
+            if($jenisbayar){
+                return redirect()->route('admin.jenis-bayar')->with('success', 'Berhasil menambahkan data jenis pembayaran');
+            }else{
+                return redirect()->back()->with('success', 'Gagal menambahkan data jenis pembayaran');
+            }
+        }catch(error){
             return redirect()->back()->with('success', 'Gagal menambahkan data jenis pembayaran');
         }
 
