@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Data Jenis Bayar'])
+@extends('layouts.app', ['title' => 'Data Guru'])
 
 @push('scripts')
 <!-- JS Libraies -->
@@ -14,11 +14,11 @@
 
 <section class="section">
     <div class="section-header">
-    <h1>Data Jenis Pembayaran</h1>
+    <h1>Data Guru</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
         <div class="breadcrumb-item"><a href="#">Data Master</a></div>
-        <div class="breadcrumb-item">Data Jenis Pembayaran</div>
+        <div class="breadcrumb-item">Data Guru</div>
     </div>
     </div>
 
@@ -31,12 +31,9 @@
             @if(session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            @error('tp_id')
-            <div class="alert alert-danger">Gagal menambahkan data jenis pembayaran, karena belum ada tahun pelajaran yang aktif</div>
-            @enderror
         <div class="card">
             <div class="p-3">
-            <button class="btn btn-primary float-right mb-4" data-target="#exampleModal" data-toggle="modal">Tambah jenis pembayaran</button>
+            <button class="btn btn-primary float-right mb-4" data-target="#exampleModal" data-toggle="modal">Tambah guru</button>
             </div>
             <div class="card-body">
             <div class="table-responsive">
@@ -46,24 +43,26 @@
                     <th class="text-center">
                         #
                     </th>
+                    <th>Username</th>
                     <th>Nama</th>
-                    <th>Biaya</th>
-                    <th>Kelas</th>
-                    <th>Keterangan</th>
+                    <th>NIP</th>
+                    <th>NUPTK</th>
+                    <th>Sebagai Wali Kelas</th>
                     <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>                                 
-                    @foreach($jenis_bayars as $jenis_bayar)
+                    @foreach($gurus as $guru)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $jenis_bayar->nm_jenis }}</td>
-                            <td>Rp {{ number_format($jenis_bayar->biaya, 0, '','.')}}</td>
-                            <td>{{ $jenis_bayar->kelas }}</td>
-                            <td>{{ $jenis_bayar->ket }}</td>
+                            <td>{{ $guru->user->username }}</td>
+                            <td>{{ $guru->nm_guru }}</td>
+                            <td>{{ $guru->nip }}</td>
+                            <td>{{ $guru->nuptk }}</td>
+                            <td>{{ ($guru->user->is_walas) ? 'Iya' : 'Tidak' }}</td>
                             <td>
-                                <a href="{{ route('admin.jenis-bayar.edit', ['jenis_bayar' => $jenis_bayar->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
-                                <form action="{{ route('admin.jenis-bayar.delete', ['jenis_bayar' => $jenis_bayar->id]) }}" method="post">
+                                <a href="{{ route('admin.user.edit', ['user' => $guru->user->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
+                                <form action="{{ route('admin.guru.delete', ['guru' => $guru->id]) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger m-1"><i class="fas fa-trash"></i></button>
@@ -85,54 +84,71 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Tambah jenis pembayaran</h5>
+                <h5 class="modal-title">Tambah guru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <form method="POST" action="{{ route('admin.jenis-bayar.store') }}" class="needs-validation" novalidate="">
+                <form method="POST" action="{{ route('admin.guru.store') }}" class="needs-validation" novalidate="">
                   @csrf
-                  <input type="hidden" name="tp_id" value="{{ (isset($tp->id)) ? $tp->id : '' }}">
                   <div class="form-group">
-                    <label for="name">Nama Jenis Pembayaran</label>
-                    <input id="name" type="text" placeholder="Contoh : Kesiswaan" class="form-control" name="nm_jenis" tabindex="1" required autofocus>
-                    @error('nm_jenis')
+                    <label for="username">Username</label>
+                    <input id="username" type="text" class="form-control" name="username" tabindex="1" required autofocus>
+                    @error('username')
+                      <div class="alert alert-danger">Mohon di isi username anda</div>
+                    @enderror
+                    <div class="invalid-feedback">
+                      Mohon di isi username
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="nip">NIP</label>
+                    <input id="nip" type="text" class="form-control" name="nip" tabindex="1" required>
+                    @error('nip')
+                      <div class="alert alert-danger">Mohon di isi nip anda</div>
+                    @enderror
+                    <div class="invalid-feedback">
+                      Mohon di isi nip
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="nuptk">NUPTK</label>
+                    <input id="nuptk" type="text" class="form-control" name="nuptk" tabindex="1" required>
+                    @error('nuptk')
+                      <div class="alert alert-danger">Mohon di isi nuptk anda</div>
+                    @enderror
+                    <div class="invalid-feedback">
+                      Mohon di isi nuptk
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="nama">Nama</label>
+                    <input id="nama" type="text" class="form-control" name="nama" tabindex="1" required>
+                    @error('nama')
                       <div class="alert alert-danger">Mohon di isi nama anda</div>
                     @enderror
                     <div class="invalid-feedback">
-                      Mohon di isi jenis pembayaran
+                      Mohon di isi nama
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="biaya">Biaya</label>
-                    <input id="biaya" type="number" placeholder="Contoh : 1000000" class="form-control" name="biaya" tabindex="1" required autofocus>
-                    @error('biaya')
-                      <div class="alert alert-danger">Mohon di isi biaya anda</div>
+                    <label for="is_walas">Sebagai Wali Kelas</label>
+                    <select id="is_walas" type="text" class="form-control" name="is_walas" tabindex="1" required>
+                        <option value="">-- Pilih --</option>
+                        <option value="1">Iya</option>
+                        <option value="0">Tidak</option>
+                    </select>
+                    @error('is_walas')
+                      <div class="alert alert-danger">Mohon di isi wali kelas anda</div>
                     @enderror
                     <div class="invalid-feedback">
-                      Mohon di isi biaya
+                      Mohon di isi is_walas
                     </div>
                   </div>
+
                   <div class="form-group">
-                    <label for="kelas">Kelas</label>
-                    <input id="kelas" type="text" placeholder="Contoh : X" class="form-control" name="kelas" tabindex="1" required autofocus>
-                    @error('kelas')
-                      <div class="alert alert-danger">Mohon di isi kelas anda</div>
-                    @enderror
-                    <div class="invalid-feedback">
-                      Mohon di isi kelas
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="keterangan">Keterangan</label>
-                    <input id="keterangan" type="text" placeholder="Contoh : -" class="form-control" name="ket" tabindex="1" required autofocus>
-                    @error('keterangan')
-                      <div class="alert alert-danger">Mohon di isi keterangan anda</div>
-                    @enderror
-                    <div class="invalid-feedback">
-                      Mohon di isi keterangan
-                    </div>
+                    <div class="alert alert-info">Password akan digenerate dari username</div>
                   </div>
 
                   <div class="form-group">

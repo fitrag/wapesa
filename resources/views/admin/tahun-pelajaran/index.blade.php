@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Data Jenis Bayar'])
+@extends('layouts.app', ['title' => 'Data Tahun Pelajaran'])
 
 @push('scripts')
 <!-- JS Libraies -->
@@ -14,11 +14,11 @@
 
 <section class="section">
     <div class="section-header">
-    <h1>Data Jenis Pembayaran</h1>
+    <h1>Data Tahun Pelajaran</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
         <div class="breadcrumb-item"><a href="#">Data Master</a></div>
-        <div class="breadcrumb-item">Data Jenis Pembayaran</div>
+        <div class="breadcrumb-item">Data Tahun Pelajaran</div>
     </div>
     </div>
 
@@ -31,12 +31,9 @@
             @if(session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            @error('tp_id')
-            <div class="alert alert-danger">Gagal menambahkan data jenis pembayaran, karena belum ada tahun pelajaran yang aktif</div>
-            @enderror
         <div class="card">
             <div class="p-3">
-            <button class="btn btn-primary float-right mb-4" data-target="#exampleModal" data-toggle="modal">Tambah jenis pembayaran</button>
+            <button class="btn btn-primary float-right mb-4" data-target="#exampleModal" data-toggle="modal">Tambah tahun pelajaran</button>
             </div>
             <div class="card-body">
             <div class="table-responsive">
@@ -46,24 +43,20 @@
                     <th class="text-center">
                         #
                     </th>
-                    <th>Nama</th>
-                    <th>Biaya</th>
-                    <th>Kelas</th>
-                    <th>Keterangan</th>
+                    <th>Tahun Pelajaran</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>                                 
-                    @foreach($jenis_bayars as $jenis_bayar)
+                    @foreach($tahun_pelajarans as $tahun_pelajaran)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $jenis_bayar->nm_jenis }}</td>
-                            <td>Rp {{ number_format($jenis_bayar->biaya, 0, '','.')}}</td>
-                            <td>{{ $jenis_bayar->kelas }}</td>
-                            <td>{{ $jenis_bayar->ket }}</td>
+                            <td>{{ $tahun_pelajaran->nm_tp }}</td>
+                            <td>{{ ($tahun_pelajaran->status) ? 'Aktif' : 'Tidak Aktif' }}</td>
                             <td>
-                                <a href="{{ route('admin.jenis-bayar.edit', ['jenis_bayar' => $jenis_bayar->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
-                                <form action="{{ route('admin.jenis-bayar.delete', ['jenis_bayar' => $jenis_bayar->id]) }}" method="post">
+                                <a href="{{ route('admin.tahun-pelajaran.edit', ['tahun_pelajaran' => $tahun_pelajaran->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
+                                <form action="{{ route('admin.tahun-pelajaran.delete', ['tahun_pelajaran' => $tahun_pelajaran->id]) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger m-1"><i class="fas fa-trash"></i></button>
@@ -85,53 +78,36 @@
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Tambah jenis pembayaran</h5>
+                <h5 class="modal-title">Tambah tahun pelajaran</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                <form method="POST" action="{{ route('admin.jenis-bayar.store') }}" class="needs-validation" novalidate="">
+                <form method="POST" action="{{ route('admin.tahun-pelajaran.store') }}" class="needs-validation" novalidate="">
                   @csrf
-                  <input type="hidden" name="tp_id" value="{{ (isset($tp->id)) ? $tp->id : '' }}">
                   <div class="form-group">
-                    <label for="name">Nama Jenis Pembayaran</label>
-                    <input id="name" type="text" placeholder="Contoh : Kesiswaan" class="form-control" name="nm_jenis" tabindex="1" required autofocus>
-                    @error('nm_jenis')
-                      <div class="alert alert-danger">Mohon di isi nama anda</div>
+                    <label for="name">Tahun Pelajaran</label>
+                    <input id="name" type="text" class="form-control" placeholder="Contoh : 2023/2024" name="nm_tp" tabindex="1" required autofocus>
+                    @error('nm_tp')
+                      <div class="alert alert-danger">Mohon di isi tahun pelajaran anda</div>
                     @enderror
                     <div class="invalid-feedback">
-                      Mohon di isi jenis pembayaran
+                      Mohon di isi tahun pelajaran
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="biaya">Biaya</label>
-                    <input id="biaya" type="number" placeholder="Contoh : 1000000" class="form-control" name="biaya" tabindex="1" required autofocus>
-                    @error('biaya')
-                      <div class="alert alert-danger">Mohon di isi biaya anda</div>
+                    <label for="status">Status</label>
+                    <select id="status" type="number" class="form-control" name="status" tabindex="1" required autofocus>
+                        <option value="">Pilih status</option>
+                        <option value="1">Aktif</option>
+                        <option value="0">Tidak Aktif</option>
+                    </select>
+                    @error('status')
+                      <div class="alert alert-danger">Mohon di isi status anda</div>
                     @enderror
                     <div class="invalid-feedback">
-                      Mohon di isi biaya
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="kelas">Kelas</label>
-                    <input id="kelas" type="text" placeholder="Contoh : X" class="form-control" name="kelas" tabindex="1" required autofocus>
-                    @error('kelas')
-                      <div class="alert alert-danger">Mohon di isi kelas anda</div>
-                    @enderror
-                    <div class="invalid-feedback">
-                      Mohon di isi kelas
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="keterangan">Keterangan</label>
-                    <input id="keterangan" type="text" placeholder="Contoh : -" class="form-control" name="ket" tabindex="1" required autofocus>
-                    @error('keterangan')
-                      <div class="alert alert-danger">Mohon di isi keterangan anda</div>
-                    @enderror
-                    <div class="invalid-feedback">
-                      Mohon di isi keterangan
+                      Mohon di isi status
                     </div>
                   </div>
 

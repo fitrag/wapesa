@@ -1,0 +1,1 @@
+<li class=""><a href="#" class="nav-link nav-link-lg mt-1">{{ (isset($tp->nm_tp)) ? 'Tahun pelajaran : '.$tp->nm_tp : 'Belum ada tahun pelajaran aktif' }}</a></li>

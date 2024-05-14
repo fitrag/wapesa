@@ -17,7 +17,7 @@ return new class extends Migration
             $table->double('biaya');
             $table->string('kelas',6);
             $table->string('ket',50);
-            $table->string('tp_id',8);
+            $table->foreignId('tp_id')->constrained()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

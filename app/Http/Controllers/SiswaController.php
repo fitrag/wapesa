@@ -5,7 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 use App\Models\Siswa;
+<<<<<<< HEAD
 use App\Models\User;
+=======
+use App\Imports\SiswaImport;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use File;
+>>>>>>> 53255631320a6b59c94efb85a994c8709a184a52
 
 class SiswaController extends Controller
 {
@@ -28,9 +35,22 @@ class SiswaController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function import(Request $request){
+        $file = $request->file('file');
+
+        // membuat nama file unik
+        
+        if($request->hasFile('file')){
+            $nama_file = $file->getClientOriginalName();
+            $file_path = $file->move('excel/',$nama_file);
+            $import = Excel::import(new SiswaImport(), $file_path);
+
+            if($import){
+                File::delete($file_path);
+                return redirect()->route('admin.siswa')->with('success', 'Berhasil mengimport data');
+            }
+        }
+    }
     public function store(Request $request)
     {
         $request->validate([

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, SiswaController, JenisBayarController, KelasController};
+use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, SiswaController, JenisBayarController, KelasController, TpController, GuruController};
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
     ->name('edit', 'admin.siswa.edit')
     ->name('update', 'admin.siswa.update')
     ->name('destroy', 'admin.siswa.delete');
+    Route::post('admin/siswa/import', SiswaController::class.'@import')->name('admin.siswa.import');
     
     Route::resource('admin/kelas', KelasController::class)
     ->name('index', 'admin.kelas')
@@ -53,6 +54,20 @@ Route::middleware(['auth'])->group(function () {
     ->name('edit', 'admin.jenis-bayar.edit')
     ->name('update', 'admin.jenis-bayar.update')
     ->name('destroy', 'admin.jenis-bayar.delete');
+
+    Route::resource('admin/tahun-pelajaran', TpController::class)
+    ->name('index', 'admin.tahun-pelajaran')
+    ->name('store', 'admin.tahun-pelajaran.store')
+    ->name('edit', 'admin.tahun-pelajaran.edit')
+    ->name('update', 'admin.tahun-pelajaran.update')
+    ->name('destroy', 'admin.tahun-pelajaran.delete');
+    
+    Route::resource('admin/guru', GuruController::class)
+    ->name('index', 'admin.guru')
+    ->name('store', 'admin.guru.store')
+    ->name('edit', 'admin.guru.edit')
+    ->name('update', 'admin.guru.update')
+    ->name('destroy', 'admin.guru.delete');
 });
 
 Route::get('/qrcode', IndexController::class.'@qrcode');
