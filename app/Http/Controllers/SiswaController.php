@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\SiswaImport;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 use App\Models\Siswa;
-<<<<<<< HEAD
 use App\Models\User;
-=======
-use App\Imports\SiswaImport;
-use Illuminate\Support\Facades\Storage;
-use Maatwebsite\Excel\Facades\Excel;
 use File;
->>>>>>> 53255631320a6b59c94efb85a994c8709a184a52
+use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
 {
