@@ -42,7 +42,7 @@ class SiswaController extends Controller
             $import = Excel::import(new SiswaImport(), $file_path);
 
             if($import){
-                File::delete($file_path);
+                 File::delete($file_path);
                 return redirect()->route('admin.siswa')->with('success', 'Berhasil mengimport data');
             }
         }
@@ -83,24 +83,36 @@ class SiswaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Siswa $siswa)
     {
-        //
+        $kelas = Kelas::all();
+        $user = User::all();
+        return view('admin.siswa.edit_siswa', compact('siswa','kelas','user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Siswa $siswa)
     {
-        //
+        $update = $siswa->update($request->all());
+        if($update){
+            return redirect()->route('admin.siswa')->with('success', 'Berhasil memperbarui data siswa');
+        }else{
+            return redirect()->back()->with('success', 'Gagal memperbarui data siswa');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Siswa $siswa)
     {
-        //
+        $delete = $siswa->delete();
+        if($delete){
+            return redirect()->route('admin.siswa')->with('success', 'Berhasil menghapus data siswa');
+        }else{
+            return redirect()->back()->with('success', 'Gagal menghapus data siswa');
+        }
     }
 }

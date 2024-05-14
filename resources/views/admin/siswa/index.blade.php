@@ -64,8 +64,8 @@
                             <td>{{ $siswa->user->username }}</td>
                             <td>
                               <div class="btn-group">
-                                <a href="{{ route('admin.siswa.edit', ['siswa' => $siswa->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
-                                <form action="{{ route('admin.siswa', ['siswa' => $siswa->id]) }}" method="post">
+                                <a href="{{ route('admin.siswa.edit_siswa', ['siswa' => $siswa->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
+                                <form action="{{ route('admin.siswa.delete', ['siswa' => $siswa->id]) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger m-1"><i class="fas fa-trash"></i></button>
