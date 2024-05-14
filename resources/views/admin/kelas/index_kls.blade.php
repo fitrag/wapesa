@@ -53,12 +53,15 @@
                               <td>{{ $kls->nm_kls }}</td>
                               <td>{{ $kls->alias }}</td>
                               <td>
+                                <div class="btn-group">
                                   <a href="{{ route('admin.kelas.edit', ['kela' => $kls->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
                                   <form action="{{ route('admin.kelas.delete', ['kela' => $kls->id]) }}" method="post">
                                       @csrf
                                       @method('DELETE')
                                       <button class="btn btn-danger m-1"><i class="fas fa-trash"></i></button>
                                   </form>
+
+                                </div>
                               </td>
                           </tr>
                       @endforeach

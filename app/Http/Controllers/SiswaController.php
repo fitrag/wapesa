@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 use App\Models\Siswa;
+use App\Models\User;
 
 class SiswaController extends Controller
 {
@@ -13,7 +15,9 @@ class SiswaController extends Controller
     public function index()
     {
         $siswas = Siswa::all();
-        return view('admin.siswa.index', compact('siswas'));
+        $kelas = Kelas::all();
+        $user = User::all();
+        return view('admin.siswa.index', compact('siswas','kelas','user'));
     }
 
     /**
@@ -29,7 +33,27 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nis'      => 'required',
+            'nisn'         => 'required',
+            'nm_siswa'         => 'required',
+            'tmpt_lhr'         => 'required',
+            'tgl_lhr'         => 'required',
+            'jen_kel'         => 'required',
+            'agama'         => 'required',
+            'almt_siswa'         => 'required',
+            'no_tlp'         => 'required',
+            'nm_ayah'         => 'required',
+            'kelas_id'         => 'required',
+            'user_id'         => 'required',
+        ]);
+
+        $siswa = Siswa::create($request->all());
+        if($siswa){
+            return redirect()->route('admin.siswa')->with('success', 'Berhasil menambahkan data siswa');
+        }else{
+            return redirect()->back()->with('success', 'Gagal menambahkan data siswa');
+        }
     }
 
     /**

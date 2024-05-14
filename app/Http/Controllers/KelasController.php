@@ -53,24 +53,34 @@ class KelasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Kelas $kela)
     {
-        //
+        return view('admin.kelas.edit_kls', compact('kela'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Kelas $kela)
     {
-        //
+        $update = $kela->update($request->all());
+        if($update){
+            return redirect()->route('admin.kelas')->with('success', 'Berhasil memperbarui data kelas');
+        }else{
+            return redirect()->back()->with('success', 'Gagal memperbarui data kelas');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Kelas $kela)
     {
-        //
+        $delete = $kela->delete();
+        if($delete){
+            return redirect()->route('admin.kelas')->with('success', 'Berhasil menghapus data kelas');
+        }else{
+            return redirect()->back()->with('success', 'Gagal menghapus data kelas');
+        }
     }
 }

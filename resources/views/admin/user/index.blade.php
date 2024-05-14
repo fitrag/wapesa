@@ -123,6 +123,7 @@
                         <option value="">-- Pilih level user --</option>
                         <option value="admin">Admin</option>
                         <option value="guru">Guru</option>
+                        <option value="siswa">Siswa</option>
                     </select>
                     @error('level')
                       <div class="alert alert-danger">Mohon di isi level anda</div>
