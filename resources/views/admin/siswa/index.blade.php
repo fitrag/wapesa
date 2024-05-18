@@ -6,8 +6,41 @@
 <script src="{{ asset('modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('modules/datatables/Select-1.2.4/js/dataTables.select.min.js') }}"></script>
 <script src="{{ asset('modules/jquery-ui/jquery-ui.min.js') }}"></script>
-
-<script src="{{ asset('js/page/modules-datatables.js') }}"></script>
+<script>
+  $("#table-1").dataTable({
+    serverSide:true,
+    processing:true,
+    ajax:{
+      url:"{{ route('siswa-ajax') }}"
+    },
+    columns:[
+      {
+        data:'nis',
+        name:'nis'
+      },
+      {
+        data:'nisn',
+        name:'nisn'
+      },
+      {
+        data:'nm_siswa',
+        name:'nama'
+      },
+      {
+        data:'kelas',
+        name:'kelas'
+      },
+      {
+        data:'username',
+        name:'username'
+      },
+      {
+        data:'action',
+        name:'action'
+      },
+    ]
+  });
+</script>
 @endpush
 
 @section('content')
@@ -43,9 +76,6 @@
                 <table class="table table-striped" id="table-1">
                 <thead>                                 
                     <tr>
-                    <th class="text-center">
-                        #
-                    </th>
                     <th>NIS</th>
                     <th>NISN</th>
                     <th>Nama</th>
@@ -54,30 +84,8 @@
                     <th>Aksi</th>
                     </tr>
                 </thead>
-                <tbody>                                 
-                    @foreach($siswas as $siswa)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $siswa->nis }}</td>
-                            <td>{{ $siswa->nisn}}</td>
-                            <td>{{ $siswa->nm_siswa }}</td>
-                            <td>{{ $siswa->kelas->nm_kls }}</td>
-                            <td>{{ $siswa->user->username }}</td>
-                            <td align="center">
-                              <div class="btn-group">
-                                <a href="{{ route('admin.siswa.edit_siswa', ['siswa' => $siswa->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
-                                <a href="{{ route('admin.siswa.qrcode', ['siswa' => $siswa->id]) }}" class="btn btn-info m-1"><i class="fas fa-qrcode"></i></a>
-                                <form action="{{ route('admin.siswa.delete', ['siswa' => $siswa->id]) }}" method="post">
-                                  @csrf
-                                  @method('DELETE')
-                                  <button class="btn btn-danger m-1"><i class="fas fa-trash"></i></button>
-                                </form>
-
-                                </div>
-                              </td>
-                          </tr>
-                      @endforeach
-                  </tbody>
+                <tbody> 
+                </tbody>
                 </table>
               </div>
             </div>

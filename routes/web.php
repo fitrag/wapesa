@@ -23,7 +23,8 @@ Route::get('/logout', AuthController::class.'@logout')->name('logout');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/dashboard', IndexController::class.'@dashboard')->name('dashboard');
-
+    
+    Route::get('/admin/siswa-ajax', IndexController::class.'@siswaAjax')->name('siswa-ajax');
 
     Route::get('/admin/user', UserController::class.'@index')->name('admin.user');
     Route::post('/admin/user', UserController::class.'@store')->name('admin.user.store');
@@ -46,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
     ->name('update', 'admin.siswa.update')
     ->name('destroy', 'admin.siswa.delete');
     Route::post('admin/siswa/import', SiswaController::class.'@import')->name('admin.siswa.import');
+    Route::get('admin/{siswa:id}/delete', SiswaController::class.'@destroy')->name('admin.siswa.delete-ajax');
     Route::get('admin/{siswa:id}/qrcode', SiswaController::class.'@qrcode')->name('admin.siswa.qrcode');
     
     Route::resource('admin/kelas', KelasController::class)

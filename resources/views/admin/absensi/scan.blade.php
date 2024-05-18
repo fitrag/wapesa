@@ -28,6 +28,7 @@
                 }else if(statusCode === 404){
                     $('#berhasilAlert').addClass('d-none')
                     $('#errorAlert').removeClass('d-none')
+                    $('#gagalAlert').addClass('d-none')
                     gagalAudio();
                     $('#errorAlert').html(data.message)
                     $('#nis').val('')
@@ -71,19 +72,22 @@
                     if(statusCode === 200){
                         $('#berhasilAlert').removeClass('d-none')
                         $('#gagalAlert').addClass('d-none')
+                        $('#errorAlert').addClass('d-none')
                         berhasilAudio();
                         $('#nis').val('')
                         document.getElementById('hasil').innerHTML = data.data.nis
                         document.getElementById('nama').innerHTML = data.data.nm_siswa
                     }else if(statusCode === 404){
                         $('#berhasilAlert').addClass('d-none')
-                        $('#gagalAlert').removeClass('d-none')
+                        $('#errorAlert').removeClass('d-none')
+                        $('#gagalAlert').addClass('d-none')
                         gagalAudio();
                         $('#errorAlert').html(data.message)
                         $('#nis').val('')
                         document.getElementById('hasil').innerHTML = 'Data tidak ditemukan'
                         document.getElementById('nama').innerHTML = 'Data tidak ditemukan'
                     }else{
+                        $('#errorAlert').addClass('d-none')
                         $('#berhasilAlert').addClass('d-none')
                         $('#gagalAlert').removeClass('d-none')
                         $('#nis').val('')
@@ -169,10 +173,10 @@
                 <h5 class="mb-3">Input Absen Manual</h5>
                 <form action="" method="post" id="inputAbsen">
                     <div class="row">
-                        <div class="col-9">
+                        <div class="col-md-9 col-7">
                             <input type="text" name="nis" id="nis" placeholder="Masukkan NIS" class="form-control">
                         </div>
-                        <div class="col-2">
+                        <div class="col-md-2 col-5">
                             <input type="submit" value="Simpan" class="btn btn-primary btn-lg">
                         </div>
                     </div>
