@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, SiswaController, JenisBayarController, KelasController, TpController, GuruController};
+use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, LihatAbsensiController};
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +32,9 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/admin/user/{user:id}/delete', UserController::class.'@destroy')->name('admin.user.delete');
     
     Route::get('/admin/absensi/scan', AbsensiController::class.'@scan')->name('scan-absensi');
+
+    // Lihat Absensi
+    Route::get('/admin/lihatabseni', LihatAbsensiController::class.'@absensitgl')->name('lihat-tgl-absensi');
 
     // Ajax Scan QRCode
     Route::post('/admin/absensi/scanning', AbsensiController::class.'@scanning')->name('scanning-absensi');
