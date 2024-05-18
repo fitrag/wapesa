@@ -34,7 +34,7 @@
     <h1>Generate QRCode</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-        <div class="breadcrumb-item"><a href="#">Data Siswa</a></div>
+        <div class="breadcrumb-item"><a href="{{ route('admin.siswa') }}">Data Siswa</a></div>
         <div class="breadcrumb-item">Generate QRCode</div>
     </div>
     </div>
