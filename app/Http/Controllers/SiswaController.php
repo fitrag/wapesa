@@ -118,7 +118,7 @@ class SiswaController extends Controller
     }
 
     public function qrcode(Siswa $siswa){
-        $qrCode = QrCode::size(200)->generate($siswa->nis);
+        $qrCode = QrCode::size(80)->generate($siswa->nis);
         return view('admin.siswa.qrcode', compact('qrCode','siswa'));
     }
 }
