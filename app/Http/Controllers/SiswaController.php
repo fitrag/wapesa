@@ -10,6 +10,7 @@ use App\Models\User;
 use File;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Hash;
 
 class SiswaController extends Controller
 {
@@ -62,11 +63,28 @@ class SiswaController extends Controller
             'no_tlp'         => 'required',
             'nm_ayah'         => 'required',
             'kelas_id'         => 'required',
-            'user_id'         => 'required',
         ]);
 
-        $siswa = Siswa::create($request->all());
-        if($siswa){
+        $user = User::create([
+            'name'          => $request->nm_siswa,
+            'username'      => $request->nis,
+            'password'      => Hash::make($request->nisn),
+            'level'         => 'siswa'
+        ]);
+        if($user){
+            $siswa = Siswa::create([
+                'nis'           => $request->nis,
+                'nisn'          => $request->nisn,
+                'nm_siswa'      => $request->nm_siswa,
+                'tmpt_lhr'      => $request->tmpt_lhr,
+                'jen_kel'       => $request->jen_kel,
+                'agama'         => $request->agama,
+                'almt_siswa'    => $request->almt_siswa,
+                'no_tlp'        => $request->no_tlp,
+                'nm_ayah'       => $request->nm_ayah,
+                'kelas_id'      => $request->kelas_id,
+                'user_id'       => $user->id,
+            ]);
             return redirect()->route('admin.siswa')->with('success', 'Berhasil menambahkan data siswa');
         }else{
             return redirect()->back()->with('success', 'Gagal menambahkan data siswa');
@@ -111,6 +129,7 @@ class SiswaController extends Controller
     {
         $delete = $siswa->delete();
         if($delete){
+            $siswa->user->delete();
             return redirect()->route('admin.siswa')->with('success', 'Berhasil menghapus data siswa');
         }else{
             return redirect()->back()->with('success', 'Gagal menghapus data siswa');

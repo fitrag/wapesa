@@ -51,13 +51,13 @@
               @endif
           <div class="card">
               <div class="card-body" style="display:flex;justify-content:center;flex-direction:column;align-items:center">
-                <div id="html-content-holder" style="background:url('{{ asset('img/bg-qrcode.jpeg') }}');background-size:cover;margin:5px 6px;padding:10px;width:5cm;height:8cm;float:left">
+                <div id="html-content-holder" style="background:url('{{ asset('img/bg-qrcode.jpeg') }}');background-size:cover;margin:5px 6px;padding:10px;width:5cm;height:8cm;border:none !important">
                     <center>
-                        <h4 style="color:white;font-size:15px">
+                        <h4 style="color:white;font-size:14px">
                             SMKN 1 Way Pengubuan
                         </h4>
                         <img src="{{ asset('img/avatar/avatar-1.png') }}" alt="" style="width:50px;border-radius:100%">
-                        <p><div style="background:white;padding:9px;border-radius:10px;display:inline-block">{!! $qrCode !!}</div></p>
+                        <p><div style="background:white;padding:9px;border-radius:10px;display:inline-block;margin-top:-5px">{!! $qrCode !!}</div></p>
                         <div>
                             <p style="font-size:12px;margin-top:-10px !important">
                                 Nama : {{ $siswa->nm_siswa }}
