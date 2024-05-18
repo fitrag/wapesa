@@ -25,12 +25,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/dashboard', IndexController::class.'@dashboard')->name('dashboard');
     
     Route::get('/admin/siswa-ajax', IndexController::class.'@siswaAjax')->name('siswa-ajax');
+    Route::get('/admin/user-ajax', IndexController::class.'@userAjax')->name('user-ajax');
 
     Route::get('/admin/user', UserController::class.'@index')->name('admin.user');
     Route::post('/admin/user', UserController::class.'@store')->name('admin.user.store');
     Route::get('/admin/user/{user:id}/edit', UserController::class.'@edit')->name('admin.user.edit');
     Route::put('/admin/user/{user:id}/update', UserController::class.'@update')->name('admin.user.update');
     Route::delete('/admin/user/{user:id}/delete', UserController::class.'@destroy')->name('admin.user.delete');
+    Route::get('/admin/user/{user:id}/delete', UserController::class.'@destroy')->name('admin.user.delete-ajax');
     
     Route::get('/admin/absensi/scan', AbsensiController::class.'@scan')->name('scan-absensi');
 

@@ -7,7 +7,41 @@
 <script src="{{ asset('modules/datatables/Select-1.2.4/js/dataTables.select.min.js') }}"></script>
 <script src="{{ asset('modules/jquery-ui/jquery-ui.min.js') }}"></script>
 
-<script src="{{ asset('js/page/modules-datatables.js') }}"></script>
+<script>
+  $('#table-1').dataTable({
+    serverSide:true,
+    processing:true,
+    ajax:{
+      url:"{{ route('user-ajax') }}"
+    },
+    columns:[
+      {
+        data:'nama',
+        name:'nama'
+      },
+      {
+        data:'username',
+        name:'username'
+      },
+      {
+        data:'password',
+        name:'password'
+      },
+      {
+        data:'wali_kelas',
+        name:'wali_kelas'
+      },
+      {
+        data:'level',
+        name:'level'
+      },
+      {
+        data:'action',
+        name:'action'
+      },
+    ]
+  })
+</script>
 @endpush
 
 @section('content')
@@ -45,9 +79,6 @@
                 <table class="table table-striped" id="table-1">
                 <thead>                                 
                     <tr>
-                    <th class="text-center">
-                        #
-                    </th>
                     <th>Nama</th>
                     <th>Username</th>
                     <th>Password</th>
@@ -56,25 +87,7 @@
                     <th>Aksi</th>
                     </tr>
                 </thead>
-                <tbody>                                 
-                    @foreach($users as $user)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->username }}</td>
-                            <td>{{ $user->password }}</td>
-                            <td>{{ $user->is_walas }}</td>
-                            <td>{{ $user->level }}</td>
-                            <td>
-                                <a href="{{ route('admin.user.edit', ['user' => $user->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
-                                <form action="{{ route('admin.user.delete', ['user' => $user->id]) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger m-1"><i class="fas fa-trash"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
+                <tbody>          
                 </tbody>
                 </table>
             </div>
