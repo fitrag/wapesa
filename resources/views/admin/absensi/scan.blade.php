@@ -7,17 +7,33 @@
     let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
     var videoSelect = document.querySelector('select#videoSource');
     scanner.addListener('scan', function (content) {
-        document.getElementById('hasil').innerHTML = content
-    });
-    Instascan.Camera.getCameras().then(function (cameras) {
-        cameras.map((el, id) => {
-            const option = document.createElement('option');
-            option.value = id;
-            option.text = el.name
-            videoSelect.appendChild(option)
+        $.ajax({
+            url:"{{ route('scanning-absensi') }}",
+            type:"POST",
+            data:{
+                '_token':"{{ @csrf_token() }}",
+                'siswa':content
+            },
+            success:function(e){
+                const data = JSON.parse(e)
+                const statusCode = data.statusCode
+                if(statusCode === 200){
+                    berhasilAudio();
+                    document.getElementById('hasil').innerHTML = data.data.nis
+                    document.getElementById('nama').innerHTML = data.data.nm_siswa
+                }else if(statusCode === 404){
+                    gagalAudio();
+                    document.getElementById('hasil').innerHTML = 'Data tidak ditemukan'
+                    document.getElementById('nama').innerHTML = 'Data tidak ditemukan'
+                }else{
+                    sudahAudio();
+                    document.getElementById('hasil').innerHTML = 'Sudah absen'
+                    document.getElementById('nama').innerHTML = 'Sudah absen'
+                }
+            }
         })
-
-        
+    });
+    Instascan.Camera.getCameras().then(function (cameras) {       
         if (cameras.length > 0) {
             scanner.start(cameras[0]);
         } else {
@@ -26,10 +42,53 @@
     }).catch(function (e) {
         console.error(e);
     });
-    videoSelect.addEventListener('change', function(e){
+
+    $("#inputAbsen").submit(function(e){
         e.preventDefault();
-        console.log(this.value)
+        if($('#nis').length != 0){
+            $.ajax({
+                url:"{{ route('scanning-absensi') }}",
+                type:"POST",
+                data:{
+                    '_token':"{{ @csrf_token() }}",
+                    'siswa':$('#nis').val()
+                },
+                success:function(e){
+                    const data = JSON.parse(e)
+                    const statusCode = data.statusCode
+                    if(statusCode === 200){
+                        berhasilAudio();
+                        $('#nis').val('')
+                        document.getElementById('hasil').innerHTML = data.data.nis
+                        document.getElementById('nama').innerHTML = data.data.nm_siswa
+                    }else if(statusCode === 404){
+                        gagalAudio();
+                        $('#nis').val('')
+                        document.getElementById('hasil').innerHTML = 'Data tidak ditemukan'
+                        document.getElementById('nama').innerHTML = 'Data tidak ditemukan'
+                    }else{
+                        $('#nis').val('')
+                        sudahAudio();
+                        document.getElementById('hasil').innerHTML = 'Sudah absen'
+                        document.getElementById('nama').innerHTML = 'Sudah absen'
+                    }
+                }
+            })
+        }
     })
+
+    function berhasilAudio() {
+        var x = document.getElementById("berhasil");
+        x.play();
+    }
+    function gagalAudio() {
+        var x = document.getElementById("gagal");
+        x.play();
+    }
+    function sudahAudio() {
+        var x = document.getElementById("sudah");
+        x.play();
+    }
 </script>
 @endpush
 
@@ -47,6 +106,15 @@
 
     <div class="section-body">
 
+    <audio id="berhasil">
+        <source src="{{asset('sound/berhasil.mp3')}}" type="audio/mpeg">
+    </audio> 
+    <audio id="gagal">
+        <source src="{{asset('sound/gagal.mp3')}}" type="audio/mpeg">
+    </audio> 
+    <audio id="sudah">
+        <source src="{{asset('sound/sudah.mp3')}}" type="audio/mpeg">
+    </audio> 
     <div class="row">
         <div class="col-12">
             @if(session('success'))
@@ -58,15 +126,26 @@
         <div class="card">
             <div class="card-body">
                 <div class="text-center">
-                    <div class="select mb-4">
-                        <label for="videoSource">Video source: </label><select id="videoSource" class="form-control"></select>
-                    </div>
                     <video id="preview" class="mw-100"></video>
                 </div>
                 <div class="my-2">
-                    <h3>Nama : </h3>
+                    <h3>Nama : <span id="nama"></span></h3>
                     <h3>NIS : <span id="hasil"></span></h3>
                 </div>
+
+            </div>
+            <div class="mt-4 p-3 border-top">
+                <h5 class="mb-3">Input Absen Manual</h5>
+                <form action="" method="post" id="inputAbsen">
+                    <div class="row">
+                        <div class="col-10">
+                            <input type="text" name="nis" id="nis" placeholder="Masukkan NIS" class="form-control">
+                        </div>
+                        <div class="col-2">
+                            <input type="submit" value="Simpan" class="btn btn-primary btn-lg w-100">
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         </div>

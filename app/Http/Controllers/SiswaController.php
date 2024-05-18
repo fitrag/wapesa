@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Siswa;
 use App\Models\User;
 use File;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
@@ -114,5 +115,10 @@ class SiswaController extends Controller
         }else{
             return redirect()->back()->with('success', 'Gagal menghapus data siswa');
         }
+    }
+
+    public function qrcode(Siswa $siswa){
+        $qrCode = QrCode::size(200)->generate($siswa->nis);
+        return view('admin.siswa.qrcode', compact('qrCode','siswa'));
     }
 }

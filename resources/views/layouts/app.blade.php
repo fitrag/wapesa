@@ -7,6 +7,7 @@
   <title>{{ isset($title) ? $title : 'SMKN 1 Way Pengubuan'}}</title>
 
   <!-- General CSS Files -->
+  <!-- @notifyCss -->
   <link rel="stylesheet" href="{{ asset('modules/bootstrap/css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('modules/fontawesome/css/all.min.css') }}">
 
@@ -20,7 +21,6 @@
       float:right !important
     }
   </style>
-
 <body>
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
@@ -73,6 +73,7 @@
       </footer>
     </div>
   </div>
+  <x-notify::notify />
 
   <!-- General JS Scripts -->
   <script src="{{ asset('modules/jquery.min.js') }}"></script>
@@ -84,6 +85,7 @@
   <script src="{{ asset('js/stisla.js') }}"></script>
 
   @stack('scripts')
+  @notifyJs
   
   <!-- Template JS File -->
   <script src="{{ asset('js/scripts.js') }}"></script>

@@ -33,6 +33,9 @@ Route::middleware(['auth'])->group(function () {
     
     Route::get('/admin/absensi/scan', AbsensiController::class.'@scan')->name('scan-absensi');
 
+    // Ajax Scan QRCode
+    Route::post('/admin/absensi/scanning', AbsensiController::class.'@scanning')->name('scanning-absensi');
+
     Route::resource('admin/siswa', SiswaController::class)
     ->name('index', 'admin.siswa')
     ->name('store', 'admin.siswa.store')
@@ -40,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
     ->name('update', 'admin.siswa.update')
     ->name('destroy', 'admin.siswa.delete');
     Route::post('admin/siswa/import', SiswaController::class.'@import')->name('admin.siswa.import');
+    Route::get('admin/{siswa:id}/qrcode', SiswaController::class.'@qrcode')->name('admin.siswa.qrcode');
     
     Route::resource('admin/kelas', KelasController::class)
     ->name('index', 'admin.kelas')
