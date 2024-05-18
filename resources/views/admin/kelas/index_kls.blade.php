@@ -41,6 +41,7 @@
                   <thead>                                 
                       <tr>
                           <th class="text-center">#</th>
+                          <th>ID</th>
                           <th>Nama Kelas</th>
                           <th>Alias</th>
                           <th>Aksi</th>
@@ -50,6 +51,7 @@
                   @foreach($kelas as $kls)
                           <tr>
                               <td>{{ $loop->iteration }}</td>
+                              <td>{{ $kls->id }}</td>
                               <td>{{ $kls->nm_kls }}</td>
                               <td>{{ $kls->alias }}</td>
                               <td>

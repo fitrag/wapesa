@@ -13,7 +13,7 @@ class AbsensiController extends Controller
 
     public function scanning(Request $req){
         $siswa = Siswa::with('kelas')->whereNis($req->siswa)->first();
-        if($siswa){
+        if($siswa AND $siswa->user->is_active){
             $tanggal = Absensi::whereSiswaId($siswa->id)->first();
             if($tanggal AND date_format(date_create($tanggal->created_at),'Y-m-d') == date('Y-m-d')){
                 echo json_encode([
@@ -49,7 +49,7 @@ class AbsensiController extends Controller
             }
         }else{
             echo json_encode([
-                'message' => 'Tidak ditemukan',
+                'message' => 'Data tidak ditemukan, silahkan hubungi administrator',
                 'statusCode' => 404
             ]);
         }

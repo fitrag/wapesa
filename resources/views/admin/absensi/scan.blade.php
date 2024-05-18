@@ -20,19 +20,24 @@
                 if(statusCode === 200){
                     $('#berhasilAlert').removeClass('d-none')
                     $('#gagalAlert').addClass('d-none')
+                    $('#errorAlert').addClass('d-none')
                     berhasilAudio();
+                    $('#nis').val('')
                     document.getElementById('hasil').innerHTML = data.data.nis
                     document.getElementById('nama').innerHTML = data.data.nm_siswa
                 }else if(statusCode === 404){
                     $('#berhasilAlert').addClass('d-none')
-                    $('#gagalAlert').removeClass('d-none')
+                    $('#errorAlert').removeClass('d-none')
                     gagalAudio();
-                    $('#gagalAlert').show()
+                    $('#errorAlert').html(data.message)
+                    $('#nis').val('')
                     document.getElementById('hasil').innerHTML = 'Data tidak ditemukan'
                     document.getElementById('nama').innerHTML = 'Data tidak ditemukan'
                 }else{
+                    $('#errorAlert').addClass('d-none')
                     $('#berhasilAlert').addClass('d-none')
                     $('#gagalAlert').removeClass('d-none')
+                    $('#nis').val('')
                     sudahAudio();
                     document.getElementById('hasil').innerHTML = 'Sudah absen'
                     document.getElementById('nama').innerHTML = 'Sudah absen'
@@ -74,6 +79,7 @@
                         $('#berhasilAlert').addClass('d-none')
                         $('#gagalAlert').removeClass('d-none')
                         gagalAudio();
+                        $('#errorAlert').html(data.message)
                         $('#nis').val('')
                         document.getElementById('hasil').innerHTML = 'Data tidak ditemukan'
                         document.getElementById('nama').innerHTML = 'Data tidak ditemukan'
@@ -138,6 +144,7 @@
             @endif
 
             <div class="alert alert-success d-none" id="berhasilAlert">Berhasil absen</div>
+            <div class="alert alert-danger d-none" id="errorAlert"></div>
             <div class="alert alert-danger d-none" id="gagalAlert">Gagal absen</div>
         <div class="card">
             <div class="card-body">

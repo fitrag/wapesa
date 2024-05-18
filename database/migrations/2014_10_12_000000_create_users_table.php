@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->enum('level',['admin','guru','siswa']);
             $table->boolean('is_walas')->default(0);
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }

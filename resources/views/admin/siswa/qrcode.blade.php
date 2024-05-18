@@ -59,10 +59,10 @@
                         <img src="{{ asset('img/avatar/avatar-1.png') }}" alt="" style="width:50px;border-radius:100%">
                         <p><div style="background:white;padding:9px;border-radius:10px;display:inline-block;margin-top:-5px">{!! $qrCode !!}</div></p>
                         <div>
-                            <p style="font-size:12px;margin-top:-10px !important">
+                            <p style="font-size:12px;margin-top:-10px !important;line-height:15px">
                                 Nama : {{ $siswa->nm_siswa }}
                             </p>
-                            <p style="font-size:12px;margin-top:-25px !important">
+                            <p style="font-size:12px;margin-top:-18px !important">
                                 NIS : {{ $siswa->nis }}
                             </p>
                         </div>
