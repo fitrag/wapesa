@@ -41,38 +41,6 @@
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-striped" id="table-1">
-<<<<<<< HEAD
-                  <thead>                                 
-                      <tr>
-                      <th class="text-center">
-                          #
-                      </th>
-                      <th>NIS</th>
-                      <th>NISN</th>
-                      <th>Nama</th>
-                      <th>Kelas</th>
-                      <th>Username</th>
-                      <th>Aksi</th>
-                      </tr>
-                  </thead>
-                  <tbody>                                 
-                      @foreach($siswas as $siswa)
-                          <tr>
-                              <td>{{ $loop->iteration }}</td>
-                              <td>{{ $siswa->nis }}</td>
-                              <td>{{ $siswa->nisn}}</td>
-                              <td>{{ $siswa->nm_siswa }}</td>
-                              <td>{{ $siswa->kelas->nm_kls }}</td>
-                              <td>{{ $siswa->user->username }}</td>
-                              <td>
-                                <div class="btn-group">
-                                  <a href="{{ route('admin.siswa.edit_siswa', ['siswa' => $siswa->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
-                                  <form action="{{ route('admin.siswa.delete', ['siswa' => $siswa->id]) }}" method="post">
-                                      @csrf
-                                      @method('DELETE')
-                                      <button class="btn btn-danger m-1"><i class="fas fa-trash"></i></button>
-                                  </form>
-=======
                 <thead>                                 
                     <tr>
                     <th class="text-center">
@@ -105,7 +73,6 @@
                                   @method('DELETE')
                                   <button class="btn btn-danger m-1"><i class="fas fa-trash"></i></button>
                                 </form>
->>>>>>> e6c673a77404a56d9d4d82f8e5ba72ef5a38fef3
 
                                 </div>
                               </td>
