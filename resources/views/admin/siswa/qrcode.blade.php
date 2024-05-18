@@ -11,7 +11,8 @@
             html2canvas(element[0],
             {
                 allowTaint: true,
-                useCORS: true
+                useCORS: true,
+                scale: 10,
             }
             ).then((canvas) => {
             const image = canvas.toDataURL('image/png');

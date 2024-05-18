@@ -66,7 +66,7 @@
                             <td align="center">
                               <div class="btn-group">
                                 <a href="{{ route('admin.siswa.edit_siswa', ['siswa' => $siswa->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
-                                <a href="{{ route('admin.siswa.qrcode', ['siswa' => $siswa->id]) }}" class="btn btn-primary m-1"><i class="fas fa-qrcode"></i></a>
+                                <a href="{{ route('admin.siswa.qrcode', ['siswa' => $siswa->id]) }}" class="btn btn-info m-1"><i class="fas fa-qrcode"></i></a>
                                 <form action="{{ route('admin.siswa.delete', ['siswa' => $siswa->id]) }}" method="post">
                                   @csrf
                                   @method('DELETE')
