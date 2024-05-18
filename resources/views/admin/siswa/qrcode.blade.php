@@ -1,6 +1,29 @@
 @extends('layouts.app', ['title' => 'QRCODE - '.$siswa->nm_siswa])
 
 @push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+    $(document).ready(function() {
+
+
+        var element = $("#html-content-holder");
+        $("#btn-Preview-Image").on('click', function() {
+            html2canvas(element[0],
+            {
+                allowTaint: true,
+                useCORS: true
+            }
+            ).then((canvas) => {
+            const image = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = '{{ $siswa->nm_siswa }}-QrCode.png';
+            link.href = image;
+            link.click();
+        });
+        });
+
+    });
+</script>
 
 @endpush
 
@@ -8,11 +31,11 @@
 
 <section class="section">
     <div class="section-header">
-    <h1>Edit Siswa</h1>
+    <h1>Generate QRCode</h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-        <div class="breadcrumb-item"><a href="#">Edit Master</a></div>
-        <div class="breadcrumb-item">Edit Siswa</div>
+        <div class="breadcrumb-item"><a href="#">Data Siswa</a></div>
+        <div class="breadcrumb-item">Generate QRCode</div>
     </div>
     </div>
 
@@ -26,35 +49,24 @@
               <div class="alert alert-danger">{{ session('error') }}</div>
               @endif
           <div class="card">
-              <div class="card-body">
-                <div class="row items-center justify-content-center">
-                    <div class="col-lg-3 mb-3" style="width:150px">
-                        <img alt="image" src="{{ asset('img/avatar/avatar-1.png') }}" class="w-100">
-                    </div>
-                    <div class="col-lg-6 mb-3">
-                        <table class="table table-bordered">
-                            <tr>
-                                <td>NISN</td>
-                                <td>{{ $siswa->nisn }}</td>
-                            </tr>
-                            <tr>
-                                <td>NIS</td>
-                                <td>{{ $siswa->nis }}</td>
-                            </tr>
-                            <tr>
-                                <td>Nama</td>
-                                <td>{{ $siswa->nm_siswa }}</td>
-                            </tr>
-                            <tr>
-                                <td>Kelas</td>
-                                <td>{{ $siswa->kelas->nm_kls }}</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="col-lg-3 mb-3">
-                        <center>{!! $qrCode !!}</center>
-                    </div>
+              <div class="card-body" style="display:flex;justify-content:center;flex-direction:column;align-items:center">
+                <div id="html-content-holder" style="background:url('{{ asset('img/bg-qrcode.jpeg') }}');background-size:cover;margin:5px 6px;padding:10px;width:5cm;height:8cm;float:left">
+                    <center>
+                        <h4 style="color:white;font-size:15px">
+                            SMKN 1 Way Pengubuan
+                        </h4>
+                        <p><div style="background:white;padding:9px;border-radius:10px;display:inline-block">{!! $qrCode !!}</div></p>
+                        <div>
+                            <p class="py-0 my-0" style="font-size:13px">
+                                Nama : {{ $siswa->nm_siswa }}
+                            </p>
+                            <p class="py-0 my-0" style="font-size:13px">
+                                NIS : {{ $siswa->nis }}
+                            </p>
+                        </div>
+                    </center>
                 </div>
+                <input download="download.png" id="btn-Preview-Image" type="button" class="btn btn-primary btn-lg w-100 mt-3" value="Download" />
               </div>
           </div>
           </div>
