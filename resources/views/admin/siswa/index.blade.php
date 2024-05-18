@@ -14,16 +14,16 @@
 
 <section class="section">
     <div class="section-header">
-    <h1>Data Siswa</h1>
-    <div class="section-header-breadcrumb">
-        <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-        <div class="breadcrumb-item"><a href="#">Data Master</a></div>
-        <div class="breadcrumb-item">Data Siswa</div>
-    </div>
+      <h1>Data Siswa</h1>
+      <div class="section-header-breadcrumb">
+          <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+          <div class="breadcrumb-item"><a href="#">Data Master</a></div>
+          <div class="breadcrumb-item">Data Siswa</div>
+      </div>
     </div>
 
     <div class="section-body">
-    <div class="row">
+      <div class="row">
         <div class="col-12">
             @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
@@ -31,61 +31,104 @@
             @if(session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-        <div class="card">
-            <div class="p-3">
-              <button class="btn btn-primary float-right mx-1" data-target="#exampleModal" data-toggle="modal">Tambah data siswa</button>
-              <a href="{{ url('')}}/format/siswa.xlsx"  class="btn btn-info float-right mx-1"><i class="fa fa-download"></i>Download Format</a>
-              <button class="btn btn-success float-right mx-1" data-target="#importExcel" data-toggle="modal">Import via Excel</button>
-            </div>
+          <div class="card">
+              <div class="p-3">
+                <button class="btn btn-primary float-right mx-1" data-target="#exampleModal" data-toggle="modal">Tambah data siswa</button>
+                <a href="{{ url('')}}/format/siswa.xlsx"  class="btn btn-info float-right mx-1"><i class="fa fa-download"></i>Download Format</a>
+                <button class="btn btn-success float-right mx-1" data-target="#importExcel" data-toggle="modal">Import via Excel</button>
+                
+              </div>
             <div class="card-body">
-            <div class="table-responsive">
+              <div class="table-responsive">
                 <table class="table table-striped" id="table-1">
-                <thead>                                 
-                    <tr>
-                    <th class="text-center">
-                        #
-                    </th>
-                    <th>NIS</th>
-                    <th>NISN</th>
-                    <th>Nama</th>
-                    <th>Kelas</th>
-                    <th>Username</th>
-                    <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>                                 
-                    @foreach($siswas as $siswa)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $siswa->nis }}</td>
-                            <td>{{ $siswa->nisn}}</td>
-                            <td>{{ $siswa->nm_siswa }}</td>
-                            <td>{{ $siswa->kelas->nm_kls }}</td>
-                            <td>{{ $siswa->user->username }}</td>
-                            <td>
-                              <div class="btn-group">
-                                <a href="{{ route('admin.siswa.edit_siswa', ['siswa' => $siswa->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
-                                <form action="{{ route('admin.siswa.delete', ['siswa' => $siswa->id]) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger m-1"><i class="fas fa-trash"></i></button>
-                                </form>
+                  <thead>                                 
+                      <tr>
+                      <th class="text-center">
+                          #
+                      </th>
+                      <th>NIS</th>
+                      <th>NISN</th>
+                      <th>Nama</th>
+                      <th>Kelas</th>
+                      <th>Username</th>
+                      <th>Aksi</th>
+                      </tr>
+                  </thead>
+                  <tbody>                                 
+                      @foreach($siswas as $siswa)
+                          <tr>
+                              <td>{{ $loop->iteration }}</td>
+                              <td>{{ $siswa->nis }}</td>
+                              <td>{{ $siswa->nisn}}</td>
+                              <td>{{ $siswa->nm_siswa }}</td>
+                              <td>{{ $siswa->kelas->nm_kls }}</td>
+                              <td>{{ $siswa->user->username }}</td>
+                              <td>
+                                <div class="btn-group">
+                                  <a href="{{ route('admin.siswa.edit_siswa', ['siswa' => $siswa->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
+                                  <form action="{{ route('admin.siswa.delete', ['siswa' => $siswa->id]) }}" method="post">
+                                      @csrf
+                                      @method('DELETE')
+                                      <button class="btn btn-danger m-1"><i class="fas fa-trash"></i></button>
+                                  </form>
 
-                              </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
+                                </div>
+                              </td>
+                          </tr>
+                      @endforeach
+                  </tbody>
                 </table>
+              </div>
             </div>
-            </div>
+          </div>
         </div>
-        </div>
-    </div>
+      </div>
     </div>
 </section>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">  
+           
+
+              
+
+        <!-- Import Excel -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="importExcel">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Import data via excel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form method="POST" action="{{ route('admin.siswa.import') }}" class="needs-validation" novalidate="" enctype="multipart/form-data">
+                  @csrf
+                  <div class="form-group">
+                    <label for="name">Pilih file</label>
+                    <input id="file" type="file" class="form-control" name="file" tabindex="1" required>
+                    @error('file')
+                      <div class="alert alert-danger">Mohon di filenya</div>
+                    @enderror
+                    <div class="invalid-feedback">
+                      Mohon di isi filenya
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">
+                      Tambah
+                    </button>
+                    <input type="reset" value="Reset" class="btn btn-danger btn-lg btn-block">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal" >  
           <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -149,6 +192,7 @@
                             Mohon di isi tanggal lahir
                           </div>
                       </div>
+                    </row>
                   </div>
                   <div class="row">
                     <div class="col-8">
@@ -210,7 +254,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="name">Nama Aayah</label>
+                    <label for="name">Nama Ayah</label>
                     <input id="name" type="text" class="form-control" name="nm_ayah" tabindex="1"  required autofocus>
                     @error('nm_ayah')
                       <div class="alert alert-danger">Mohon di isi nama ayah</div>
@@ -261,42 +305,6 @@
                       </button>
                       <input type="reset" value="Reset" class="btn btn-danger btn-lg btn-block">
                     </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>        
-
-        //import
-        <div class="modal fade" tabindex="-1" role="dialog" id="importExcel">
-          <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Import data via excel</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <form method="POST" action="{{ route('admin.siswa.import') }}" class="needs-validation" novalidate="" enctype="multipart/form-data">
-                  @csrf
-                  <div class="form-group">
-                    <label for="name">Pilih file</label>
-                    <input id="file" type="file" class="form-control" name="file" tabindex="1" required>
-                    @error('file')
-                      <div class="alert alert-danger">Mohon di filenya</div>
-                    @enderror
-                    <div class="invalid-feedback">
-                      Mohon di isi filenya
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">
-                      Tambah
-                    </button>
-                    <input type="reset" value="Reset" class="btn btn-danger btn-lg btn-block">
                   </div>
                 </form>
               </div>
