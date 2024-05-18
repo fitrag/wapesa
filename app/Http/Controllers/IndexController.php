@@ -62,7 +62,7 @@ class IndexController extends Controller
             return $data->is_walas ? 'Iya' : 'Tidak';
         })
         ->addColumn('level', function($data){
-            return $data->level ? 'Iya' : 'Tidak';
+            return $data->level;
         })
         ->addColumn('action', function($data){
             return '
