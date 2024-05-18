@@ -18,14 +18,21 @@
                 const data = JSON.parse(e)
                 const statusCode = data.statusCode
                 if(statusCode === 200){
+                    $('#berhasilAlert').removeClass('d-none')
+                    $('#gagalAlert').addClass('d-none')
                     berhasilAudio();
                     document.getElementById('hasil').innerHTML = data.data.nis
                     document.getElementById('nama').innerHTML = data.data.nm_siswa
                 }else if(statusCode === 404){
+                    $('#berhasilAlert').addClass('d-none')
+                    $('#gagalAlert').removeClass('d-none')
                     gagalAudio();
+                    $('#gagalAlert').show()
                     document.getElementById('hasil').innerHTML = 'Data tidak ditemukan'
                     document.getElementById('nama').innerHTML = 'Data tidak ditemukan'
                 }else{
+                    $('#berhasilAlert').addClass('d-none')
+                    $('#gagalAlert').removeClass('d-none')
                     sudahAudio();
                     document.getElementById('hasil').innerHTML = 'Sudah absen'
                     document.getElementById('nama').innerHTML = 'Sudah absen'
@@ -57,16 +64,22 @@
                     const data = JSON.parse(e)
                     const statusCode = data.statusCode
                     if(statusCode === 200){
+                        $('#berhasilAlert').removeClass('d-none')
+                        $('#gagalAlert').addClass('d-none')
                         berhasilAudio();
                         $('#nis').val('')
                         document.getElementById('hasil').innerHTML = data.data.nis
                         document.getElementById('nama').innerHTML = data.data.nm_siswa
                     }else if(statusCode === 404){
+                        $('#berhasilAlert').addClass('d-none')
+                        $('#gagalAlert').removeClass('d-none')
                         gagalAudio();
                         $('#nis').val('')
                         document.getElementById('hasil').innerHTML = 'Data tidak ditemukan'
                         document.getElementById('nama').innerHTML = 'Data tidak ditemukan'
                     }else{
+                        $('#berhasilAlert').addClass('d-none')
+                        $('#gagalAlert').removeClass('d-none')
                         $('#nis').val('')
                         sudahAudio();
                         document.getElementById('hasil').innerHTML = 'Sudah absen'
@@ -123,26 +136,37 @@
             @if(session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
+
+            <div class="alert alert-success d-none" id="berhasilAlert">Berhasil absen</div>
+            <div class="alert alert-danger d-none" id="gagalAlert">Gagal absen</div>
         <div class="card">
             <div class="card-body">
                 <div class="text-center">
                     <video id="preview" class="mw-100"></video>
                 </div>
                 <div class="my-2">
-                    <h3>Nama : <span id="nama"></span></h3>
-                    <h3>NIS : <span id="hasil"></span></h3>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>Nama</td>
+                            <td><span id="nama"></span></td>
+                        </tr>
+                        <tr>
+                            <td>NIS</td>
+                            <td><span id="hasil"></span></td>
+                        </tr>
+                    </table>
                 </div>
 
             </div>
-            <div class="mt-4 p-3 border-top">
+            <div class="mt-4 p-4 border-top">
                 <h5 class="mb-3">Input Absen Manual</h5>
                 <form action="" method="post" id="inputAbsen">
                     <div class="row">
-                        <div class="col-10">
+                        <div class="col-9">
                             <input type="text" name="nis" id="nis" placeholder="Masukkan NIS" class="form-control">
                         </div>
                         <div class="col-2">
-                            <input type="submit" value="Simpan" class="btn btn-primary btn-lg w-100">
+                            <input type="submit" value="Simpan" class="btn btn-primary btn-lg">
                         </div>
                     </div>
                 </form>
