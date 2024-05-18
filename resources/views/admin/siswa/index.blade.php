@@ -281,22 +281,6 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-8">
-                      <div class="form-group">
-                        <label for="name">Nama user (Jika tidak ada silahkan input di data user)</label>
-                        <select class="form-control" name="user_id" required="">
-                            @foreach($user as $item)
-                                <option value="{{$item->id}}">{{$item->name}}</option>
-                            @endforeach
-                        </select>
-                        @error('user_id')
-                          <div class="alert alert-danger">Mohon di isi nama user</div>
-                        @enderror
-                        <div class="invalid-feedback">
-                          Mohon di isi nama user
-                        </div>
-                      </div>
-                    </div>
                   </div>
 
                   <div class="form-group">
