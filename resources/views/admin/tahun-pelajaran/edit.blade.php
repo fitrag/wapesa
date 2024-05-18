@@ -47,6 +47,20 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <label for="semester">Semester</label>
+                    <select id="semester" type="number" class="form-control" name="semester" tabindex="1" required autofocus>
+                        <option value="">Pilih semester</option>
+                        <option value="genap" {{ ($tahun_pelajaran->semester == 'genap') ? 'selected' : '' }}>Genap</option>
+                        <option value="ganjil" {{ ($tahun_pelajaran->semester == 'ganjil') ? 'selected' : '' }}>Ganjil</option>
+                    </select>
+                    @error('semester')
+                      <div class="alert alert-danger">Mohon di isi semester anda</div>
+                    @enderror
+                    <div class="invalid-feedback">
+                      Mohon di isi semester
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <label for="status">Status</label>
                     <select id="status" type="number" class="form-control" name="status" tabindex="1" required autofocus>
                         <option value="">Pilih status</option>

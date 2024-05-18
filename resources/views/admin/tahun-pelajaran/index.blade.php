@@ -44,6 +44,7 @@
                         #
                     </th>
                     <th>Tahun Pelajaran</th>
+                    <th>Semester</th>
                     <th>Status</th>
                     <th>Aksi</th>
                     </tr>
@@ -53,6 +54,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $tahun_pelajaran->nm_tp }}</td>
+                            <td class="text-capitalize">{{ $tahun_pelajaran->semester }}</td>
                             <td>{{ ($tahun_pelajaran->status) ? 'Aktif' : 'Tidak Aktif' }}</td>
                             <td>
                                 <a href="{{ route('admin.tahun-pelajaran.edit', ['tahun_pelajaran' => $tahun_pelajaran->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
@@ -94,6 +96,20 @@
                     @enderror
                     <div class="invalid-feedback">
                       Mohon di isi tahun pelajaran
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="semester">Semester</label>
+                    <select id="semester" class="form-control" name="semester" tabindex="1" required autofocus>
+                        <option value="">Pilih semester</option>
+                        <option value="genap">Genap</option>
+                        <option value="ganjil">Ganjil</option>
+                    </select>
+                    @error('semester')
+                      <div class="alert alert-danger">Mohon di isi semester anda</div>
+                    @enderror
+                    <div class="invalid-feedback">
+                      Mohon di isi status
                     </div>
                   </div>
                   <div class="form-group">

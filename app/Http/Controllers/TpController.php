@@ -32,6 +32,7 @@ class TpController extends Controller
         $validate = $request->validate([
             'nm_tp'     => 'required',
             'status'    => 'required',
+            'semester'   => 'required'
         ]);
         $insert = Tp::create($validate);
         if($insert){
@@ -64,6 +65,7 @@ class TpController extends Controller
         $validate = $request->validate([
             'nm_tp'     => 'required',
             'status'    => 'required',
+            'semester'  => 'required'
         ]);
         $update = $tahun_pelajaran->update($validate);
         if($update){

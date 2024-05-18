@@ -56,12 +56,13 @@
                         <h4 style="color:white;font-size:15px">
                             SMKN 1 Way Pengubuan
                         </h4>
+                        <img src="{{ asset('img/avatar/avatar-1.png') }}" alt="" style="width:50px;border-radius:100%">
                         <p><div style="background:white;padding:9px;border-radius:10px;display:inline-block">{!! $qrCode !!}</div></p>
                         <div>
-                            <p class="py-0 my-0" style="font-size:13px">
+                            <p style="font-size:12px;margin-top:-10px !important">
                                 Nama : {{ $siswa->nm_siswa }}
                             </p>
-                            <p class="py-0 my-0" style="font-size:13px">
+                            <p style="font-size:12px;margin-top:-25px !important">
                                 NIS : {{ $siswa->nis }}
                             </p>
                         </div>

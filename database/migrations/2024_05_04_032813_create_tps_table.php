@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tps', function (Blueprint $table) {
             $table->id();
             $table->string('nm_tp',10);
+            $table->string('semester');
             $table->boolean('status')->default(0);
             $table->timestamps();
         });
