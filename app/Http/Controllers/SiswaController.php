@@ -129,6 +129,7 @@ class SiswaController extends Controller
     {
         $delete = $siswa->delete();
         if($delete){
+            $siswa->user->delete();
             return redirect()->route('admin.siswa')->with('success', 'Berhasil menghapus data siswa');
         }else{
             return redirect()->back()->with('success', 'Gagal menghapus data siswa');
