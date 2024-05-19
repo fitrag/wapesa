@@ -14,8 +14,8 @@ class AbsensiController extends Controller
     public function scanning(Request $req){
         $siswa = Siswa::with('kelas')->whereNis($req->siswa)->first();
         if($siswa AND $siswa->user->is_active){
-            $tanggal = Absensi::whereSiswaId($siswa->id)->first();
-            if($tanggal AND date_format(date_create($tanggal->created_at),'Y-m-d') == date('Y-m-d')){
+            $tanggal = Absensi::whereSiswaId($siswa->id)->latest()->first();
+            if($tanggal AND date_format(date_create($tanggal->created_at),'Y-m-d') === date('Y-m-d')){
                 echo json_encode([
                     'message' => 'Sudah absen',
                     'statusCOde' => 500
