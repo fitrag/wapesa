@@ -41,9 +41,9 @@
             </ul>
         </li>
         <li class="dropdown">
-            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-flask"></i> <span>Experiment</span></a>
+            <a href="#" class="nav-link has-dropdown bg-warning text-white" data-toggle="dropdown"><i class="fas fa-flask"></i> <span>Experiment</span></a>
             <ul class="dropdown-menu">
-                <li><a class="nav-link" href="layout-default.html">Sinkron Absensi</a></li>
+                <li><a class="nav-link" href="{{ route('sinkron-absensi') }}">Sinkron Absensi</a></li>
             </ul>
         </li>
         @endif

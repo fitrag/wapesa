@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, LihatAbsensiController};
+use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, LihatAbsensiController, SinkronisasiController};
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +26,9 @@ Route::middleware(['auth'])->group(function () {
     
     Route::get('/admin/siswa-ajax', IndexController::class.'@siswaAjax')->name('siswa-ajax');
     Route::get('/admin/user-ajax', IndexController::class.'@userAjax')->name('user-ajax');
+    
+    Route::get('/admin/sinkron-absensi', IndexController::class.'@sinkronAbsensi')->name('sinkron-absensi');
+    Route::post('/admin/sinkron-absensi/proses', SinkronisasiController::class.'@sinkronAbsensi')->name('sinkron-absensi-proses');
 
     Route::get('/admin/user', UserController::class.'@index')->name('admin.user');
     Route::post('/admin/user', UserController::class.'@store')->name('admin.user.store');

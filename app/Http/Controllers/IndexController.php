@@ -73,4 +73,8 @@ class IndexController extends Controller
         ->rawColumns(['action'])
         ->make(true);
     }
+
+    public function sinkronAbsensi(){
+        return view('admin.experiment.sinkron-absensi');
+    }
 }
