@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('pengaturans', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_aplikasi');
-            $table->string('npsn');
-            $table->string('nama_sekolah');
-            $table->text('alamat_sekolah');
+            $table->string('logo', 955)->nullable();
+            $table->string('nama_aplikasi')->nullable();
+            $table->string('npsn')->nullable();
+            $table->string('nama_sekolah')->nullable();
+            $table->text('alamat_sekolah')->nullable();
             $table->timestamps();
         });
     }

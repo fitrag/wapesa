@@ -32,6 +32,13 @@
                                     <td>:</td>
                                     <td>{{ auth()->user()->guru->nuptk }}</td>
                                 </tr>
+                                @if(auth()->user()->is_walas)
+                                <tr>
+                                    <td>Wali Kelas</td>
+                                    <td>:</td>
+                                    <td>{{ auth()->user()->is_walas }}</td>
+                                </tr>
+                                @endif
                             </table>
                         </div>
                     </div>
