@@ -77,53 +77,55 @@
                         </div>
                     </div>
                 </form>
-                <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th rowspan="2" class="text-center">NO</th>
-                            <th rowspan="2">Nama</th>
-                            <th colspan="4" class="text-center">Keterangan</th>
-                        </tr>
-                        <tr>
-                            <th class="text-center">H</th>
-                            <th class="text-center">I</th>
-                            <th class="text-center">S</th>
-                            <th class="text-center">A</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($siswas as $siswa)
-                        <tr>
-                            <td align="center">{{ $loop->iteration }}</td>
-                            <td>{{ $siswa->nm_siswa }}</td>
-                            @if($siswa->absensis)
-                                @foreach($siswa->absensis as $keterangan)
-                                    <td align="center">{{ $keterangan->hadir == 'h' ? '✅' : '' }}</td>
-                                    <td align="center">{{ $keterangan->hadir == 'i' ? '✅' : '' }}</td>
-                                    <td align="center">{{ $keterangan->hadir == 's' ? '✅' : '' }}</td>
-                                    <td align="center">{{ $keterangan->hadir == 'a' ? '✅' : '' }}</td>
-                                @endforeach
-                            @endif
-                            @if($siswa->absensis->isEmpty())
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            @endif
-                        </tr>
-                        @endforeach
-                        <tr>
-                            <td align="center" colspan="2" rowspan="2" class="font-weight-bold">TOTAL</td>
-                            <td align="center">{{ $absensis->where('hadir','h')->count() }}</td>
-                            <td align="center">{{ $absensis->where('hadir','i')->count() }}</td>
-                            <td align="center">{{ $absensis->where('hadir','s')->count() }}</td>
-                            <td align="center">{{ $absensis->where('hadir','a')->count() }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" align="center" style="font-weight:bold;font-size:18px">{{ $absensis->where('hadir','h')->count() + $absensis->where('hadir','i')->count() + $absensis->where('hadir','s')->count() + $absensis->where('hadir','a')->count() }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" class="text-center">NO</th>
+                                <th rowspan="2">Nama</th>
+                                <th colspan="4" class="text-center">Keterangan</th>
+                            </tr>
+                            <tr>
+                                <th class="text-center">H</th>
+                                <th class="text-center">I</th>
+                                <th class="text-center">S</th>
+                                <th class="text-center">A</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($siswas as $siswa)
+                            <tr>
+                                <td align="center">{{ $loop->iteration }}</td>
+                                <td>{{ $siswa->nm_siswa }}</td>
+                                @if($siswa->absensis)
+                                    @foreach($siswa->absensis as $keterangan)
+                                        <td align="center">{{ $keterangan->hadir == 'h' ? '✅' : '' }}</td>
+                                        <td align="center">{{ $keterangan->hadir == 'i' ? '✅' : '' }}</td>
+                                        <td align="center">{{ $keterangan->hadir == 's' ? '✅' : '' }}</td>
+                                        <td align="center">{{ $keterangan->hadir == 'a' ? '✅' : '' }}</td>
+                                    @endforeach
+                                @endif
+                                @if($siswa->absensis->isEmpty())
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                @endif
+                            </tr>
+                            @endforeach
+                            <tr>
+                                <td align="center" colspan="2" rowspan="2" class="font-weight-bold">TOTAL</td>
+                                <td align="center">{{ $absensis->where('hadir','h')->count() }}</td>
+                                <td align="center">{{ $absensis->where('hadir','i')->count() }}</td>
+                                <td align="center">{{ $absensis->where('hadir','s')->count() }}</td>
+                                <td align="center">{{ $absensis->where('hadir','a')->count() }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="center" style="font-weight:bold;font-size:18px">{{ $absensis->where('hadir','h')->count() + $absensis->where('hadir','i')->count() + $absensis->where('hadir','s')->count() + $absensis->where('hadir','a')->count() }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
           </div>
         </div>
