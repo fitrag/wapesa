@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>{{ isset($title) ? $title : 'SMKN 1 Way Pengubuan'}}</title>
+  <title>{{ isset($title) ? $title.' - '.\App\Models\Pengaturan::find(1)?->nama_aplikasi.' '.\App\Models\Pengaturan::find(1)?->nama_sekolah : 'SMKN 1 Way Pengubuan'}}</title>
 
   <!-- General CSS Files -->
   <!-- @notifyCss -->
