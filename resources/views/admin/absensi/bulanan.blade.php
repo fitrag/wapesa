@@ -67,7 +67,21 @@
                                     <td class="text-center text-uppercase">
                                         @foreach($siswa->absensis as $absen)
                                             @if(date_format(date_create($absen->created_at), 'd') == $i)
-                                                {{ $absen->hadir }}
+                                                @if($absen->hadir == 'h')
+                                                    <span class="py-1 px-2 badge badge-success" style="font-size:10px !important">H</span>
+                                                @endif
+                                                @if($absen->hadir == 'i')
+                                                    <span class="py-1 px-2 badge badge-info" style="font-size:10px !important">I</span>
+                                                @endif
+                                                @if($absen->hadir == 's')
+                                                    <span class="py-1 px-2 badge badge-warning" style="font-size:10px !important">S</span>
+                                                @endif
+                                                @if($absen->hadir == 'a')
+                                                    <span class="py-1 px-2 badge badge-danger" style="font-size:10px !important">A</span>
+                                                @endif
+                                                @if($absen->hadir == 'al')
+                                                    <span class="py-1 px-2 badge badge-danger" style="font-size:10px !important">AL</span>
+                                                @endif
                                             @endif
                                         @endforeach
                                     </td>
