@@ -21,8 +21,12 @@ class IndexController extends Controller
         return view('admin.dashboard');
     }
     public function siswaAjax(){
-        $siswa = Siswa::with('kelas')->latest()->get();
-        return DataTables::of($siswa)
+        if(auth()->user()->level == 'admin'){
+            $siswas = Siswa::all();
+        }else if(auth()->user()->level == 'guru' AND auth()->user()->is_walas){
+            $siswas = Siswa::whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->get();
+        }
+        return DataTables::of($siswas)
             ->AddColumn('nis', function($data){
                 return $data->nis;
             })

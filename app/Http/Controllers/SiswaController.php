@@ -145,28 +145,4 @@ class SiswaController extends Controller
         $qrCode = QrCode::size(80)->generate($siswa->nis);
         return view('admin.siswa.qrcode', compact('qrCode','siswa'));
     }
-    public function ajax(Request $req){
-        if($req->ajax()){
-            return DataTables::of(Siswa::latest())
-            ->AddColumn('nis', function($data){
-                return "No";
-            })
-            ->AddColumn('nisn', function($data){
-                return "No";
-            })
-            ->AddColumn('nama', function($data){
-                return "No";
-            })
-            ->AddColumn('kelas', function($data){
-                return "No";
-            })
-            ->AddColumn('username', function($data){
-                return "No";
-            })
-            ->AddColumn('action', function($data){
-                return "No";
-            })
-            ->make(true);
-        }
-    }
 }
