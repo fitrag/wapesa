@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Data Siswa'])
+@extends('layouts.app', ['title' => 'Absensi Harian'])
 
 @section('content')
 

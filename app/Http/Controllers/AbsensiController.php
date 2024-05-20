@@ -71,4 +71,29 @@ class AbsensiController extends Controller
         return view('admin.absensi.harian', compact('absensis','siswas'));
     }
 
+    public function bulanan(Request $req){
+        // $absensis = Absensi::whereMonth('created_at', date('m'))->whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->get();
+        
+        if($req->bulan){
+
+            $data = explode('-', $req->bulan);
+            $year = $data[0];
+            $month = $data[1];
+
+            $siswas = Siswa::with(['absensis' => function($query) use($month, $year){
+                $query->whereMonth('created_at', $month);
+                $query->whereYear('created_at', $year);
+                $query->orderBy('created_at');
+            }])->whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->get();
+
+        }else{
+            $siswas = Siswa::with(['absensis' => function($query){
+                $query->whereMonth('created_at', date('m'));
+                $query->whereYear('created_at', date('Y'));
+                $query->orderBy('created_at');
+            }])->whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->get();
+        }
+        return view('admin.absensi.bulanan', compact('siswas'));
+    }
+
 }

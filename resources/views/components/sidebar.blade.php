@@ -48,7 +48,13 @@
             <li class="{{ request()->is('admin/absensi/scan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('scan-absensi') }}"><i class="fas fa-qrcode"></i> <span>Scan Kartu</span></a></li>
             @if(auth()->user()->is_walas AND auth()->user()->wali_kelass()->latest()->first())
                 <li><a class="nav-link"><i class="fas fa-fingerprint"></i> <span>Tambah Absensi</span></a></li>
-                <li><a class="nav-link"><i class="fas fa-calendar"></i> <span>Lihat Absensi</span></a></li>
+                <li class="dropdown {{ request()->is('admin/absensi/harian') || request()->is('admin/absensi/bulanan') ? 'active' : '' }}">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-calendar"></i> <span>Lihat Absensi</span></a>
+                    <ul class="dropdown-menu">
+                        <li class="{{ request()->is('admin/absensi/harian') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-harian') }}">Absensi Harian</a></li>
+                        <li class="{{ request()->is('admin/absensi/bulanan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-bulanan') }}">Absensi Bulanan</a></li>
+                    </ul>
+                </li>
                 <li><a class="nav-link"><i class="fas fa-print"></i> <span>Cetak Absensi</span></a></li>
             @endif
         @endif

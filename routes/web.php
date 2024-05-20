@@ -32,7 +32,7 @@ Route::middleware(['auth'])->group(function () {
     // Ajax Sinkronisasi data
     Route::get('/admin/sinkron-absensi', IndexController::class.'@sinkronAbsensi')->name('sinkron-absensi');
     Route::post('/admin/sinkron-absensi/proses', SinkronisasiController::class.'@sinkronAbsensi')->name('sinkron-absensi-proses');
-
+    
     // Data User
     Route::get('/admin/user', UserController::class.'@index')->name('admin.user');
     Route::post('/admin/user', UserController::class.'@store')->name('admin.user.store');
@@ -48,8 +48,6 @@ Route::middleware(['auth'])->group(function () {
     
     // Lihat Absensi
     Route::get('/admin/lihatabseni', LihatAbsensiController::class.'@absensitgl')->name('lihat-tgl-absensi');
-    Route::get('/admin/absensi/scan', AbsensiController::class.'@scan')->name('scan-absensi');
-    Route::get('/admin/absensi/harian', AbsensiController::class.'@harian')->name('absensi-harian');
 
     // Ajax Scan QRCode
     Route::post('/admin/absensi/scanning', AbsensiController::class.'@scanning')->name('scanning-absensi');
@@ -101,6 +99,10 @@ Route::middleware(['auth'])->group(function () {
     ->name('edit', 'admin.guru.edit')
     ->name('update', 'admin.guru.update')
     ->name('destroy', 'admin.guru.delete');
+
+    Route::get('/admin/absensi/scan', AbsensiController::class.'@scan')->name('scan-absensi');
+    Route::get('/admin/absensi/harian', AbsensiController::class.'@harian')->name('absensi-harian');
+    Route::get('/admin/absensi/bulanan', AbsensiController::class.'@bulanan')->name('absensi-bulanan');
 });
 
 Route::get('/qrcode', IndexController::class.'@qrcode');
