@@ -35,7 +35,7 @@
                     </div>
                 </form>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th rowspan="2" class="text-center">NO</th>
@@ -74,7 +74,14 @@
                             </tr>
                             @endforelse
                             <tr>
-                                <td align="center" colspan="2" rowspan="2" class="font-weight-bold">TOTAL</td>
+                                <td align="center" colspan="2" rowspan="3" class="font-weight-bold">TOTAL</td>
+                                <td align="center">H</td>
+                                <td align="center">I</td>
+                                <td align="center">S</td>
+                                <td align="center">A</td>
+                                <td align="center">AL</td>
+                            </tr>
+                            <tr>
                                 <td align="center">{{ $absensis->where('hadir','h')->count() }}</td>
                                 <td align="center">{{ $absensis->where('hadir','i')->count() }}</td>
                                 <td align="center">{{ $absensis->where('hadir','s')->count() }}</td>
