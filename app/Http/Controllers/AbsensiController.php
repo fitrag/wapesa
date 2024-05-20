@@ -54,5 +54,17 @@ class AbsensiController extends Controller
             ]);
         }
     }
+    public function harian(Request $req){
+        if($req->tanggal){
+            $absensis = Absensi::with(['kelas'])->whereDay('created_at', date_format(date_create($req->tanggal), 'd'))->whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->get();
+            $siswas = Siswa::with(['absensis' => function($query) use($req){
+                $query->whereDay('created_at', date_format(date_create($req->tanggal), 'd'));
+            }])->get();
+        }else{
+            $absensis = Absensi::with(['kelas'])->whereDay('created_at', now()->day)->whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->get();
+            $siswas = Siswa::with(['absensis'])->get();
+        }
+        return view('admin.absensi.harian', compact('absensis','siswas'));
+    }
 
 }

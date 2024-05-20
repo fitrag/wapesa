@@ -49,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
     // Lihat Absensi
     Route::get('/admin/lihatabseni', LihatAbsensiController::class.'@absensitgl')->name('lihat-tgl-absensi');
     Route::get('/admin/absensi/scan', AbsensiController::class.'@scan')->name('scan-absensi');
+    Route::get('/admin/absensi/harian', AbsensiController::class.'@harian')->name('absensi-harian');
 
     // Ajax Scan QRCode
     Route::post('/admin/absensi/scanning', AbsensiController::class.'@scanning')->name('scanning-absensi');
