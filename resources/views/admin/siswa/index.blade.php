@@ -65,12 +65,13 @@
             <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
           <div class="card">
+            @if(auth()->user()->level == 'admin')
               <div class="p-3">
                 <button class="btn btn-primary float-right mx-1" data-target="#exampleModal" data-toggle="modal">Tambah data siswa</button>
                 <a href="{{ url('')}}/format/siswa.xlsx"  class="btn btn-info float-right mx-1"><i class="fa fa-download"></i>Download Format</a>
                 <button class="btn btn-success float-right mx-1" data-target="#importExcel" data-toggle="modal">Import via Excel</button>
-                
               </div>
+            @endif
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-striped" id="table-1">

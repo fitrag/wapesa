@@ -43,9 +43,12 @@ class IndexController extends Controller
                 return $data->user->username;
             })
             ->AddColumn('action', function($data){
-                return '<a href="'.route('admin.siswa.edit_siswa', ['siswa' => $data->id]).'" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
+                return auth()->user()->level == 'admin' ? '<a href="'.route('admin.siswa.edit_siswa', ['siswa' => $data->id]).'" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
                 <a href="'.route('admin.siswa.qrcode', ['siswa' => $data->id]).'" class="btn btn-info m-1"><i class="fas fa-qrcode"></i></a>
-                <a href="'.route('admin.siswa.delete-ajax', ['siswa' => $data->id]).'" onclick="return confirm(`Anda yakin ingin menghapus data ini?`)" class="btn btn-danger m-1"><i class="fas fa-trash"></i></a>';
+                <a href="'.route('admin.siswa.delete-ajax', ['siswa' => $data->id]).'" onclick="return confirm(`Anda yakin ingin menghapus data ini?`)" class="btn btn-danger m-1"><i class="fas fa-trash"></i></a>'
+                : '
+                <a href="'.route('admin.siswa.qrcode', ['siswa' => $data->id]).'" class="btn btn-info m-1"><i class="fas fa-qrcode"></i></a>
+                ';
             })
             ->rawColumns(['action'])
             ->make(true);
