@@ -32,7 +32,7 @@
                                 @if(auth()->user()->is_walas)
                                 <tr>
                                     <td>Wali Kelas</td>
-                                    <td>{{ auth()->user()->wali_kelas?->kelas->nm_kls }}</td>
+                                    <td>{{ auth()->user()->wali_kelass()->latest()->first()->kelas->nm_kls }}</td>
                                 </tr>
                                 @endif
                             </table>
