@@ -20,10 +20,14 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $siswas = Siswa::all();
-        $kelas = Kelas::all();
-        $user = User::all();
-        return view('admin.siswa.index', compact('siswas','kelas','user'));
+        if(auth()->user()->level == 'admin'){
+            $siswas = Siswa::all();
+            $kelas = Kelas::all();
+        }else if(auth()->user()->is_walas){
+            $siswas = Siswa::whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->get();
+            $kelas = Kelas::all();
+        }
+        return view('admin.siswa.index', compact('siswas','kelas'));
     }
 
     /**

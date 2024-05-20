@@ -40,6 +40,10 @@
         </li>
         @endif
         @if(auth()->user()->level == 'guru')
+            @if(auth()->user()->is_walas)
+                <li class="menu-header">Data</li>
+                <li class="{{ request()->is('admin/siswa*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.siswa') }}"><i class="fas fa-user-graduate"></i> <span>Data Siswa</span></a></li>
+            @endif
             <li class="menu-header">Absensi</li>
             <li class="{{ request()->is('admin/absensi*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('scan-absensi') }}"><i class="fas fa-qrcode"></i> <span>Scan Kartu</span></a></li>
             @if(auth()->user()->is_walas)
