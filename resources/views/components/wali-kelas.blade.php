@@ -28,7 +28,7 @@
                     <h4>Total Absen (Harian)</h4>
                 </div>
                 <div class="card-body">
-                    {{ \App\Models\Absensi::whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->whereDay('created_at', now()->day)->count() }}
+                    {{ \App\Models\Absensi::whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->whereDate('created_at', date('Y-m-d'))->count() }}
                     <h6 class="mt-1">
                         <a href="{{ route('absensi-harian') }}" class="text-primary" style="font-size:14px">Lihat detail</a>
                     </h6>
@@ -46,7 +46,7 @@
                     <h4>Siswa Hadir (Harian)</h4>
                 </div>
                 <div class="card-body">
-                    {{ \App\Models\Absensi::whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->whereHadir('h')->whereDay('created_at', now()->day)->count() }}
+                    {{ \App\Models\Absensi::whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->whereHadir('h')->whereDate('created_at', date('Y-m-d'))->count() }}
                     <h6 class="mt-1">
                         <a href="{{ route('absensi-harian') }}" class="text-primary" style="font-size:14px">Lihat detail</a>
                     </h6>
@@ -64,7 +64,7 @@
                     <h4>Siswa Tidak Hadir (Harian)</h4>
                 </div>
                 <div class="card-body">
-                    {{ \App\Models\Absensi::whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->where('hadir','!=','h')->whereDay('created_at', now()->day)->count() }}
+                    {{ \App\Models\Absensi::whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->where('hadir','!=','h')->whereDate('created_at', date('Y-m-d'))->count() }}
                     <h6 class="mt-1">
                         <a href="{{ route('absensi-harian') }}" class="text-primary" style="font-size:14px">Lihat detail</a>
                     </h6>

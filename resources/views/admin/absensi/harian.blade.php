@@ -1,48 +1,5 @@
 @extends('layouts.app', ['title' => 'Data Siswa'])
 
-@push('scripts')
-<!-- JS Libraies -->
-<script src="{{ asset('modules/datatables/datatables.min.js') }}"></script>
-<script src="{{ asset('modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('modules/datatables/Select-1.2.4/js/dataTables.select.min.js') }}"></script>
-<script src="{{ asset('modules/jquery-ui/jquery-ui.min.js') }}"></script>
-<script>
-//   $("#table-1").dataTable({
-//     serverSide:true,
-//     processing:true,
-//     ajax:{
-//       url:"{{ route('siswa-ajax') }}"
-//     },
-//     columns:[
-//       {
-//         data:'nis',
-//         name:'nis'
-//       },
-//       {
-//         data:'nisn',
-//         name:'nisn'
-//       },
-//       {
-//         data:'nm_siswa',
-//         name:'nama'
-//       },
-//       {
-//         data:'kelas',
-//         name:'kelas'
-//       },
-//       {
-//         data:'username',
-//         name:'username'
-//       },
-//       {
-//         data:'action',
-//         name:'action'
-//       },
-//     ]
-//   });
-</script>
-@endpush
-
 @section('content')
 
 <section class="section">
@@ -83,13 +40,14 @@
                             <tr>
                                 <th rowspan="2" class="text-center">NO</th>
                                 <th rowspan="2">Nama</th>
-                                <th colspan="4" class="text-center">Keterangan</th>
+                                <th colspan="5" class="text-center">Keterangan</th>
                             </tr>
                             <tr>
                                 <th class="text-center">H</th>
                                 <th class="text-center">I</th>
                                 <th class="text-center">S</th>
                                 <th class="text-center">A</th>
+                                <th class="text-center">AL</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -103,13 +61,11 @@
                                         <td align="center">{{ $keterangan->hadir == 'i' ? '✅' : '' }}</td>
                                         <td align="center">{{ $keterangan->hadir == 's' ? '✅' : '' }}</td>
                                         <td align="center">{{ $keterangan->hadir == 'a' ? '✅' : '' }}</td>
+                                        <td align="center">{{ $keterangan->hadir == 'al' ? '✅' : '' }}</td>
                                     @endforeach
                                 @endif
                                 @if($siswa->absensis->isEmpty())
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td colspan="5" class="text-center">Belum ada data</td>
                                 @endif
                             </tr>
                             @endforeach
@@ -119,9 +75,10 @@
                                 <td align="center">{{ $absensis->where('hadir','i')->count() }}</td>
                                 <td align="center">{{ $absensis->where('hadir','s')->count() }}</td>
                                 <td align="center">{{ $absensis->where('hadir','a')->count() }}</td>
+                                <td align="center">{{ $absensis->where('hadir','al')->count() }}</td>
                             </tr>
                             <tr>
-                                <td colspan="4" align="center" style="font-weight:bold;font-size:18px">{{ $absensis->where('hadir','h')->count() + $absensis->where('hadir','i')->count() + $absensis->where('hadir','s')->count() + $absensis->where('hadir','a')->count() }}</td>
+                                <td colspan="5" align="center" style="font-weight:bold;font-size:18px">{{ $absensis->where('hadir','h')->count() + $absensis->where('hadir','i')->count() + $absensis->where('hadir','s')->count() + $absensis->where('hadir','a')->count() + $absensis->where('hadir','al')->count() }}</td>
                             </tr>
                         </tbody>
                     </table>
