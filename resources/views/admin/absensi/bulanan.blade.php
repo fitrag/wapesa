@@ -45,17 +45,17 @@
                                 <th rowspan="2" class="text-center">NO</th>
                                 <th rowspan="2">Nama</th>
                                 <th colspan="{{ $month }}" class="text-center">Tanggal</th>
-                                <th colspan="5" class="text-center">Total</th>
+                                <th colspan="5" class="text-center bg-primary text-white">Total</th>
                             </tr>
                             <tr>
                                 @for($i=1;$i<=$month;$i++)
                                 <th class="text-center">{{ $i }}</th>
                                 @endfor
-                                <th>H</th>
-                                <th>I</th>
-                                <th>S</th>
-                                <th>A</th>
-                                <th>AL</th>
+                                <th class="text-white bg-success">H</th>
+                                <th class="text-white bg-info">I</th>
+                                <th class="text-white bg-warning">S</th>
+                                <th class="text-white bg-danger">A</th>
+                                <th class="text-white bg-danger">AL</th>
                             </tr>
                         </thead>
                         <tbody>
