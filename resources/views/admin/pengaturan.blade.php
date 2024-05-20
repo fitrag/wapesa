@@ -1,5 +1,16 @@
 @extends('layouts.app', ['title' => 'Pengaturan'])
 
+@push('scripts')
+
+<script>
+    $('#logo').change(function(e){
+        $('#logoImg').attr('src', window.URL.createObjectURL(this.files[0]))
+        console.log(this.files[0].name)
+    })
+</script>
+
+@endpush
+
 @section('content')
 
     <section class="section">
@@ -16,9 +27,9 @@
             @endif
             <div class="card">
                 <div class="card-body">
-                    <div class="row align-items-center">
+                    <div class="d-lg-flex align-items-center flex-lg-row flex-md-row-reverse">
                         <div class="col-lg-6 mb-4">
-                            <form action="{{ route('pengaturan-update',['id' => 1 ]) }}" method="post">
+                            <form action="{{ route('pengaturan-update',['id' => 1 ]) }}" enctype="multipart/form-data" method="post">
                                 @csrf
                                 @method('PUT')
                                 <div class="mb-3">
@@ -38,17 +49,17 @@
                                     <textarea name="alamat_sekolah" class="form-control">{{ $pengaturan?->alamat_sekolah }}</textarea>
                                 </div>
                                 <input type="submit" value="Simpan" class="btn btn-primary w-100">
-                            </form>
-                        </div>
-                        <div class="col-lg-6 mb-4">
+                            </div>
+                            <div class="col-lg-6 mb-4">
                             <center>
-                                <img src="{{ asset('img/'.$pengaturan->logo) }}" alt="Logo sekolah" class="w-75 img-thumbnail p-3">
+                                <img src="{{ asset('img/'.$pengaturan->logo) }}" alt="Logo sekolah" id="logoImg" class="w-75 img-thumbnail p-3">
                             </center>
                             <div class="mb-3 mt-3">
                                 <label for="formFile" class="form-label">Logo sekolah</label>
-                                <input class="form-control" type="file" id="formFile">
+                                <input class="form-control" type="file" name="logo" id="logo">
                             </div>
                         </div>
+                    </form>
                     </div>
                 </div>
             </div>
