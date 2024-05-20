@@ -25,7 +25,7 @@
             <h4>Total Absen (Harian)</h4>
         </div>
         <div class="card-body">
-            {{ \App\Models\Absensi::whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->count() }}
+            {{ \App\Models\Absensi::whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->whereDay('created_at', now()->day)->count() }}
         </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
             <h4>Siswa Hadir (Harian)</h4>
         </div>
         <div class="card-body">
-            {{ \App\Models\Absensi::whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->whereHadir('h')->count() }}
+            {{ \App\Models\Absensi::whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->whereHadir('h')->whereDay('created_at', now()->day)->count() }}
         </div>
         </div>
     </div>
@@ -55,7 +55,7 @@
             <h4>Siswa Tidak Hadir (Harian)</h4>
         </div>
         <div class="card-body">
-            {{ \App\Models\Absensi::whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->where('hadir','!=','h')->count() }}
+            {{ \App\Models\Absensi::whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->where('hadir','!=','h')->whereDay('created_at', now()->day)->count() }}
         </div>
         </div>
     </div>
