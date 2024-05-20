@@ -68,8 +68,10 @@
                                         <img src="{{ asset('img/'.$pengaturan->logo) }}" alt="Logo sekolah" id="logoImg" class="w-75 img-thumbnail p-3">
                                     </center>
                                     <div class="mb-3 mt-3">
-                                        <label for="formFile" class="form-label">Logo sekolah</label>
-                                        <input class="form-control" type="file" name="logo" id="logo">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" name="logo" id="logo">
+                                            <label class="custom-file-label" for="customFile">Pilih logo</label>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
