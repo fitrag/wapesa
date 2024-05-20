@@ -63,8 +63,8 @@
       <div class="main-content">
         @yield('content')
       </div>
-      <x-footer/>
     </div>
+    <x-footer/>
   </div>
   <x-notify::notify />
 

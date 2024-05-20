@@ -40,13 +40,13 @@
         </li>
         @endif
         @if(auth()->user()->level == 'guru')
-            @if(auth()->user()->is_walas)
+            @if(auth()->user()->is_walas AND auth()->user()->wali_kelass()->latest()->first())
                 <li class="menu-header">Data</li>
                 <li class="{{ request()->is('admin/siswa*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.siswa') }}"><i class="fas fa-user-graduate"></i> <span>Data Siswa</span></a></li>
             @endif
             <li class="menu-header">Absensi</li>
             <li class="{{ request()->is('admin/absensi/scan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('scan-absensi') }}"><i class="fas fa-qrcode"></i> <span>Scan Kartu</span></a></li>
-            @if(auth()->user()->is_walas)
+            @if(auth()->user()->is_walas AND auth()->user()->wali_kelass()->latest()->first())
                 <li><a class="nav-link"><i class="fas fa-fingerprint"></i> <span>Tambah Absensi</span></a></li>
                 <li><a class="nav-link"><i class="fas fa-calendar"></i> <span>Lihat Absensi</span></a></li>
                 <li><a class="nav-link"><i class="fas fa-print"></i> <span>Cetak Absensi</span></a></li>

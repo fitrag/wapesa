@@ -70,7 +70,7 @@
                         <div class="row">
                         <div class="col-8">
                             <label for="name">Tempat Lahir</label>
-                            <input id="name" type="text" class="form-control" name="tmpt_lhr" value="{{ $siswa->tmpt_lhr }}" tabindex="1"  required autofocus>
+                            <input id="name" type="text" class="form-control" name="tmpt_lhr" value="{{ $siswa->tmpt_lhr }}" tabindex="1">
                             @error('tmpt_lhr')
                             <div class="alert alert-danger">Mohon di isi tempat lahir</div>
                             @enderror
@@ -80,7 +80,7 @@
                         </div>
                         <div class="col-4">
                             <label for="name">Tanggal Lahir</label>
-                            <input id="tgl" type="date" class="form-control" name="tgl_lhr" value="{{ $siswa->tgl_lhr }}" tabindex="1"  required autofocus>
+                            <input id="tgl" type="date" class="form-control" name="tgl_lhr" value="{{ $siswa->tgl_lhr }}" tabindex="1">
                             @error('tgl_lhr')
                                 <div class="alert alert-danger">Mohon di isi tanggal lahir</div>
                             @enderror
@@ -93,7 +93,7 @@
                         <div class="col-8">
                         <div class="form-group">
                             <label for="level">Agama</label>
-                            <select id="level" type="level" class="form-control" name="agama" tabindex="1" required>
+                            <select id="level" type="level" class="form-control" name="agama" tabindex="1">
                                 <option value="">-- Pilih agama --</option>
                                 <option value="islam" {{ $siswa->agama == 'islam' ? 'selected' : '' }}>Islam</option>
                                 <option value="kristen" {{ $siswa->agama == 'kristen' ? 'selected' : '' }}>Kristen</option>
@@ -115,11 +115,11 @@
                             <label for="password" class="control-label">Jenis Kelamin</label>
                             </div>
                             <div class="custom-control custom-radio">
-                            <input type="radio" id="customRadio1" name="jen_kel" value="L" class="custom-control-input" {{ $siswa->jen_kel == 'L' ? 'checked' : '' }} required>
+                            <input type="radio" id="customRadio1" name="jen_kel" value="L" class="custom-control-input" {{ $siswa->jen_kel == 'L' ? 'checked' : '' }}>
                             <label class="custom-control-label" for="customRadio1">L</label>
                             </div>
                             <div class="custom-control custom-radio">
-                            <input type="radio" id="customRadio2" name="jen_kel" value="P" class="custom-control-input" {{ $siswa->jen_kel == 'P' ? 'checked' : '' }} required>
+                            <input type="radio" id="customRadio2" name="jen_kel" value="P" class="custom-control-input" {{ $siswa->jen_kel == 'P' ? 'checked' : '' }}>
                             <label class="custom-control-label" for="customRadio2">P</label>
                             </div>
                             <div class="invalid-feedback">
@@ -130,7 +130,7 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Alamat</label>
-                        <input id="name" type="text" class="form-control" name="almt_siswa" value="{{ $siswa->almt_siswa}}" tabindex="1"  required autofocus>
+                        <input id="name" type="text" class="form-control" name="almt_siswa" value="{{ $siswa->almt_siswa}}" tabindex="1">
                         @error('almt_siswa')
                         <div class="alert alert-danger">Mohon di isi alamat siswa</div>
                         @enderror
@@ -140,7 +140,7 @@
                     </div>
                     <div class="form-group">
                         <label for="name">No Telepon</label>
-                        <input id="name" type="text" class="form-control" name="no_tlp" value="{{ $siswa->no_tlp }}" tabindex="1"  required autofocus>
+                        <input id="name" type="text" class="form-control" name="no_tlp" value="{{ $siswa->no_tlp }}" tabindex="1">
                         @error('no_tlp')
                         <div class="alert alert-danger">Mohon di isi no telepon</div>
                         @enderror
@@ -150,7 +150,7 @@
                     </div>
                     <div class="form-group">
                         <label for="name">Nama Ayah</label>
-                        <input id="name" type="text" class="form-control" name="nm_ayah" value="{{ $siswa->nm_ayah}}" tabindex="1"  required autofocus>
+                        <input id="name" type="text" class="form-control" name="nm_ayah" value="{{ $siswa->nm_ayah}}" tabindex="1">
                         @error('nm_ayah')
                         <div class="alert alert-danger">Mohon di isi nama ayah</div>
                         @enderror

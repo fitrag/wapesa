@@ -51,7 +51,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($siswas as $siswa)
+                            @forelse($siswas as $siswa)
                             <tr>
                                 <td align="center">{{ $loop->iteration }}</td>
                                 <td>{{ $siswa->nm_siswa }}</td>
@@ -68,7 +68,11 @@
                                     <td colspan="5" class="text-center">Belum ada data</td>
                                 @endif
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="7" class="text-center">Belum ada siswa</td>
+                            </tr>
+                            @endforelse
                             <tr>
                                 <td align="center" colspan="2" rowspan="2" class="font-weight-bold">TOTAL</td>
                                 <td align="center">{{ $absensis->where('hadir','h')->count() }}</td>
