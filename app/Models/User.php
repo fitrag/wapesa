@@ -44,4 +44,7 @@ class User extends Authenticatable
     public function guru(){
         return $this->hasOne(Guru::class);
     }
+    public function wali_kelas(){
+        return $this->hasOne(WaliKelas::class);
+    }
 }

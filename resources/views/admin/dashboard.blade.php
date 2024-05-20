@@ -19,24 +19,20 @@
                             <table class="table table-bordered">
                                 <tr>
                                     <td>Nama</td>
-                                    <td>:</td>
                                     <td>{{ auth()->user()->guru->nm_guru }}</td>
                                 </tr>
                                 <tr>
                                     <td>NIP</td>
-                                    <td>:</td>
                                     <td>{{ auth()->user()->guru->nip }}</td>
                                 </tr>
                                 <tr>
                                     <td>NUPTK</td>
-                                    <td>:</td>
                                     <td>{{ auth()->user()->guru->nuptk }}</td>
                                 </tr>
                                 @if(auth()->user()->is_walas)
                                 <tr>
                                     <td>Wali Kelas</td>
-                                    <td>:</td>
-                                    <td>{{ auth()->user()->is_walas }}</td>
+                                    <td>{{ auth()->user()->wali_kelas?->kelas->nm_kls }}</td>
                                 </tr>
                                 @endif
                             </table>
