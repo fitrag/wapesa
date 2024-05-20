@@ -10,14 +10,14 @@ class WaliKelasController extends Controller
     public function index(){
         
         // Cek guru yang belum menjadi wali kelas
-        $sudahwali = WaliKelas::where('tp_id', \App\Models\Tp::whereStatus(1)->first()->id)->select('user_id')->get()->pluck('user_id');
-        $users = User::whereNotIn('id', $sudahwali)->where('level','guru')->get();
+        $sudahwali = WaliKelas::where('tp_id', \App\Models\Tp::whereStatus(1)->first()?->id)->select('user_id')->get()->pluck('user_id');
+        $users = User::whereNotIn('id', $sudahwali)->where('level','guru')->whereIsWalas(1)->get();
 
         // Cek kelas yang belum ada wali kelas
-        $belumWali = WaliKelas::where('tp_id', \App\Models\Tp::whereStatus(1)->first()->id)->select('kelas_id')->get()->pluck('kelas_id');
+        $belumWali = WaliKelas::where('tp_id', \App\Models\Tp::whereStatus(1)->first()?->id)->select('kelas_id')->get()->pluck('kelas_id');
         $kelass = Kelas::whereNotIn('id', $belumWali)->get();
 
-        $wali_kelass = WaliKelas::with(['user','kelas'])->get();
+        $wali_kelass = WaliKelas::with(['user','kelas'])->where('tp_id', \App\Models\Tp::whereStatus(1)->first()?->id)->get();
         return view('admin.wali-kelas.index', compact('wali_kelass','users','kelass'));
     }
 
