@@ -76,7 +76,21 @@
                         </div>
                       </div>
                       <div class="tab-pane fade" id="profile3" role="tabpanel" aria-labelledby="profile-tab3">
-                        Coming Soon
+                        <form action="{{ route('pengaturan-sinkronisasi',['id' => 1 ]) }}" enctype="multipart/form-data" method="post">
+                            @csrf
+                            @method('PUT')
+                            <div class="mb-3">
+                                <label for="" class="form-label">URL Server Tujuan</label>
+                                <input type="text" name="url_server" placeholder="https://" value="{{ $pengaturan?->url_server }}" class="form-control">
+                                <small>Isi dengan domain server tujuan sinkronisasi</small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">API Key</label>
+                                <input type="text" name="api_key" value="{{ $pengaturan?->api_key }}" placeholder="--------" class="form-control">
+                                <small><strong>Note :</strong> API key di generate dari website server tujuan</small>
+                            </div>
+                            <input type="submit" value="Simpan" class="btn btn-primary">
+                        </form>
                       </div>
                       <div class="tab-pane fade" id="contact3" role="tabpanel" aria-labelledby="contact-tab3">
                         Coming Soon
