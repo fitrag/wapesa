@@ -22,9 +22,11 @@
       <div class="container mt-5">
         <div class="row">
           <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-            <div class="login-brand">
-            <img src="{{ asset('img/'.\App\Models\Pengaturan::find(1)?->logo) }}" alt="logo" width="100" class="shadow-light rounded-circle">
-            </div>
+            @if(\App\Models\Pengaturan::find(1)?->logo)
+              <div class="login-brand">
+                <img src="{{ asset('img/'.\App\Models\Pengaturan::find(1)?->logo) }}" alt="logo" width="100" class="shadow-light rounded-circle">
+              </div>
+            @endif
             <h5 class="text-center pb-0 mb-0" style="font-weight:300">{{ \App\Models\Pengaturan::find(1)?->nama_aplikasi }}</h5>
             <h4 class="text-center mb-4 mt-0 pt-0">{{ \App\Models\Pengaturan::find(1)?->nama_sekolah }}</h4>
             @if(session('success'))

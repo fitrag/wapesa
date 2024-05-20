@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="col-lg-6 mb-4">
                                     <center>
-                                        <img src="{{ asset('img/'.$pengaturan->logo) }}" alt="Logo sekolah" id="logoImg" class="w-75 img-thumbnail p-3">
+                                        <img src="{{ asset('img/'.$pengaturan?->logo) }}" alt="Logo sekolah" id="logoImg" class="w-75 img-thumbnail p-3">
                                     </center>
                                     <div class="mb-3 mt-3">
                                         <div class="custom-file">
