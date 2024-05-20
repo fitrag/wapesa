@@ -25,7 +25,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/dashboard', IndexController::class.'@dashboard')->name('dashboard');
     
     Route::get('/admin/pengaturan', PengaturanController::class.'@index')->name('pengaturan');
-    Route::put('/admin/pengaturan/{pengaturan:id}/update', PengaturanController::class.'@update')->name('pengaturan-update');
+    Route::put('/admin/pengaturan/{id}/update', PengaturanController::class.'@update')->name('pengaturan-update');
     
     Route::get('/admin/siswa-ajax', IndexController::class.'@siswaAjax')->name('siswa-ajax');
     Route::get('/admin/user-ajax', IndexController::class.'@userAjax')->name('user-ajax');
