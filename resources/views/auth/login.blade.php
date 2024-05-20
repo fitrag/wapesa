@@ -25,7 +25,8 @@
             <div class="login-brand">
               <img src="{{ asset('img/logo1.png') }}" alt="logo" width="100" class="shadow-light rounded-circle">
             </div>
-            <h4 class="text-center mb-4">Sistem Informasi Manajemen</h4>
+            <h5 class="text-center pb-0 mb-0" style="font-weight:300">{{ \App\Models\Pengaturan::find(1)?->nama_aplikasi }}</h5>
+            <h4 class="text-center mb-4 mt-0 pt-0">{{ \App\Models\Pengaturan::find(1)?->nama_sekolah }}</h4>
             @if(session('success'))
               <div class="alert alert-success">{{ session('success') }}</div>
             @endif
@@ -74,7 +75,7 @@
               Belum punya akun? <a href="{{ route('register') }}">Daftar akun</a>
             </div>
             <div class="simple-footer">
-              Copyright &copy; SMKN 1 Way Pengubuan 2024
+              Copyright &copy; {{ \App\Models\Pengaturan::find(1)?->nama_sekolah }} {{ date('Y') }}
             </div>
           </div>
         </div>

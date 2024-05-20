@@ -63,14 +63,7 @@
       <div class="main-content">
         @yield('content')
       </div>
-      <footer class="main-footer">
-        <div class="footer-left">
-          Copyright &copy; 2024 <div class="bullet"></div> Sistem Informasi Akademik SMKN 1 Way Pengubuan
-        </div>
-        <div class="footer-right">
-          
-        </div>
-      </footer>
+      <x-footer/>
     </div>
   </div>
   <x-notify::notify />

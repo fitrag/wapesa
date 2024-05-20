@@ -10,11 +10,18 @@ class SinkronisasiController extends Controller
 {
     public function sinkronAbsensi(){
         $absensis = Absensi::select(['id','nis','kelas_id','tp_id','siswa_id','semester','hadir','ket','username'])->whereDay('created_at', now()->day)->get();
-        $request = Http::post('https://fb9b-103-59-44-219.ngrok-free.app/api/sinkron-absensi',[
+        $request = Http::post('http://127.0.0.1/api/sinkron-absensi',[
             'key'   => 'sim_wapesa-ABCD',
             'data' => $absensis
         ]);
+        if($request){
+            return $request;
+        }else{
+            return json_encode([
+                'statusCode'    => 500,
+                'message'       => 'Gagal mengambil data'
+            ]);
+        }
 
-        return $request;
     }
 }

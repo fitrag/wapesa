@@ -1,9 +1,6 @@
 <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-    <a href="index.html">SIM WAPESA</a>
-    </div>
-    <div class="sidebar-brand sidebar-brand-sm">
-    <a href="index.html">SW</a>
+        <a href="{{ route('dashboard') }}">{{ \App\Models\Pengaturan::find(1)?->nama_sekolah }}</a>
     </div>
     <ul class="sidebar-menu">
         <li class="menu-header">Dashboard</li>
@@ -31,7 +28,7 @@
 
 
         <li class="menu-header">Lainnya</li>
-        <li><a class="nav-link"><i class="fas fa-cog"></i> <span>Pengaturan</span></a></li>
+        <li class="{{ request()->is('admin/pengaturan*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('pengaturan') }}"><i class="fas fa-cog"></i> <span>Pengaturan</span></a></li>
         <li class="dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
             <ul class="dropdown-menu">
