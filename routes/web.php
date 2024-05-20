@@ -43,7 +43,6 @@ Route::middleware(['auth'])->group(function () {
     
     // Wali Kelas
     Route::get('/admin/wali-kelas', WaliKelasController::class.'@index')->name('admin.wali-kelas');
-    Route::get('/admin/wali-kelas/{wali_kelas:id}/edit', WaliKelasController::class.'@edit')->name('admin.wali-kelas.edit');
     Route::post('/admin/wali-kelas', WaliKelasController::class.'@store')->name('admin.wali-kelas.store');
     Route::delete('/admin/wali-kelas/{wali_kelas:id}/delete', WaliKelasController::class.'@destroy')->name('admin.wali-kelas.delete');
     

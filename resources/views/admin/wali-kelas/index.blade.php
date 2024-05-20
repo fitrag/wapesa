@@ -55,7 +55,6 @@
                             <td>{{ $wali_kelas->user->name }}</td>
                             <td>{{ $wali_kelas->kelas->nm_kls }}</td>
                             <td>
-                                <a href="{{ route('admin.wali-kelas.edit', ['wali_kelas' => $wali_kelas->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
                                 <form action="{{ route('admin.wali-kelas.delete', ['wali_kelas' => $wali_kelas->id]) }}" method="post">
                                     @csrf
                                     @method('DELETE')

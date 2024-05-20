@@ -41,4 +41,12 @@ class WaliKelasController extends Controller
             return redirect()->back()->with('success', 'Gagal menambahkan wali kelas');
         }
     }
+    public function destroy(WaliKelas $wali_kelas){
+        $delete = $wali_kelas->delete();
+        if($delete){
+            return redirect()->route('admin.wali-kelas')->with('success', 'Berhasil menghapus wali kelas');
+        }else{
+            return redirect()->back()->with('success', 'Gagal menghapus wali kelas');
+        }
+    }
 }
