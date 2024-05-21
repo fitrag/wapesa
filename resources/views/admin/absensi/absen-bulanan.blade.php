@@ -39,7 +39,7 @@
                     </div>
                 </form>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover" id="printArea">
                         <thead>
                             <tr>
                                 <th rowspan="2" class="text-center">NO</th>

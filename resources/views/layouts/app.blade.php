@@ -21,6 +21,7 @@
       float:right !important
     }
   </style>
+  @stack('styles')
 <body>
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
