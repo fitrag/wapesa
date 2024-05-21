@@ -100,7 +100,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        <input type="submit" value="Simpan" class="btn btn-primary w-100">
+                        @if(request()->kelas_id)
+                            <input type="submit" value="Simpan" class="btn btn-primary w-100">
+                        @endif
                     </form>
                 </div>
             </div>

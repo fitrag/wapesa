@@ -35,7 +35,7 @@
         <ul class="navbar-nav navbar-right">
           <x-tahun-pelajaran/>
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-            <img alt="image" src="{{ asset('img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
+            <img alt="image" src="{{ auth()->user()->foto ? auth()->user()->foto : asset('img/avatar/avatar-1.png') }}" class="rounded-circle mr-1" style="width:40px;height:40px;object-fit:cover">
             <div class="d-sm-none d-lg-inline-block">{{ auth()->user()->name }}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">Masuk sebagai {{ auth()->user()->level }}</div>

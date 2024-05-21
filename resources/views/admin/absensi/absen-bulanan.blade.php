@@ -94,7 +94,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="7" class="text-center">Belum ada siswa</td>
+                                <td colspan="{{ $month+7 }}" class="text-center">Belum ada siswa</td>
                             </tr>
                             @endforelse
                         </tbody>
