@@ -29,11 +29,11 @@
                             <tr>
                                 <th rowspan="3" class="text-center">NO</th>
                                 <th rowspan="3" class="text-center">Nama</th>
-                                <th colspan="10" class="text-center">Keterangan</th>
+                                <th colspan="10" class="text-center text-white bg-dark">Keterangan</th>
                             </tr>
                             <tr>
-                                <th colspan="5" class="text-center">Ganjil</th>
-                                <th colspan="5" class="text-center">Genap</th>
+                                <th colspan="5" class="text-center text-white bg-primary">Ganjil</th>
+                                <th colspan="5" class="text-center text-white bg-primary">Genap</th>
                             </tr>
                             <tr>
                                 <th class="text-center text-white bg-success">H</th>
@@ -53,16 +53,16 @@
                             <tr>
                                 <td align="center">{{ $loop->iteration }}</td>
                                 <td>{{ $siswa->nm_siswa }}</td>
-                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('ganjil')->whereHadir('h')->count() }}</td>
-                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('ganjil')->whereHadir('i')->count() }}</td>
-                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('ganjil')->whereHadir('s')->count() }}</td>
-                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('ganjil')->whereHadir('a')->count() }}</td>
-                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('ganjil')->whereHadir('al')->count() }}</td>
-                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('genap')->whereHadir('h')->count() }}</td>
-                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('genap')->whereHadir('i')->count() }}</td>
-                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('genap')->whereHadir('s')->count() }}</td>
-                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('genap')->whereHadir('a')->count() }}</td>
-                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('genap')->whereHadir('al')->count() }}</td>
+                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('ganjil')->whereHadir('h')->count() == 0 ? '-' : $siswa->absensis()->whereTpId($tp->id)->whereSemester('ganjil')->whereHadir('h')->count() }}</td>
+                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('ganjil')->whereHadir('i')->count() == 0 ? '-' : $siswa->absensis()->whereTpId($tp->id)->whereSemester('ganjil')->whereHadir('i')->count() }}</td>
+                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('ganjil')->whereHadir('s')->count() == 0 ? '-' : $siswa->absensis()->whereTpId($tp->id)->whereSemester('ganjil')->whereHadir('s')->count() }}</td>
+                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('ganjil')->whereHadir('a')->count() == 0 ? '-' : $siswa->absensis()->whereTpId($tp->id)->whereSemester('ganjil')->whereHadir('a')->count() }}</td>
+                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('ganjil')->whereHadir('al')->count() == 0 ? '-' : $siswa->absensis()->whereTpId($tp->id)->whereSemester('ganjil')->whereHadir('al')->count() }}</td>
+                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('genap')->whereHadir('h')->count() == 0 ? '-' : $siswa->absensis()->whereTpId($tp->id)->whereSemester('genap')->whereHadir('h')->count() }}</td>
+                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('genap')->whereHadir('i')->count() == 0 ? '-' : $siswa->absensis()->whereTpId($tp->id)->whereSemester('genap')->whereHadir('i')->count() }}</td>
+                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('genap')->whereHadir('s')->count() == 0 ? '-' : $siswa->absensis()->whereTpId($tp->id)->whereSemester('genap')->whereHadir('s')->count() }}</td>
+                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('genap')->whereHadir('a')->count() == 0 ? '-' : $siswa->absensis()->whereTpId($tp->id)->whereSemester('genap')->whereHadir('a')->count() }}</td>
+                                <td align="center">{{ $siswa->absensis()->whereTpId($tp->id)->whereSemester('genap')->whereHadir('al')->count() == 0 ? '-' : $siswa->absensis()->whereTpId($tp->id)->whereSemester('genap')->whereHadir('al')->count() }}</td>
                             </tr>
                             @empty
                             <tr>
