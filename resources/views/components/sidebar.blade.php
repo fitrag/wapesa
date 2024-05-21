@@ -54,11 +54,12 @@
             @endif
         
             @if(auth()->user()->is_walas AND auth()->user()->wali_kelass()->latest()->first())
-                <li class="dropdown {{ request()->is('admin/absensi/harian') || request()->is('admin/absensi/bulanan') ? 'active' : '' }}">
+                <li class="dropdown {{ request()->is('admin/absensi/harian') || request()->is('admin/absensi/bulanan') || request()->is('admin/absensi/tahun-pelajaran') ? 'active' : '' }}">
                     <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-calendar"></i> <span>Lihat Absensi</span></a>
                     <ul class="dropdown-menu">
                         <li class="{{ request()->is('admin/absensi/harian') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-harian') }}">Absensi Harian</a></li>
                         <li class="{{ request()->is('admin/absensi/bulanan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-bulanan') }}">Absensi Bulanan</a></li>
+                        <li class="{{ request()->is('admin/absensi/tahun-pelajaran') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-tahun-pelajaran') }}">Absensi Tahun Pelajaran</a></li>
                     </ul>
                 </li>
                 <li><a class="nav-link"><i class="fas fa-print"></i> <span>Cetak Absensi</span></a></li>
