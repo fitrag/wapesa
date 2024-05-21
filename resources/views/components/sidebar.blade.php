@@ -18,7 +18,7 @@
         <li class="{{ request()->is('admin/guru*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.guru') }}"><i class="fas fa-user-tie"></i> <span>Data Guru</span></a></li>
         
         <li class="menu-header">Absensi</li>
-        <li class="{{ request()->is('admin/absensi*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('scan-absensi') }}"><i class="fas fa-qrcode"></i> <span>Scan Kartu</span></a></li>
+        <li class="{{ request()->is('admin/absensi/scan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('scan-absensi') }}"><i class="fas fa-qrcode"></i> <span>Scan Kartu</span></a></li>
         <li class="{{ request()->is('admin/absensi/tambah') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-tambah') }}"><i class="fas fa-fingerprint"></i> <span>Tambah Absensi</span></a></li>
         <li class="dropdown {{ request()->is('admin/lihatabseni*') ? 'active' : '' }}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Lihat Absensi</span></a>
