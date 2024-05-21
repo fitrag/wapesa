@@ -15,18 +15,20 @@ class UserController extends Controller
     }
     public function store(Request $req){
         $req->validate([
-            'username'  => 'required',
-            'password'  => 'required',
-            'level'     => 'required',
-            'is_walas'  => 'required',
+            'username'      => 'required',
+            'password'      => 'required',
+            'level'         => 'required',
+            'is_walas'      => 'required',
+            'is_gurupiket'  => 'required',
         ]);
 
         $user = User::create([
-            'name'      => $req->name,
-            'username'  => $req->username,
-            'is_walas'  => $req->is_walas,
-            'level'     => $req->level,
-            'password'  => Hash::make($req->password),
+            'name'          => $req->name,
+            'username'      => $req->username,
+            'is_walas'      => $req->is_walas,
+            'is_guru_piket' => $req->is_guru_piket,
+            'level'         => $req->level,
+            'password'      => Hash::make($req->password),
         ]);
 
         if($user){

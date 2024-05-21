@@ -48,6 +48,7 @@
                     <th>NIP</th>
                     <th>NUPTK</th>
                     <th>Sebagai Wali Kelas</th>
+                    <th>Sebagai Guru Piket</th>
                     <th>Aksi</th>
                     </tr>
                 </thead>
@@ -60,6 +61,7 @@
                             <td>{{ $guru->nip }}</td>
                             <td>{{ $guru->nuptk }}</td>
                             <td>{{ ($guru->user->is_walas) ? 'Iya' : 'Tidak' }}</td>
+                            <td>{{ ($guru->user->is_gurupiket) ? 'Iya' : 'Tidak' }}</td>
                             <td>
                                 <a href="{{ route('admin.user.edit', ['user' => $guru->user->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
                                 <form action="{{ route('admin.guru.delete', ['guru' => $guru->id]) }}" method="post">
@@ -144,6 +146,20 @@
                     @enderror
                     <div class="invalid-feedback">
                       Mohon di isi is_walas
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="is_gurupiket">Sebagai Guru Piket</label>
+                    <select id="is_gurupiket" type="text" class="form-control" name="is_gurupiket" tabindex="1" required>
+                        <option value="">-- Pilih --</option>
+                        <option value="1">Iya</option>
+                        <option value="0">Tidak</option>
+                    </select>
+                    @error('is_gurupiket')
+                      <div class="alert alert-danger">Mohon di isi wali kelas anda</div>
+                    @enderror
+                    <div class="invalid-feedback">
+                      Mohon di isi is_gurupiket
                     </div>
                   </div>
 

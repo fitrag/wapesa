@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Siswa, Absensi, Tp};
+use App\Models\{Siswa, Absensi, Tp, Kelas};
 
 class AbsensiController extends Controller
 {
@@ -54,6 +54,54 @@ class AbsensiController extends Controller
             ]);
         }
     }
+
+    public function tambah(Request $req){
+        if($req->kelas_id){
+
+            $req->validate([
+                'kelas_id'  => 'required'
+            ]);
+
+            $kelass = Kelas::all();
+
+            $sudahAbsen = Absensi::whereKelasId($req->kelas_id)->whereDate('created_at', date('Y-m-d'))->get()->pluck('siswa_id');
+            $siswas = Siswa::whereNotIn('id',$sudahAbsen)->whereKelasId($req->kelas_id)->get();
+            return view('admin.absensi.tambah', compact('kelass','siswas'));
+        }else{
+            $kelass = Kelas::all();
+            $siswas = [];
+            return view('admin.absensi.tambah', compact('kelass','siswas'));
+        }
+    }
+
+    public function store(Request $req){
+        $tp = Tp::where('status',1)->first();
+
+        $req->validate([
+            'hadir'     => 'array',
+            'hadir.*'   => 'required'
+        ]);
+
+        for($i=0;$i<count($req->user_id);$i++){
+
+            $insert = Absensi::create([
+                'nis'           => $req->nis[$i],
+                'user_id'       => $req->user_id[$i],
+                'kelas_id'      => $req->kelas_id,
+                'tp_id'         => $tp->id,
+                'siswa_id'      => $req->siswa_id[$i],
+                'semester'      => $tp->semester,
+                'hadir'         => $req->hadir[$i],
+            ]);
+
+        }
+        if($insert){
+            return redirect()->route('absensi-tambah')->with('success', 'Berhasil menambahkan data');
+        }else{
+            return redirect()->back()->with('success', 'Gagal menambahkan data');
+        }
+    }
+
 
     // Lihat absensi harian untuk wali kelas
     public function harian(Request $req){

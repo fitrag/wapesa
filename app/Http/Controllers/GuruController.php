@@ -36,6 +36,7 @@ class GuruController extends Controller
             'nuptk'     => 'required',
             'nama'      => 'required',
             'is_walas'  => 'required',
+            'is_gurupiket'  => 'required',
         ]);
 
         $user = User::create([
@@ -44,6 +45,7 @@ class GuruController extends Controller
             'password'      => $request->username,
             'level'         => 'guru',
             'is_walas'      => $request->is_walas,
+            'is_gurupiket'  => $request->is_gurupiket,
         ]);
 
         $guru = Guru::create([

@@ -102,6 +102,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/absensi/scan', AbsensiController::class.'@scan')->name('scan-absensi');
     Route::get('/admin/absensi/harian', AbsensiController::class.'@harian')->name('absensi-harian');
+    Route::get('/admin/absensi/tambah', AbsensiController::class.'@tambah')->name('absensi-tambah');
+    Route::post('/admin/absensi/tambah', AbsensiController::class.'@store')->name('absensi-store');
     Route::get('/admin/absensi/bulanan', AbsensiController::class.'@bulanan')->name('absensi-bulanan');
 });
 

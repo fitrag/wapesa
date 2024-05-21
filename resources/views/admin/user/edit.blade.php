@@ -87,6 +87,22 @@
                       Mohon di isi walas anda
                     </div>
                   </div>
+                  <div class="form-group">
+                    <div class="d-block">
+                    	<label for="guru_piket" class="control-label">Sebagai Guru Piket</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" id="guruPiket1" name="is_gurupiket" value="0" class="custom-control-input" {{ $user->is_gurupiket == '0' ? 'checked' : '' }} required>
+                      <label class="custom-control-label" for="guruPiket1">Tidak</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" id="guruPiket2" name="is_gurupiket" value="1" class="custom-control-input" {{ $user->is_gurupiket == '1' ? 'checked' : '' }} required>
+                      <label class="custom-control-label" for="guruPiket2">Iya</label>
+                    </div>
+                    <div class="invalid-feedback">
+                      Mohon di isi walas anda
+                    </div>
+                  </div>
 
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">
