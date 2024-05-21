@@ -46,58 +46,60 @@
                     <form action="{{ route('absensi-store') }}" method="post">
                         @csrf
                         <input type="hidden" name="kelas_id" value="{{ request()->kelas_id ? request()->kelas_id : ''  }}">
-                        <table class="table table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>NO</th>
-                                    <th>Nama</th>
-                                    <th>Kehadiran</th>
-                                    <th>Keterangan</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($siswas as $siswa)
-                                <input type="hidden" name="user_id[]" value="{{ $siswa->user->id }}">
-                                <input type="hidden" name="nis[]" value="{{ $siswa->nis }}">
-                                <input type="hidden" name="siswa_id[]" value="{{ $siswa->id }}">
+                        <div class="table-responsive">
+                            <table class="table table table-bordered">
+                                <thead>
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $siswa->nm_siswa }}</td>
-                                        <td class="text-uppercase text-center">{{ $siswa->absensis()->whereDate('created_at', date('Y-m-d'))->first() ? $siswa->absensis()->whereDate('created_at', date('Y-m-d'))->first()?->hadir : 'Belum absen' }}</td>
-                                        <td>
-                                            <select name="hadir[]" id="" class="form-control">
-                                            @if ($siswa->absensis)
-                                                @if ($siswa->absensis()?->whereDate('created_at', date('Y-m-d'))->first()?->hadir == 'h')
-                                                    <option value="h" selected>Hadir</option>
-                                                @elseif ($siswa->absensis()?->whereDate('created_at', date('Y-m-d'))->first()?->hadir == 'i')
-                                                    <option value="i" selected>Izin</option>
-                                                @elseif ($siswa->absensis()?->whereDate('created_at', date('Y-m-d'))->first()?->hadir == 's')
-                                                    <option value="s" selected>Sakit</option>
-                                                @elseif ($siswa->absensis()?->whereDate('created_at', date('Y-m-d'))->first()?->hadir == 'a')
-                                                    <option value="a" selected>Alpha</option>
-                                                @elseif ($siswa->absensis()?->whereDate('created_at', date('Y-m-d'))->first()?->hadir == 'al')
-                                                    <option value="al" selected>Alpha Lari</option>
+                                        <th>NO</th>
+                                        <th>Nama</th>
+                                        <th>Kehadiran</th>
+                                        <th>Keterangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse($siswas as $siswa)
+                                    <input type="hidden" name="user_id[]" value="{{ $siswa->user->id }}">
+                                    <input type="hidden" name="nis[]" value="{{ $siswa->nis }}">
+                                    <input type="hidden" name="siswa_id[]" value="{{ $siswa->id }}">
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $siswa->nm_siswa }}</td>
+                                            <td class="text-uppercase text-center">{{ $siswa->absensis()->whereDate('created_at', date('Y-m-d'))->first() ? $siswa->absensis()->whereDate('created_at', date('Y-m-d'))->first()?->hadir : 'Belum absen' }}</td>
+                                            <td>
+                                                <select name="hadir[]" id="" class="form-control">
+                                                @if ($siswa->absensis)
+                                                    @if ($siswa->absensis()?->whereDate('created_at', date('Y-m-d'))->first()?->hadir == 'h')
+                                                        <option value="h" selected>Hadir</option>
+                                                    @elseif ($siswa->absensis()?->whereDate('created_at', date('Y-m-d'))->first()?->hadir == 'i')
+                                                        <option value="i" selected>Izin</option>
+                                                    @elseif ($siswa->absensis()?->whereDate('created_at', date('Y-m-d'))->first()?->hadir == 's')
+                                                        <option value="s" selected>Sakit</option>
+                                                    @elseif ($siswa->absensis()?->whereDate('created_at', date('Y-m-d'))->first()?->hadir == 'a')
+                                                        <option value="a" selected>Alpha</option>
+                                                    @elseif ($siswa->absensis()?->whereDate('created_at', date('Y-m-d'))->first()?->hadir == 'al')
+                                                        <option value="al" selected>Alpha Lari</option>
+                                                    @endif
                                                 @endif
-                                            @endif
-                                                <option value="">Pilih keterangan</option>
-                                                <option value="h">Hadir</option>
-                                                <option value="i">Izin</option>
-                                                <option value="s">Sakit</option>
-                                                <option value="a">Alpha</option>
-                                                <option value="al">Alpha Lari</option>
-                                            </select>
-                                            @error('hadir.*')
-                                                <span class="text-danger my-1">Keterangan harus dipilih</span>
-                                            @enderror
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="4" class="text-center">Tidak ada data</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
+                                                    <option value="">Pilih keterangan</option>
+                                                    <option value="h">Hadir</option>
+                                                    <option value="i">Izin</option>
+                                                    <option value="s">Sakit</option>
+                                                    <option value="a">Alpha</option>
+                                                    <option value="al">Alpha Lari</option>
+                                                </select>
+                                                @error('hadir.*')
+                                                    <span class="text-danger my-1">Keterangan harus dipilih</span>
+                                                @enderror
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="4" class="text-center">Tidak ada data</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
                         <input type="submit" value="Simpan" class="btn btn-primary w-100">
                     </form>
                 </div>

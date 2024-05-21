@@ -61,9 +61,9 @@ class AbsensiController extends Controller
         if($req->kelas_id){
             $sudahAbsen = Absensi::whereKelasId($req->kelas_id)->whereDate('created_at', date('Y-m-d'))->get()->pluck('siswa_id');
             if($sudahAbsen->count() != Siswa::whereKelasId($req->kelas_id)->count()){
-                $siswas = Siswa::whereNotIn('id',$sudahAbsen)->whereKelasId($req->kelas_id)->get();
+                $siswas = Siswa::with('absensis')->whereNotIn('id',$sudahAbsen)->whereKelasId($req->kelas_id)->get();
             }else{
-                $siswas = Siswa::whereKelasId($req->kelas_id)->get();
+                $siswas = Siswa::with('absensis')->whereKelasId($req->kelas_id)->get();
             }
             return view('admin.absensi.tambah', compact('kelass','siswas'));
         }else{
