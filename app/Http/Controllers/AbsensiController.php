@@ -144,6 +144,7 @@ class AbsensiController extends Controller
         return view('admin.absensi.absen-bulanan', compact('siswas'));
     }
 
+    // Lihat absensi per tahun pelajaran untuk wali kelas
     public function tahunPelajaran(){
         $tp = Tp::where('status',1)->first();
         $siswas = Siswa::with(['absensis'])->whereKelasId(auth()->user()->wali_kelass()->latest()->first()?->kelas_id)->get();
