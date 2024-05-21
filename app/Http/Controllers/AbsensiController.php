@@ -56,19 +56,17 @@ class AbsensiController extends Controller
     }
 
     public function tambah(Request $req){
+        $kelass = Kelas::all();
+
         if($req->kelas_id){
-
-            $req->validate([
-                'kelas_id'  => 'required'
-            ]);
-
-            $kelass = Kelas::all();
-
             $sudahAbsen = Absensi::whereKelasId($req->kelas_id)->whereDate('created_at', date('Y-m-d'))->get()->pluck('siswa_id');
-            $siswas = Siswa::whereNotIn('id',$sudahAbsen)->whereKelasId($req->kelas_id)->get();
+            if($sudahAbsen->count() != Siswa::whereKelasId($req->kelas_id)->count()){
+                $siswas = Siswa::whereNotIn('id',$sudahAbsen)->whereKelasId($req->kelas_id)->get();
+            }else{
+                $siswas = Siswa::whereKelasId($req->kelas_id)->get();
+            }
             return view('admin.absensi.tambah', compact('kelass','siswas'));
         }else{
-            $kelass = Kelas::all();
             $siswas = [];
             return view('admin.absensi.tambah', compact('kelass','siswas'));
         }
@@ -84,7 +82,9 @@ class AbsensiController extends Controller
 
         for($i=0;$i<count($req->user_id);$i++){
 
-            $insert = Absensi::create([
+            $insert = Absensi::updateOrCreate([
+                'nis'   => $req->nis[$i]
+            ],[
                 'nis'           => $req->nis[$i],
                 'user_id'       => $req->user_id[$i],
                 'kelas_id'      => $req->kelas_id,

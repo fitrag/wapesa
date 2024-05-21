@@ -51,6 +51,7 @@
                                 <tr>
                                     <th>NO</th>
                                     <th>Nama</th>
+                                    <th>Kehadiran</th>
                                     <th>Keterangan</th>
                                 </tr>
                             </thead>
@@ -62,10 +63,24 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $siswa->nm_siswa }}</td>
+                                        <td class="text-uppercase text-center">{{ $siswa->absensis()->whereDate('created_at', date('Y-m-d'))->first() ? $siswa->absensis()->whereDate('created_at', date('Y-m-d'))->first()?->hadir : 'Belum absen' }}</td>
                                         <td>
                                             <select name="hadir[]" id="" class="form-control">
+                                            @if ($siswa->absensis)
+                                                @if ($siswa->absensis()?->whereDate('created_at', date('Y-m-d'))->first()?->hadir == 'h')
+                                                    <option value="h" selected>Hadir</option>
+                                                @elseif ($siswa->absensis()?->whereDate('created_at', date('Y-m-d'))->first()?->hadir == 'i')
+                                                    <option value="i" selected>Izin</option>
+                                                @elseif ($siswa->absensis()?->whereDate('created_at', date('Y-m-d'))->first()?->hadir == 's')
+                                                    <option value="s" selected>Sakit</option>
+                                                @elseif ($siswa->absensis()?->whereDate('created_at', date('Y-m-d'))->first()?->hadir == 'a')
+                                                    <option value="a" selected>Alpha</option>
+                                                @elseif ($siswa->absensis()?->whereDate('created_at', date('Y-m-d'))->first()?->hadir == 'al')
+                                                    <option value="al" selected>Alpha Lari</option>
+                                                @endif
+                                            @endif
                                                 <option value="">Pilih keterangan</option>
-                                                <!-- <option value="h">Hadir</option> -->
+                                                <option value="h">Hadir</option>
                                                 <option value="i">Izin</option>
                                                 <option value="s">Sakit</option>
                                                 <option value="a">Alpha</option>
@@ -78,7 +93,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="3" class="text-center">Tidak ada data</td>
+                                        <td colspan="4" class="text-center">Tidak ada data</td>
                                     </tr>
                                 @endforelse
                             </tbody>
