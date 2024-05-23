@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="row">
             <div class="my-2 col-lg-4 d-flex justify-content-center align-items-center">
-                <img alt="image" src="{{ asset('img/avatar/avatar-1.png') }}" class="mr-1" style="width:100%">
+                <img alt="image" src="{{ auth()->user()->foto ? auth()->user()->foto : asset('img/avatar/avatar-1.png') }}" class="mr-1" style="width:100%">
             </div>
             <div class="my-2 col-lg-8">
                 <table class="table table-bordered">
