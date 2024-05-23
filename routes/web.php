@@ -47,7 +47,11 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/admin/wali-kelas/{wali_kelas:id}/delete', WaliKelasController::class.'@destroy')->name('admin.wali-kelas.delete');
     
     // Lihat Absensi
-    Route::get('/admin/lihatabseni', LihatAbsensiController::class.'@absensitgl')->name('lihat-tgl-absensi');
+    Route::get('/admin/lihat-absensi', LihatAbsensiController::class.'@absensitgl')->name('lihat-tgl-absensi');
+    Route::get('/admin/cetak-absensi-tgl', LihatAbsensiController::class.'@cetak_absensi_tgl')->name('cetak-tgl-absensi');
+    Route::get('/admin/cetak-absensi-bln', LihatAbsensiController::class.'@cetak_absensi_bln')->name('cetak-bln-absensi');
+    Route::post('/admin/proses_cetakabsensi_tgl', LihatAbsensiController::class.'@proses_cetakabsensi_tgl')->name('proses_cetakabsensi_tgl');
+    Route::post('/admin/proses_cetakabsensi_bln', LihatAbsensiController::class.'@proses_cetakabsensi_bln')->name('proses_cetakabsensi_bln');
 
     // Ajax Scan QRCode
     Route::post('/admin/absensi/scanning', AbsensiController::class.'@scanning')->name('scanning-absensi');

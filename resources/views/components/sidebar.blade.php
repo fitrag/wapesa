@@ -20,14 +20,20 @@
         <li class="menu-header">Absensi</li>
         <li class="{{ request()->is('admin/absensi/scan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('scan-absensi') }}"><i class="fas fa-qrcode"></i> <span>Scan Kartu</span></a></li>
         <li class="{{ request()->is('admin/absensi/tambah') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-tambah') }}"><i class="fas fa-fingerprint"></i> <span>Tambah Absensi</span></a></li>
-        <li class="dropdown {{ request()->is('admin/lihatabseni*') ? 'active' : '' }}">
+        <li class="dropdown {{ request()->is('admin/lihat-absensi*') ? 'active' : '' }}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Lihat Absensi</span></a>
             <ul class="dropdown-menu">
-                <li class="{{ request()->is('admin/lihatabseni*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('lihat-tgl-absensi') }}">Absensi Per-Tanggal</a></li>
+                <li class="{{ request()->is('admin/lihat-absensi*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('lihat-tgl-absensi') }}">Absensi Per-Tanggal</a></li>
                 <li><a class="nav-link" href="layout-transparent.html">Absensi Per-Bulan</a></li>
             </ul>
         </li>
-        <li><a class="nav-link"><i class="fas fa-print"></i> <span>Cetak Absensi</span></a></li>
+        <li class="dropdown {{ request()->is('admin/cetak-absensi-tgl*') ? 'active' : '' }} || {{ request()->is('admin/cetak-absensi-bln*') ? 'active' : '' }}">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Cetak Absensi</span></a>
+            <ul class="dropdown-menu">
+                <li class="{{ request()->is('admin/cetak-absensi-tgl*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('cetak-tgl-absensi') }}">Cetak Per-Tanggal</a></li>
+                <li class="{{ request()->is('admin/cetak-absensi-bln*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('cetak-bln-absensi') }}">Cetak Per-Bulan</a></li>
+            </ul>
+        </li>
 
 
         <li class="menu-header">Lainnya</li>
