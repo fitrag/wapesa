@@ -111,7 +111,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/absensi/bulanan', AbsensiController::class.'@bulanan')->name('absensi-bulanan');
     Route::get('/admin/absensi/tahun-pelajaran', AbsensiController::class.'@tahunPelajaran')->name('absensi-tahun-pelajaran');
 
-    Route::get('/admin/pembayaran/tambah', AbsensiController::class.'@tambah')->name('pembayaran-tambah');
+    Route::get('/admin/pembayaran/tambah', PembayaranController::class.'@tambah')->name('pembayaran-tambah');
 });
 
 Route::get('/qrcode', IndexController::class.'@qrcode');
