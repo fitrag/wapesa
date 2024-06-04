@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, LihatAbsensiController, SinkronisasiController, PengaturanController, WaliKelasController};
+use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, LihatAbsensiController, SinkronisasiController, PengaturanController, WaliKelasController, PembayaranController};
 
 /*
 |--------------------------------------------------------------------------
@@ -110,6 +110,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/absensi/tambah', AbsensiController::class.'@store')->name('absensi-store');
     Route::get('/admin/absensi/bulanan', AbsensiController::class.'@bulanan')->name('absensi-bulanan');
     Route::get('/admin/absensi/tahun-pelajaran', AbsensiController::class.'@tahunPelajaran')->name('absensi-tahun-pelajaran');
+
+    Route::get('/admin/pembayaran/tambah', AbsensiController::class.'@tambah')->name('pembayaran-tambah');
 });
 
 Route::get('/qrcode', IndexController::class.'@qrcode');

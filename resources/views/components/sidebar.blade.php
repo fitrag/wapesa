@@ -35,6 +35,9 @@
             </ul>
         </li>
 
+        <li class="menu-header">Pembayaran</li>
+        <li class="{{ request()->is('admin/pembayaran/add') ? 'active' : '' }}"><a class="nav-link" href="{{ route('pembayaran-tambah') }}"><i class="fas fa-credit-card"></i> <span>Tambah Pembayaran</span></a></li>
+
 
         <li class="menu-header">Lainnya</li>
         <li class="{{ request()->is('admin/pengaturan*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('pengaturan') }}"><i class="fas fa-cog"></i> <span>Pengaturan</span></a></li>
