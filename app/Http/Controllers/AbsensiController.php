@@ -28,6 +28,7 @@ class AbsensiController extends Controller
                         'kelas_id'  => $siswa->kelas->id,
                         'tp_id'     => $tp->id,
                         'siswa_id'  => $siswa->id,
+                        'user_id'   => $siswa->user->id,
                         'semester'  => $tp->semester,
                         'hadir'     => 'h',
                     ]);
