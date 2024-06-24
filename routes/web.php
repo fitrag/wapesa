@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, LihatAbsensiController, SinkronisasiController, PengaturanController, WaliKelasController, PembayaranController};
+use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, GuruAjarController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, JurnalGuruController, LihatAbsensiController, SinkronisasiController, PengaturanController, WaliKelasController, PembayaranController};
 
 /*
 |--------------------------------------------------------------------------
@@ -103,6 +103,25 @@ Route::middleware(['auth'])->group(function () {
     ->name('edit', 'admin.guru.edit')
     ->name('update', 'admin.guru.update')
     ->name('destroy', 'admin.guru.delete');
+
+    //Guru Ajar
+    Route::resource('admin/guru-ajar', GuruAjarController::class)
+    ->name('index', 'admin.guru-ajar')
+    ->name('store', 'admin.guru-ajar.store')
+    ->name('edit', 'admin.guru-ajar.edit')
+    ->name('update', 'admin.guru-ajar.update')
+    ->name('destroy', 'admin.guru-ajar.delete')
+    ->name('show', 'admin.guru-ajar.show');
+    
+    //Jurnal Guru 
+    Route::resource('admin/jurnal-guru', JurnalGuruController::class)
+    ->name('index', 'admin.jurnal-guru')
+    ->name('store', 'admin.jurnal-guru.store')
+    ->name('edit', 'admin.jurnal-guru.edit')
+    ->name('update', 'admin.jurnal-guru.update')
+    ->name('destroy', 'admin.jurnal-guru.delete')
+    ->name('show', 'admin.jurnal-guru.show');
+    Route::get('/admin/jurnal/tampil_jurnalkelas/{guru_ajar}', JurnalGuruController::class.'@jurnal_kelas')->name('admin.jurnal.tampil_jurnalkelas');
 
     Route::get('/admin/absensi/scan', AbsensiController::class.'@scan')->name('scan-absensi');
     Route::get('/admin/absensi/harian', AbsensiController::class.'@harian')->name('absensi-harian');

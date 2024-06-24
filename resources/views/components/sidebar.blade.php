@@ -16,6 +16,7 @@
             <span>Wali Kelas</span></a></li>
         <li class="{{ request()->is('admin/siswa*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.siswa') }}"><i class="fas fa-user-graduate"></i> <span>Data Siswa</span></a></li>
         <li class="{{ request()->is('admin/guru*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.guru') }}"><i class="fas fa-user-tie"></i> <span>Data Guru</span></a></li>
+        <li class="{{ request()->is('admin/guru-ajar*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.guru-ajar') }}"><i class="fas fa-user"></i> <span>Guru Mengajar</span></a></li>
         
         <li class="menu-header">Absensi</li>
         <li class="{{ request()->is('admin/absensi/scan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('scan-absensi') }}"><i class="fas fa-qrcode"></i> <span>Scan Kartu</span></a></li>
@@ -39,6 +40,9 @@
         <li class="{{ request()->is('admin/pembayaran/tambah') ? 'active' : '' }}"><a class="nav-link" href="{{ route('pembayaran-tambah') }}"><i class="fas fa-credit-card"></i> <span>Tambah Pembayaran</span></a></li>
 
 
+        <li class="menu-header">Jurnal</li>
+        <li class="{{ request()->is('admin/jurnal-guru') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.jurnal-guru') }}"><i class="fas fa-book"></i> <span>Jurnal Mengajar</span></a></li>
+
         <li class="menu-header">Lainnya</li>
         <li class="{{ request()->is('admin/pengaturan*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('pengaturan') }}"><i class="fas fa-cog"></i> <span>Pengaturan</span></a></li>
         <li class="dropdown">
@@ -47,6 +51,9 @@
                 <li><a class="nav-link" href="{{ route('sinkron-absensi') }}">Sinkron Absensi</a></li>
             </ul>
         </li>
+
+        
+        
         @endif
         @if(auth()->user()->level == 'guru')
             
@@ -58,6 +65,9 @@
             <li class="menu-header">Absensi</li>
             <li class="{{ request()->is('admin/absensi/scan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('scan-absensi') }}"><i class="fas fa-qrcode"></i> <span>Scan Kartu</span></a></li>
         
+            <li class="menu-header">Jurnal</li>
+            <li class="{{ request()->is('admin/jurnal-guru') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.jurnal-guru') }}"><i class="fas fa-book"></i> <span>Jurnal Mengajar</span></a></li>
+
             @if(auth()->user()->is_gurupiket)
                 <li class="{{ request()->is('admin/absensi/tambah') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-tambah') }}"><i class="fas fa-fingerprint"></i> <span>Tambah Absensi</span></a></li>
             @endif
