@@ -40,4 +40,15 @@ class PembayaranController extends Controller
         }
         return redirect()->back();
     }
+    public function edit(Request $req){
+        $jenisBayars = Jenisbayar::whereIn('id', $req->idjenisbayar)->get();
+        for($i=0;$i<count($req->idpembayaran);$i++){
+            $pembayaran = Pembayaran::find($req->idpembayaran[$i]);
+            $pembayaran->total_bayar = $pembayaran->total_bayar + $req->bayar[$i];
+            $pembayaran->status = ($jenisBayars[$i]->biaya == $pembayaran->total_bayar) ? 'lunas' : 'belum lunas';
+            $pembayaran->save();
+        }
+        // dd($pembayaran);
+        return redirect()->back();
+    }
 }
