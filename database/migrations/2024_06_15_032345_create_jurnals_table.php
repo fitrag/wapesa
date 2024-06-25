@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignId('mapel_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('tp_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('kelas_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('semester',8);
             $table->date('tgl');
             $table->string('jamke',20);
             $table->text('materi');

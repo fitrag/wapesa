@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, GuruAjarController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, JurnalGuruController, LihatAbsensiController, SinkronisasiController, PengaturanController, WaliKelasController, PembayaranController};
+use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, GuruAjarController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, JurnalGuruController, LihatAbsensiController, SinkronisasiController, PengaturanController, WaliKelasController, PembayaranController, AjaxController};
 
 /*
 |--------------------------------------------------------------------------
@@ -122,6 +122,13 @@ Route::middleware(['auth'])->group(function () {
     ->name('destroy', 'admin.jurnal-guru.delete')
     ->name('show', 'admin.jurnal-guru.show');
     Route::get('/admin/jurnal/tampil_jurnalkelas/{guru_ajar}', JurnalGuruController::class.'@jurnal_kelas')->name('admin.jurnal.tampil_jurnalkelas');
+    Route::get('jurnal_test', function(){
+        return redirect()->back();
+    })->name('jurnal_test');
+    Route::get('/admin/jurnal/tampil_jurnal_mapel', JurnalGuruController::class.'@jurnal_mapel')->name('admin.tampil-jurnal-mapel');
+
+    // AJAX
+    Route::post('admin/tambah_jurnal', AjaxController::class.'@tambahJurnal')->name('ajax.tambah_jurnal');
 
     Route::get('/admin/absensi/scan', AbsensiController::class.'@scan')->name('scan-absensi');
     Route::get('/admin/absensi/harian', AbsensiController::class.'@harian')->name('absensi-harian');

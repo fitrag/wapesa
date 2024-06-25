@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{ isset($title) ? $title.' - '.\App\Models\Pengaturan::find(1)?->nama_aplikasi.' '.\App\Models\Pengaturan::find(1)?->nama_sekolah : 'SMKN 1 Way Pengubuan'}}</title>
 
   <!-- General CSS Files -->
@@ -77,6 +79,7 @@
   <script src="{{ asset('modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
   <script src="{{ asset('modules/moment.min.js') }}"></script>
   <script src="{{ asset('js/stisla.js') }}"></script>
+  
 
   @stack('scripts')
   @notifyJs

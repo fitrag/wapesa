@@ -8,6 +8,29 @@
 <script src="{{ asset('modules/jquery-ui/jquery-ui.min.js') }}"></script>
 
 <script src="{{ asset('js/page/modules-datatables.js') }}"></script>
+
+
+<script type="text/javascript">
+        function readURL() {
+            var input = this;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $(input).prev().attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(function () {
+            $(".uploads").change(readURL)
+            $("#f").submit(function(){
+                // do ajax submit or just classic form submit
+              //  alert("fake subminting")
+                return false
+            })
+        })
+</script>
 @endpush
 
 @section('content')
@@ -34,7 +57,7 @@
         <div class="card">
             
             <div class="card-body">
-                <form method="GET" action="" enctype="multipart/form-data">
+                <form method="GET" action="{{route('admin.tampil-jurnal-mapel')}}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-group">
@@ -67,11 +90,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="alias">Kelas</label>
+                        <label for="alias">Tahun Pelajaran</label>
                         <select class="form-control" name="tp_id" required="">
-                            <option value="">(Pilih Tahun Pelajaran)</option>
                             @foreach($tp as $item)
-                                <option value="{{$item->id}}">{{$item->nm_tp}}</option>
+                                <option value="{{$item->id}}" {{ old('tp_id', $item->id)== $tps->id? 'selected' : null }}>{{$item->nm_tp}} ({{ $item->semester }})</option>
                             @endforeach
                         </select>
                         @error('tp_id')
@@ -82,28 +104,13 @@
                         </div>
                     </div>
 
-                    
-                                
-                               
-                                <div class="form-group{{ $errors->has('semester') ? ' has-error' : '' }}">
-                                    <label for="semester" class="col-md-6 control-label">Semester</label>
-                                    <div class="col-md-4">
-                                        <select class="form-control" name="semester" required="">
-                                            <option value="">(Pilih Semester)</option>
-                                            <option value="Ganjil">Ganjil</option>
-                                            <option value="Genap">Genap</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            
 
-                                <button type="submit" class="btn btn-primary pull-left mr-1" id="submit">
-                                            Go
-                                </button>
-                                <a href="" class="btn btn-dark pull-left">Back</a>
-                            </div>           
-                        </div>
-                    </div>
+                    <button type="submit" class="btn btn-primary pull-left mr-1" id="submit">
+                                Go
+                    </button>
+                    <a href="{{route('admin.jurnal-guru')}}" class="btn btn-dark pull-left">Back</a>
+                            
+                        
                 </form>
                 
             </div>
