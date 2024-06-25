@@ -76,16 +76,14 @@ class AbsensiController extends Controller
     public function store(Request $req){
         $tp = Tp::where('status',1)->first();
 
-        $req->validate([
-            'hadir'     => 'array',
-            'hadir.*'   => 'required'
-        ]);
+        // $req->validate([
+        //     'hadir'     => 'array',
+        //     'hadir.*'   => 'required'
+        // ]);
 
         for($i=0;$i<count($req->user_id);$i++){
 
-            $insert = Absensi::updateOrCreate([
-                'nis'   => $req->nis[$i]
-            ],[
+            $insert = Absensi::create([
                 'nis'           => $req->nis[$i],
                 'user_id'       => $req->user_id[$i],
                 'kelas_id'      => $req->kelas_id,

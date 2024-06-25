@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, LihatAbsensiController, SinkronisasiController, PengaturanController, WaliKelasController, PembayaranController};
+use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, LihatAbsensiController, SinkronisasiController, PengaturanController, WaliKelasController, PembayaranController, AjaxController};
 
 /*
 |--------------------------------------------------------------------------
@@ -112,6 +112,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/absensi/tahun-pelajaran', AbsensiController::class.'@tahunPelajaran')->name('absensi-tahun-pelajaran');
 
     Route::get('/admin/pembayaran/tambah', PembayaranController::class.'@tambah')->name('pembayaran-tambah');
+    Route::get('/admin/pembayaran/tambah/{siswa:id}', PembayaranController::class.'@form')->name('pembayaran-form');
+    Route::post('/admin/pembayaran/store', PembayaranController::class.'@store')->name('pembayaran-store');
+
+    // Ajax Routing
+    Route::post('/ajax/get/siswa/all', AjaxController::class.'@siswaAll')->name('ajax-siswa-all');
+    Route::post('/ajax/total', AjaxController::class.'@total')->name('ajax-total');
 });
 
 Route::get('/qrcode', IndexController::class.'@qrcode');

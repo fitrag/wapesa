@@ -9,4 +9,8 @@ class Jenisbayar extends Model
 {
     use HasFactory;
     protected $guarded = [''];
+    
+    public function pembayarans(){
+        return $this->hasMany(Pembayaran::class);
+    }
 }
