@@ -101,6 +101,7 @@
                             <th>Nominal Biaya</th>
                             <th>Sudah Bayar</th>
                             <th>Bayar</th>
+                            <th>Potongan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -111,7 +112,7 @@
                                 <td>{{ $pembayaran->jenisbayar->nm_jenis }}</td>
                                 <td>Rp {{ number_format($pembayaran->jenisbayar->biaya,0, ',','.') }}</td>
                                 <td>Rp {{ number_format($pembayaran->total_bayar,0, ',','.') }}</td>
-                                <td>
+                                <td colspan="{{ $pembayaran->status == 'lunas' ? 2 : 0 }}" class="text-center">
                                     @if($pembayaran->status != 'lunas')
                                         <input type="number" name="bayar[]" value="0" id="bayar" class="form-control">
                                         <input type="hidden" name="idpembayaran[]" value="{{ $pembayaran->id }}">
@@ -120,6 +121,11 @@
                                         <span class="badge badge-success">Lunas</span>
                                     @endif
                                 </td>
+                                @if($pembayaran->status != 'lunas')
+                                <td>
+                                    <input type="number" name="potongan[]" value="0" class="form-control">
+                                </td>
+                                @endif
                             </tr>
                             @endforeach
                         @elseif($siswa->pembayarans->isEmpty())
@@ -133,6 +139,9 @@
                                     <input type="number" name="bayar[]" value="0" id="bayar" class="form-control">
                                     <input type="hidden" name="idjenisbayar[]" value="{{ $jenis_bayar->id }}">
                                     <input type="hidden" name="idpembayaran[]" value="">
+                                </td>
+                                <td>
+                                    <input type="number" name="potongan[]" value="0" class="form-control">
                                 </td>
                             </tr>
                             @endforeach

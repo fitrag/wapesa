@@ -34,6 +34,7 @@ class PembayaranController extends Controller
                 'tgl'           => date('Y-m-d'),
                 'potongan'      => 0,
                 'total_bayar'   => $req->bayar[$i],
+                'potongan'      => $req->potongan[$i],
                 'sisa_bayar'    => 0,
                 'status'        => $jenisBayars[$i]->biaya==$req->bayar[$i] ? 'lunas' : 'belum lunas',
             ]);
@@ -43,9 +44,10 @@ class PembayaranController extends Controller
     public function edit(Request $req){
         $jenisBayars = Jenisbayar::whereIn('id', $req->idjenisbayar)->get();
         for($i=0;$i<count($req->idpembayaran);$i++){
-            $pembayaran = Pembayaran::find($req->idpembayaran[$i]);
-            $pembayaran->total_bayar = $pembayaran->total_bayar + $req->bayar[$i];
-            $pembayaran->status = ($jenisBayars[$i]->biaya == $pembayaran->total_bayar) ? 'lunas' : 'belum lunas';
+            $pembayaran                 = Pembayaran::find($req->idpembayaran[$i]);
+            $pembayaran->total_bayar    = $pembayaran->total_bayar + $req->bayar[$i];
+            $pembayaran->potongan       = $req->potongan[$i];
+            $pembayaran->status         = ($jenisBayars[$i]->biaya == $pembayaran->total_bayar + $req->potongan[$i]) ? 'lunas' : 'belum lunas';
             $pembayaran->save();
         }
         // dd($pembayaran);
