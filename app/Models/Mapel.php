@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Guru extends Model
+class Mapel extends Model
 {
     use HasFactory;
     protected $guarded = [''];
 
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function guru(){
+        return $this->belongsTo(Guru::class);
     }
-    
 }
