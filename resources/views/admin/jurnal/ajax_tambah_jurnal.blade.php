@@ -10,7 +10,7 @@
                                 <div class="form-group">
                                     <label for="alias">Nama Guru</label>
                                     <select class="form-control" name="guru_id">
-                                        < @foreach($guru as $item)
+                                        @foreach($guru as $item)
                                             <option value="{{$item->kon_id}}">{{$item->name}}</option>
                                         @endforeach
                                     </select>
@@ -43,7 +43,7 @@
                             <div class="form-group">
                                 <label for="alias">Tahun Pelajaran</label>
                                 <select class="form-control" name="tp_id">
-                                    @foreach($tp as $item)
+                                    @foreach($tps as $item)
                                         <option value="{{$item->id}}">{{$item->nm_tp}}</option>
                                     @endforeach
                                 </select>
@@ -124,7 +124,7 @@
                             <button type="submit" class="btn btn-primary pull-left mr-1" id="submit">
                                         Simpan
                             </button>
-                            <a href="{{route('jurnal.index')}}" class="btn btn-dark pull-left">Back</a>
+                            <a href="{{route('admin.jurnal-guru')}}" class="btn btn-dark pull-left">Back</a>
                         </div>
                     </div>
                 </div>

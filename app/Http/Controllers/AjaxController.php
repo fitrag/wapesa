@@ -26,7 +26,7 @@ class AjaxController extends Controller
         $semester = $req->semester;
         $kelas_id = $req->kelas_id;
         
-        if (Auth::user()->role->is_admin)
+        if (auth()->user()->level == 'admin')
         {
             // ?
             
@@ -36,45 +36,43 @@ class AjaxController extends Controller
             $user = auth::user()->id;
             $guru_id = DB::table('gurus')
                 ->join('users','gurus.user_id','users.id')
-                ->select('gurus.id')
+                ->select('gurus.id','gurus.nm_guru')
                 ->where('gurus.user_id','=',$user)
                 ->first();
 
-                $data = DB::table('guru_ajars')
-                    ->join('gurus','guru_ajars.guru_id','=','gurus.id')
-                    ->join('mapels','guru_ajars.mapel_id','=','mapels.id')
-                    ->select('guru_ajars.*','mapels.nm_mapel','mapels.alias')
-                    ->where([
-                            ['guru_ajars.guru_id','=',$guru_id->id],
-                            ['guru_ajars.mapel_id','=',$mapel_id],
-                        ])
-                    ->get();
-
+            $data = DB::table('guru_ajars')
+                ->join('gurus','guru_ajars.guru_id','=','gurus.id')
+                ->join('mapels','guru_ajars.mapel_id','=','mapels.id')
+                ->select('guru_ajars.*','mapels.nm_mapel','mapels.alias')
+                ->where([
+                        ['guru_ajars.guru_id','=',$guru_id->id],
+                        ['guru_ajars.mapel_id','=',$mapel_id],
+                    ])
+                ->get();
                 
 
                 // $tp = Tp::all();
-                // $tps = DB::table('tps')
-                //     ->select('id','nm_tp')  
-                //     ->where('id','=',$tp_id)
-                //     ->get();
-                $mapel = DB::table('guru_ajars')
-                        ->join('mapels','guru_ajars.mapel_id','=','mapels.id') 
-                        ->select('guru_ajars.mapel_id','mapels.alias')  
-                        ->where([
-                            ['guru_ajars.guru_id','=',$guru_id],
-                            ['guru_ajars.mapel_id','=',$mapel_id],
-                            ])
-                        ->groupBy('guru_ajars.mapel_id','mapels.alias')
-                        ->get();
+                $tps = DB::table('tps')
+                    ->select('id','nm_tp')  
+                    ->where('id','=',$tp_id)
+                    ->get();
+            $mapel = DB::table('guru_ajars')
+                    ->join('mapels','guru_ajars.mapel_id','=','mapels.id') 
+                    ->select('guru_ajars.mapel_id','mapels.alias')  
+                    ->where([
+                        ['guru_ajars.guru_id','=',$guru_id->id],
+                        ['guru_ajars.mapel_id','=',$mapel_id],
+                        ])
+                    ->groupBy('guru_ajars.mapel_id','mapels.alias')
+                    ->get();
                 // $kelas = Kelas::orderBy('nm_kls')->get(); 
-                // $kelas = DB::table('kelas')
-                //         ->select('id','nm_kls')  
-                //         ->where('id','=',$kelas_id)
-                //         ->get();
-                $guru = Guru::all();
-                return view('admin.jurnal.ajax_tambah_jurnal',compact('data','guru_id','mapel'));
-                // dd($tp_id);
-                        }
+                $kelas = DB::table('kelas')
+                        ->select('id','nm_kls')  
+                        ->where('id','=',$kelas_id)
+                        ->get();
+            $guru = Guru::all();
+            return view('admin.jurnal.ajax_tambah_jurnal',compact('data','guru_id','mapel','kelas','tps'));
+        }
     }
 
 }

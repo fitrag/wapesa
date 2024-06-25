@@ -166,7 +166,8 @@ $(document).ready(function() {
                 'mapel_id' : '{{ $data[0]->mapel_id }}',
                 'tp_id' : '{{ $data[0]->tp_id }}',
                 '_token'     : '{{ csrf_token() }}',
-                'kelas_id' : '{{ $data[0]->kelas_id }}'
+                'kelas_id' : '{{ $data[0]->kelas_id }}',
+                'semester' :'{{ $datax[0]->semester }}'
             },
             success:function(data){
                 $('#tambahJurnal').html(data)
