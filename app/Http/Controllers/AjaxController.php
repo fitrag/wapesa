@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Siswa;
 use App\Models\Guru;
+use App\Models\Jurnal;
+use App\Models\Tp;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -53,7 +55,7 @@ class AjaxController extends Controller
 
                 // $tp = Tp::all();
                 $tps = DB::table('tps')
-                    ->select('id','nm_tp')  
+                    ->select('id','nm_tp','semester')  
                     ->where('id','=',$tp_id)
                     ->get();
             $mapel = DB::table('guru_ajars')
@@ -73,6 +75,29 @@ class AjaxController extends Controller
             $guru = Guru::all();
             return view('admin.jurnal.ajax_tambah_jurnal',compact('data','guru_id','mapel','kelas','tps'));
         }
+    }
+    public function editJurnal($id)
+    {
+        $user = auth::user()->id;
+        $guru_id = DB::table('gurus')
+                ->join('users','gurus.user_id','users.id')
+                ->select('gurus.id','gurus.nm_guru')
+                ->where('gurus.user_id','=',$user)
+                ->first();
+
+        $mapel = DB::table('guru_ajars')
+                ->join('mapels','guru_ajars.mapel_id','=','mapels.id') 
+                ->select('guru_ajars.mapel_id','mapels.alias')  
+                ->where('guru_ajars.guru_id','=',$guru_id->id)
+                ->groupBy('guru_ajars.mapel_id','mapels.alias')
+                ->get();
+       
+        $kelas = DB::table('kelas')
+                ->get();
+        $data = Jurnal::findOrFail($id);
+        $tp = Tp::all();
+
+        return view('admin.jurnal.ajax_edit_jurnal', compact('data','mapel','kelas','tp','guru_id'));
     }
 
 }

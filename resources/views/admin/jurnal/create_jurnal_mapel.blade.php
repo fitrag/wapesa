@@ -142,7 +142,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="name">Keterangan (contoh: Alpha lari jam ke-4)</label>
+                        <label for="name">Keterangan (contoh: Alpha lari jam ke-4 / di kosongkan)</label>
                         <textarea name="ket" class="form-control" id="" cols="30" rows="6">{{ old('ket') }}</textarea>
                         @error('ket')
                             <div class="alert alert-danger">Mohon di isi keterangan</div>

@@ -14,11 +14,20 @@
 
 <section class="section">
     <div class="section-header">
-    <h1>Jurnal Guru</h1>
+    <h1>Jurnal Mengajar Tahun : 
+        @php
+            $tp = App\Models\Tp::select('nm_tp','semester')
+                    ->where('id',$tp_id)
+                    ->first();
+        @endphp
+        
+            {{$tp->nm_tp}} ({{$tp->semester}})
+       
+    </h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-        <div class="breadcrumb-item"><a href="#">Data Master</a></div>
-        <div class="breadcrumb-item"> <a href="{{ route('admin.jurnal-guru')}}">Jurnal Guru</a></div>
+        <div class="breadcrumb-item"><a href="{{ route('admin.jurnal-guru')}}">Jurnal Mengajar</a></div>
+       
     </div>
     </div>
 
@@ -35,41 +44,51 @@
             
             <div class="card-body">
                 <div class="table-responsive">
-                <table class="table table-striped table-sm table-hover" id="table-1">
+                <table class="table table-bordered table-sm table-hover" id="table-1">
                     <thead>                                 
                         <tr>
                             <th class="text-center">#</th>
                             <th>Nama Guru</th>
-                            <th>Mengajar</th>
+                            <th>Mengajar / (Sudah Input Jurnal)</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>                                 
-                    @foreach($guru as $item)
+                        @foreach($guru_ajar as $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ $item->nm_guru }}</td>
                                 @php
-                                        $guru_ajar  =   App\Models\Guru_ajar::select('mapels.nm_mapel')
-                                                        ->join('mapels','guru_ajars.mapel_id','mapels.id')
-                                                        ->Where('guru_ajars.guru_id',$item->id)
-                                                        ->get();
-                                    @endphp
-
+                                     
+                                    $mapel  =   App\Models\Guru_ajar::select('mapels.alias','guru_ajars.id','guru_ajars.mapel_id')
+                                                    ->join('mapels','guru_ajars.mapel_id','mapels.id')
+                                                    ->Where('guru_ajars.guru_id',$item->id)
+                                                    ->get();
+                                @endphp
                                 <td>
-                                    
-                                    @foreach($guru_ajar as $items)
-                                        {{ $items->nm_mapel}}, 
+                                    @foreach($mapel as $items)
+                                        @php
+                                            $count_jurnal  =   App\Models\Jurnal::Where([
+                                                    ['jurnals.mapel_id','=',$items->mapel_id],
+                                                    ['jurnals.tp_id','=',$tp_id],
+                                                ])
+                                                    ->count();
+                                        @endphp
+                                            {{ $items->alias}} / <b>({{$count_jurnal}}-Pertemuan)</b>; 
                                     @endforeach
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.guru-ajar.show', ['guru_ajar' => $item->id]) }}" class="btn btn-primary m-1 "><i class="fas fa-eye"></i></a>
+                                    <a href="{{ url('admin/jurnal/tampil_jurnal_admin/'.$item->id.'/'.$tp_id)}}" class="btn btn-primary m-1 "><i class="fas fa-eye"></i></a>
                                 </td>
                             </tr>
-                    @endforeach
+                                
+                            
+                            
+                        @endforeach
                     </tbody>
                   </table>
                 </div>
+              
             </div>
         </div>
         </div>

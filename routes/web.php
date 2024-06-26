@@ -126,10 +126,15 @@ Route::middleware(['auth'])->group(function () {
         return redirect()->back();
     })->name('jurnal_test');
     Route::get('/admin/jurnal/tampil_jurnal_mapel', JurnalGuruController::class.'@jurnal_mapel')->name('admin.tampil-jurnal-mapel');
+    Route::get('cetak.jurnalpdf/{mapel_id}/{guru_id}/{kelas_id}/{tp_id}', JurnalGuruController::class.'@cetakpdf')->name('cetak.jurnalpdf');
+    Route::get('admin/jurnal/tampil_jurnal_admin/{guru_id}/{tp_id}', JurnalGuruController::class.'@jurnal_admin_perguru')->name('tampil.jurnal.admin.guru');
+    
 
-    // AJAX
+    // AJAX jurnal guru
     Route::post('admin/tambah_jurnal', AjaxController::class.'@tambahJurnal')->name('ajax.tambah_jurnal');
+    Route::get('edit_jurnal/{id}', AjaxController::class.'@editJurnal')->name('ajax.edit_jurnal');
 
+    //absensi
     Route::get('/admin/absensi/scan', AbsensiController::class.'@scan')->name('scan-absensi');
     Route::get('/admin/absensi/harian', AbsensiController::class.'@harian')->name('absensi-harian');
     Route::get('/admin/absensi/tambah', AbsensiController::class.'@tambah')->name('absensi-tambah');
