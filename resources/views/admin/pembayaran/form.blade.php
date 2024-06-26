@@ -150,6 +150,7 @@
                                 <td>Rp {{ number_format($jenis_bayar->biaya,0, ',','.') }}</td>
                                 <td>Rp {{ number_format(0,0, ',','.') }}</td>
                                 <td>Rp {{ number_format(0,0, ',','.') }}</td>
+                                <td>Rp {{ number_format($jenis_bayar->biaya,0, ',','.') }}</td>
                                 <td>
                                     <input type="number" name="bayar[]" value="0" id="bayar" class="form-control">
                                     <input type="hidden" name="idjenisbayar[]" value="{{ $jenis_bayar->id }}">
