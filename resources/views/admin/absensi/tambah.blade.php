@@ -43,7 +43,7 @@
                     </div>
                 </form>
                 <div class="mt-3">
-                    <form action="{{ (App\Models\Absensi::whereKelasId(request()->kelas_id)->whereDate('created_at',now())->count() != App\Models\Siswa::whereKelasId(request()->kelas_id)->count()) ? route('absensi-store') : '/absensi/edit' }}" method="post">
+                    <form action="{{ route('absensi-store') }}" method="post">
                         @csrf
                         <input type="hidden" name="kelas_id" value="{{ request()->kelas_id ? request()->kelas_id : ''  }}">
                         <div class="table-responsive">

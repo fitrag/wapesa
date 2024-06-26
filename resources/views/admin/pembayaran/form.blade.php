@@ -20,6 +20,12 @@
             return a + b
         }, 0)
 
+        let totalPotongan = $.map($('input[id^="potongan"]'), function(el, id){
+            return parseInt(el.value, 10) || 0
+        }).reduce(function(a, b){
+            return a + b
+        }, 0)
+
         $('#total').text('Rp '+ new Intl.NumberFormat("id-ID", {
             currency:"IDR"
         }).format(totalBayar))
@@ -74,6 +80,10 @@
         <div id="tambahPembayaran">
           <div class="card">
               <div class="card-body">
+                <div class="py-3 text-right">
+                    <a href="#" onclick="return window.history.back()" class="btn btn-dark">Kembali</a>
+                    <a href="#" class="btn btn-info">Cetak</a>
+                </div>
                  <table class="table table-bordered mb-3">
                     <tbody>
                         <tr>
@@ -97,9 +107,11 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Jenis Pembayaran</th>
-                            <th>Nominal Biaya</th>
-                            <th>Sudah Bayar</th>
+                            <th>Jenis</th>
+                            <th>Biaya</th>
+                            <th>Potongan</th>
+                            <th>Total</th>
+                            <th>Kurang</th>
                             <th>Bayar</th>
                             <th>Potongan</th>
                         </tr>
@@ -111,8 +123,10 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $pembayaran->jenisbayar->nm_jenis }}</td>
                                 <td>Rp {{ number_format($pembayaran->jenisbayar->biaya,0, ',','.') }}</td>
+                                <td>Rp {{ number_format($pembayaran->potongan,0, ',','.') }}</td>
                                 <td>Rp {{ number_format($pembayaran->total_bayar,0, ',','.') }}</td>
-                                <td colspan="{{ $pembayaran->status == 'lunas' ? 2 : 0 }}" class="text-center">
+                                <td>Rp {{ number_format($pembayaran->sisa_bayar,0, ',','.') }}</td>
+                                <td class="text-center" colspan="{{ $pembayaran->status == 'lunas' ? 2 : 0 }}">
                                     @if($pembayaran->status != 'lunas')
                                         <input type="number" name="bayar[]" value="0" id="bayar" class="form-control">
                                         <input type="hidden" name="idpembayaran[]" value="{{ $pembayaran->id }}">
@@ -123,7 +137,7 @@
                                 </td>
                                 @if($pembayaran->status != 'lunas')
                                 <td>
-                                    <input type="number" name="potongan[]" value="0" class="form-control">
+                                    <input type="number" name="potongan[]" id="potongan" value="0" class="form-control">
                                 </td>
                                 @endif
                             </tr>
@@ -135,13 +149,14 @@
                                 <td>{{ $jenis_bayar->nm_jenis }}</td>
                                 <td>Rp {{ number_format($jenis_bayar->biaya,0, ',','.') }}</td>
                                 <td>Rp {{ number_format(0,0, ',','.') }}</td>
+                                <td>Rp {{ number_format(0,0, ',','.') }}</td>
                                 <td>
                                     <input type="number" name="bayar[]" value="0" id="bayar" class="form-control">
                                     <input type="hidden" name="idjenisbayar[]" value="{{ $jenis_bayar->id }}">
                                     <input type="hidden" name="idpembayaran[]" value="">
                                 </td>
                                 <td>
-                                    <input type="number" name="potongan[]" value="0" class="form-control">
+                                    <input type="number" name="potongan[]" id="potongan" value="0" class="form-control">
                                 </td>
                             </tr>
                             @endforeach

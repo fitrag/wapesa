@@ -23,7 +23,6 @@ class PembayaranController extends Controller
     public function store(Request $req){
         $siswa = Siswa::find($req->siswaId);
         $jenisBayars = Jenisbayar::whereIn('id', $req->idjenisbayar)->get();
-        // dd($jenisBayars);
         for($i=0;$i<count($req->idjenisbayar);$i++){
             $bayar = Pembayaran::create([
                 'siswa_id'      => $siswa->id,
@@ -35,8 +34,8 @@ class PembayaranController extends Controller
                 'potongan'      => 0,
                 'total_bayar'   => $req->bayar[$i],
                 'potongan'      => $req->potongan[$i],
-                'sisa_bayar'    => 0,
-                'status'        => $jenisBayars[$i]->biaya==$req->bayar[$i] ? 'lunas' : 'belum lunas',
+                'sisa_bayar'    => $jenisBayars[$i]->biaya-($req->bayar[$i]+$req->potongan[$i]),
+                'status'        => $jenisBayars[$i]->biaya==$req->bayar[$i]+$req->potongan[$i] ? 'lunas' : 'belum lunas',
             ]);
         }
         return redirect()->back();
@@ -46,8 +45,9 @@ class PembayaranController extends Controller
         for($i=0;$i<count($req->idpembayaran);$i++){
             $pembayaran                 = Pembayaran::find($req->idpembayaran[$i]);
             $pembayaran->total_bayar    = $pembayaran->total_bayar + $req->bayar[$i];
-            $pembayaran->potongan       = $req->potongan[$i];
-            $pembayaran->status         = ($jenisBayars[$i]->biaya == $pembayaran->total_bayar + $req->potongan[$i]) ? 'lunas' : 'belum lunas';
+            $pembayaran->potongan       = $pembayaran->potongan+$req->potongan[$i];
+            $pembayaran->sisa_bayar     = $pembayaran->sisa_bayar-($req->bayar[$i]+$req->potongan[$i]);
+            $pembayaran->status         = ($jenisBayars[$i]->biaya == $pembayaran->total_bayar+$pembayaran->potongan) ? 'lunas' : 'belum lunas';
             $pembayaran->save();
         }
         // dd($pembayaran);
