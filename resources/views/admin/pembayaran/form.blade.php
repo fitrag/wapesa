@@ -19,7 +19,7 @@
         }).reduce(function(a, b){
             return a + b
         }, 0)
-        
+
         let totalPotongan = $.map($('input[id^="potongan"]'), function(el, id){
             return parseInt(el.value, 10) || 0
         }).reduce(function(a, b){
@@ -107,10 +107,11 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Jenis Pembayaran</th>
-                            <th>Nominal Biaya</th>
+                            <th>Jenis</th>
+                            <th>Biaya</th>
                             <th>Potongan</th>
                             <th>Total</th>
+                            <th>Kurang</th>
                             <th>Bayar</th>
                             <th>Potongan</th>
                         </tr>
@@ -124,6 +125,7 @@
                                 <td>Rp {{ number_format($pembayaran->jenisbayar->biaya,0, ',','.') }}</td>
                                 <td>Rp {{ number_format($pembayaran->potongan,0, ',','.') }}</td>
                                 <td>Rp {{ number_format($pembayaran->total_bayar,0, ',','.') }}</td>
+                                <td>Rp {{ number_format($pembayaran->sisa_bayar,0, ',','.') }}</td>
                                 <td class="text-center" colspan="{{ $pembayaran->status == 'lunas' ? 2 : 0 }}">
                                     @if($pembayaran->status != 'lunas')
                                         <input type="number" name="bayar[]" value="0" id="bayar" class="form-control">
