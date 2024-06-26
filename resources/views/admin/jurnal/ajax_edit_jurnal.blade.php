@@ -1,5 +1,6 @@
-<form method="POST" action="{{ route('admin.jurnal-guru.store') }}" enctype="multipart/form-data">
-    {{ csrf_field() }}
+<form method="POST" action="{{ route('admin.jurnal-guru.update', $data->id) }}" enctype="multipart/form-data">
+{{ csrf_field() }}
+{{ method_field('put') }}
    
     <div class="card">
         <div class="">
@@ -25,7 +26,7 @@
                 <label for="alias">Mata Pelajaran</label>
                 <select class="form-control" name="mapel_id">
                     @foreach($mapel as $item)
-                        <option value="{{$item->mapel_id}}">{{$item->alias}}</option>
+                        <option value="{{$item->mapel_id}}" {{ old('mapel_id', $data->mapel_id) == $item->mapel_id? 'selected' : null}}>{{$item->alias}}</option>
                     @endforeach
                 </select>
             </div>
@@ -33,21 +34,21 @@
                 <label for="alias">Kelas</label>
                 <select class="form-control" name="kelas_id">
                     @foreach($kelas as $item)
-                        <option value="{{$item->id}}">{{$item->nm_kls}}</option>
+                        <option value="{{$item->id}}" {{ old('mapel_id', $data->kelas_id) == $item->id? 'selected' : null}}>{{$item->nm_kls}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group">
                 <label for="alias">Tahun Pelajaran</label>
                 <select class="form-control" name="tp_id">
-                    @foreach($tps as $item)
-                        <option value="{{$item->id}}">{{$item->nm_tp}} ({{$item->semester}})</option>
+                    @foreach($tp as $item)
+                        <option value="{{$item->id}}" {{ old('mapel_id', $data->tp_id) == $item->id? 'selected' : null}}>{{$item->nm_tp}} ({{$item->semester}})</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group">
                 <label for="name">Tanggal</label>
-                <input id="tgl" type="date" class="form-control" value="{{ date('Y-m-d') }}" name="tgl" tabindex="1"  required autofocus>
+                <input id="tgl" type="date" class="form-control" value="{{ old(date('Y-m-d'), $data->tgl) }}" name="tgl" tabindex="1"  required autofocus>
                 @error('tgl')
                 <div class="alert alert-danger">Mohon di isi tanggal</div>
                 @enderror
@@ -57,7 +58,7 @@
             </div>
             <div class="form-group">
                 <label for="name">Jam Ke</label>
-                <input id="jamke" type="text" class="form-control"  name="jamke" value="{{ old('jamke') }}"  placeholder="contoh: 1 - 3">
+                <input id="jamke" type="text" class="form-control"  name="jamke" value="{{ old('jamke', $data->jamke) }}"  placeholder="contoh: 1 - 3">
                 @error('jamke')
                     <div class="alert alert-danger">Mohon di isi Jam Ke</div>
                 @enderror
@@ -67,7 +68,7 @@
             </div>
             <div class="form-group">
                 <label for="name">Kompetensi dasar / materi pokok / sub materi</label>
-                <textarea name="materi" class="form-control" id="" cols="30" rows="6" >{{ old('materi') }}</textarea>
+                <textarea name="materi" class="form-control" id="" cols="30" rows="6" >{{ old('materi', $data->materi) }}</textarea>
                 @error('materi')
                     <div class="alert alert-danger">Mohon di isi materi</div>
                 @enderror
@@ -77,7 +78,7 @@
             </div>
             <div class="form-group">
                 <label for="name">Pertemuan Ke (contoh: 1 )</label>
-                <input id="tmke" type="number" class="form-control"  name="tmke" value="{{ old('tmke') }}">
+                <input id="tmke" type="number" class="form-control"  name="tmke" value="{{ old('tmke', $data->tmke) }}">
                 @error('tmke')
                     <div class="alert alert-danger">Mohon di isi pertemuan ke</div>
                 @enderror
@@ -87,7 +88,7 @@
             </div>
             <div class="form-group">
                 <label for="name">Selesai/tidak selesai, alasan</label>
-                <textarea name="status" class="form-control" id="" cols="30" rows="6">{{ old('status') }}</textarea>
+                <textarea name="status" class="form-control" id="" cols="30" rows="6">{{ old('status', $data->status) }}</textarea>
                 @error('status')
                     <div class="alert alert-danger">Mohon di isi selesai/tidak selesai</div>
                 @enderror
@@ -97,7 +98,7 @@
             </div>
             <div class="form-group">
                 <label for="name">Absensi (contoh: Nihil / Anis (S) / Adi (I))</label>
-                <textarea name="absensi" class="form-control" id="" cols="30" rows="6">{{ old('absensi') }}</textarea>
+                <textarea name="absensi" class="form-control" id="" cols="30" rows="6">{{ old('absensi', $data->absensi) }}</textarea>
                 @error('absensi')
                     <div class="alert alert-danger">Mohon di isi absensi</div>
                 @enderror
@@ -107,7 +108,7 @@
             </div>
             <div class="form-group">
                 <label for="name">Keterangan (contoh: Alpha lari jam ke-4 / di kosongkan)</label>
-                <textarea name="ket" class="form-control" id="" cols="30" rows="6">{{ old('ket') }}</textarea>
+                <textarea name="ket" class="form-control" id="" cols="30" rows="6">{{ old('ket', $data->ket) }}</textarea>
                 @error('ket')
                     <div class="alert alert-danger">Mohon di isi keterangan</div>
                 @enderror

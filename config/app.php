@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'id',
 
     /*
     |--------------------------------------------------------------------------
@@ -171,6 +171,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        // Barryvdh\DomPDF\ServiceProvider::class,
         
     ])->toArray(),
 
@@ -187,6 +188,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        // 'PDF' => Barryvdh\DomPDF\Facade::class,
+        // 'PDF' => Barryvdh\DomPDF\Facade::class,
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 

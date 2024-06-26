@@ -67,7 +67,7 @@
         
             <li class="menu-header">Jurnal</li>
             <li class="{{ request()->is('admin/jurnal-guru') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.jurnal-guru') }}"><i class="fas fa-book"></i> <span>Jurnal Mengajar</span></a></li>
-
+            <li class="{{ request()->is('admin/absensi/tambah') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-tambah') }}"><i class="fas fa-fingerprint"></i> <span>Lihat Absensi</span></a></li>
             @if(auth()->user()->is_gurupiket)
                 <li class="{{ request()->is('admin/absensi/tambah') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-tambah') }}"><i class="fas fa-fingerprint"></i> <span>Tambah Absensi</span></a></li>
             @endif

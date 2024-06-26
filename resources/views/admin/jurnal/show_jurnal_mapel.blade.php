@@ -34,7 +34,7 @@
                 @endif
                 <div class="card">
                     <div class="p-1">
-                        <a href="" class="btn btn-info btn-rounded btn-fw float-right mx-1" target="_blank"><i class="fa fa-print"></i> Cetak</a>
+                        <a href="{{ url('cetak.jurnalpdf/'.$data[0]->mapel_id.'/'.$data[0]->guru_id.'/'.$data[0]->kelas_id.'/'.$data[0]->tp_id ) }}" class="btn btn-info btn-rounded btn-fw float-right mx-1" target="_blank"><i class="fa fa-print"></i> Cetak</a>
                         <a href="#" data-target="#bukaModal" id="tombolModal" data-toggle="modal" class="btn btn-primary btn-rounded btn-fw float-right mx-1"><i class="fa fa-plus"></i> Tambah Jurnal</a>
                         <a href="{{ route('admin.jurnal-guru') }}" class="btn btn-dark btn-rounded btn-fw float-right mx-1"><i class="fa fa-backward"></i> Back</a>
                     </div>
@@ -88,7 +88,7 @@
                                     <th>Hari/Tanggal</th>
                                     <th>Jam Ke</th>
                                     <th>Kelas</th>
-                                    <th>KD/Materi Pokok/Sub Materi</th>
+                                    <th>Materi Pokok/Sub Materi</th>
                                     <th>TM Ke</th>
                                     <th>Selesai/tidak alasan</th>
                                     <th>Absensi</th>
@@ -101,7 +101,8 @@
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
                                             <td>
-                                            {{date('l, d/m/Y', strtotime($item->tgl))}}</td>
+                                            {{Carbon\Carbon::parse($item->tgl)->isoFormat('dddd, D/MM/YYYY')}}
+                                            </td>
                                             <td>{{$item->jamke}}</td>
                                             <td>{{$item->nm_kls}}</td>
                                             <td>{{$item->materi}}</td>
@@ -115,8 +116,8 @@
                                                         Aksi
                                                     </button>
                                                 <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 30px, 0px);">
-                                                    <a class="dropdown-item" data-toggle="modal" onclick="editModal" data-target="#modalEdit" href="#"> Edit </a>
-                                                    <form action="" class="pull-left"  method="post">
+                                                    <a class="dropdown-item" data-toggle="modal" onclick="editModal({{ $item->id }})" data-target="#modalEdit" href="#"> Edit </a>
+                                                    <form action="{{ route('admin.jurnal-guru.delete', $item->id) }}" class="pull-left"  method="post">
                                                         {{ csrf_field() }}
                                                         {{ method_field('delete') }}
                                                         <button class="dropdown-item" onclick="return confirm('Anda yakin ingin menghapus data ini?')"> Delete
@@ -137,6 +138,7 @@
     </div>
 </section>
 
+<!-- modal tambah -->
 <div class="modal fade bd-example-modal-md" id="bukaModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
   <div class="modal-dialog modal-lg modal-dialog-scrollable modal-md" role="document" >
     <div class="modal-content" style="background: #fff;">
@@ -147,6 +149,22 @@
           </button>
         </div>
         <div class="modal-body" id="tambahJurnal">
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal edit -->
+<div class="modal fade bd-example-modal-lg" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document" >
+    <div class="modal-content" style="background: #fff;">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Jurnal Guru</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="editJurnal">
         </div>
     </div>
   </div>

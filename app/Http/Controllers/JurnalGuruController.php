@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
+use App\Models\Guru_ajar;
 use App\Models\Jurnal;
 use App\Models\Kelas;
 use App\Models\Pengaturan;
 use App\Models\Tp;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,14 +22,12 @@ class JurnalGuruController extends Controller
     public function index()
     {
         if(auth()->user()->level == 'admin'){
-            $guru = Guru::orderBy('nm_guru')->get();
-            
-            return view('admin.jurnal.index_jurnal', compact('guru'));
+            $tp = Tp::orderBy('nm_tp')->get();
+            return view('admin.jurnal.index_admin_jurnal', compact('tp'));
         }
         else 
         {
             $user = auth::user()->id; 
-            // dd($user); 
             $data = DB::table('guru_ajars')
                     ->join('gurus','guru_ajars.guru_id','=','gurus.id')
                     ->join('mapels','guru_ajars.mapel_id','=','mapels.id')
@@ -95,6 +96,7 @@ class JurnalGuruController extends Controller
                         ['jurnals.kelas_id','=',$kelas_id],
                         ['jurnals.tp_id','=',$tp_id],
                         ])
+                    ->orderBy('jurnals.tmke')
                     ->get();
 
             //Jika sudah pernah input data
@@ -133,7 +135,7 @@ class JurnalGuruController extends Controller
                         ->first();
 
                     // $data = DB::table('tr_guru_mapel')
-                    //     ->join('gurus','tr_guru_mapel.id_guru','=','gurus.id')
+                    //     ->join('gurus','tr_guru_mapel.guru_id','=','gurus.id')
                     //     ->join('mapels','tr_guru_mapel.id_mapel','=','mapels.id')
                     //     ->select('tr_guru_mapel.*','mapels.nm_mapel','mapels.alias')
                     //     ->where([
@@ -199,8 +201,10 @@ class JurnalGuruController extends Controller
         else
         { 
             $jurnal = Jurnal::create($request->all());
+
+
             if($jurnal){
-                return redirect()->route('admin.jurnal-guru')->with('success', 'Berhasil menambahkan data jurnal');
+                return redirect()->back()->with('success', 'Berhasil menambahkan data jurnal');
             }else{
                 return redirect()->back()->with('success', 'Gagal menambahkan data jurnal');
             }
@@ -212,25 +216,122 @@ class JurnalGuruController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        
+        $guru_ajar = DB::table('guru_ajars')
+                    ->join('gurus','guru_ajars.guru_id','gurus.id')
+                    ->select('gurus.id','gurus.nm_guru')
+                    ->orderBy('gurus.nm_guru')
+                    ->groupBy('gurus.id','gurus.nm_guru')
+                    ->get();
+       $tp_id = $id;
+
+
+        return view('admin.jurnal.show_jurnal_admin', compact('guru_ajar','tp_id'));
     }
 
+    public function jurnal_admin_perguru($guru_id, $tp_id)
+    {
+        
+        $datax = DB::table('jurnals')
+                    ->join('gurus','jurnals.guru_id','=','gurus.id')
+                    ->join('mapels','jurnals.mapel_id','=','mapels.id')
+                    ->join('kelas','jurnals.kelas_id','=','kelas.id')
+                    ->join('tps','jurnals.tp_id','=','tps.id')
+                    ->select('jurnals.mapel_id','tps.nm_tp','tps.semester','jurnals.kelas_id','mapels.nm_mapel','mapels.alias','kelas.nm_kls','jurnals.guru_id','gurus.nm_guru','jurnals.tp_id')
+                    ->where([
+                        ['jurnals.guru_id','=',$guru_id],
+                        ])
+                    ->groupBy('jurnals.mapel_id','tps.nm_tp','tps.semester','jurnals.kelas_id','mapels.nm_mapel','mapels.alias','kelas.nm_kls','jurnals.guru_id','gurus.nm_guru','jurnals.tp_id')
+                    ->get();
+
+            $pengaturan = Pengaturan::first();            
+        return view('admin.jurnal.show_jurnal_adminguru', compact('datax','guru_id','pengaturan')); 
+    }
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        // $update = $id->update($request->all());
+
+        $user = Auth::user()->id;
+        $guru_id = DB::table('gurus')
+                        ->join('users','gurus.user_id','users.id')
+                        ->select('gurus.*')
+                        ->where('gurus.user_id','=',$user)
+                        ->first();
+// dd($guru_id);
+        Jurnal::find($id)->update([
+            'guru_id'     => $guru_id->id,
+            'mapel_id'    => $request->get('mapel_id'),
+            'tp_id'       => $request->get('tp_id'),
+            'kelas_id'     => $request->get('kelas_id'),
+            'tgl'         => $request->get('tgl'),
+            'jamke'       => $request->get('jamke'),
+            'materi'      => $request->get('materi'),
+            'tmke'        => $request->get('tmke'),
+            'status'      => $request->get('status'),
+            'absensi'     => $request->get('absensi'),
+            'ket'         => $request->get('ket')
+            ]);
+
+        // if($update){
+            return redirect()->back()->with('success', 'Berhasil memperbarui data jurnal');
+        // }else{
+        //     return redirect()->back()->with('success', 'Gagal memperbarui data jurnal');
+        // }
+    }
+
+    public function cetakpdf($mapel_id, $guru_id, $kelas_id, $tp_id)
+    {
+        date_default_timezone_set('Asia/Jakarta'); // Zona Waktu indonesia
+        Carbon::now();
+        $date = Carbon::now()->isoFormat('D MMMM Y');
+
+        $data = DB::table('jurnals')
+        ->join('gurus','jurnals.guru_id','=','gurus.id')
+        ->join('mapels','jurnals.mapel_id','=','mapels.id')
+        ->join('kelas','jurnals.kelas_id','=','kelas.id')
+        ->select('jurnals.*','mapels.nm_mapel','kelas.nm_kls','gurus.nm_guru','gurus.nip')
+        ->where([
+            ['jurnals.guru_id','=',$guru_id],
+            ['jurnals.mapel_id','=',$mapel_id],
+            ['jurnals.kelas_id','=',$kelas_id],
+            ['jurnals.tp_id','=',$tp_id],
+            ])
+        ->orderBy('jurnals.tgl')
+        ->get();
+
+    $datax = DB::table('jurnals')
+        ->join('mapels','jurnals.mapel_id','=','mapels.id')
+        ->select('jurnals.mapel_id','tps.semester','tps.nm_tp','mapels.nm_mapel')
+        ->join('tps','jurnals.tp_id','=','tps.id')
+        ->where([
+            ['jurnals.guru_id','=',$guru_id],
+            ['jurnals.mapel_id','=',$mapel_id],
+            ['jurnals.kelas_id','=',$kelas_id],
+            ])
+        ->groupBy('jurnals.mapel_id','tps.semester','tps.nm_tp','mapels.nm_mapel')
+        ->get();
+    $pengaturan = Pengaturan::all();
+    
+    // $pdf =  PDF::loadView('admin.jurnal.cetak_pdf', compact('data','datax','date','pengaturan'));
+    //     return $pdf->stream('cetak.pdf');
+
+   
+    return view('admin.jurnal.cetak_pdf', compact('data','datax','date','pengaturan'));
+      
+
     }
 
     /**
@@ -238,6 +339,9 @@ class JurnalGuruController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        {
+            Jurnal::find($id)->delete();
+            return redirect()->back()->with('success', 'Berhasil menghapus data jurnal');
+         }
     }
 }
