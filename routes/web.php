@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, GuruAjarController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, JurnalGuruController, LihatAbsensiController, SinkronisasiController, PengaturanController, WaliKelasController, PembayaranController, AjaxController};
+use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, GuruAjarController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, JurnalGuruController, LihatAbsensiController, SinkronisasiController, PengaturanController, WaliKelasController, PembayaranController, AjaxController, MapelController};
 
 /*
 |--------------------------------------------------------------------------
@@ -112,6 +112,9 @@ Route::middleware(['auth'])->group(function () {
     ->name('update', 'admin.guru-ajar.update')
     ->name('destroy', 'admin.guru-ajar.delete')
     ->name('show', 'admin.guru-ajar.show');
+    
+    //Mapel
+    Route::resource('admin/mapel', MapelController::class);
     
     //Jurnal Guru 
     Route::resource('admin/jurnal-guru', JurnalGuruController::class)

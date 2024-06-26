@@ -242,6 +242,7 @@ class JurnalGuruController extends Controller
                     ->select('jurnals.mapel_id','tps.nm_tp','tps.semester','jurnals.kelas_id','mapels.nm_mapel','mapels.alias','kelas.nm_kls','jurnals.guru_id','gurus.nm_guru','jurnals.tp_id')
                     ->where([
                         ['jurnals.guru_id','=',$guru_id],
+                        ['jurnals.tp_id','=',$tp_id],
                         ])
                     ->groupBy('jurnals.mapel_id','tps.nm_tp','tps.semester','jurnals.kelas_id','mapels.nm_mapel','mapels.alias','kelas.nm_kls','jurnals.guru_id','gurus.nm_guru','jurnals.tp_id')
                     ->get();
