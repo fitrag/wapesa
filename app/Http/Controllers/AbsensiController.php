@@ -64,7 +64,9 @@ class AbsensiController extends Controller
             if($sudahAbsen->count() != Siswa::whereKelasId($req->kelas_id)->count()){
                 $siswas = Siswa::with('absensis')->whereNotIn('id',$sudahAbsen)->whereKelasId($req->kelas_id)->get();
             }else{
-                $siswas = Siswa::with('absensis')->whereKelasId($req->kelas_id)->get();
+                $siswas = Siswa::with(['absensis' => function($query){
+                    $query->whereDate('created_at', date('Y-m-d'));
+                }])->whereKelasId($req->kelas_id)->get();
             }
             return view('admin.absensi.tambah', compact('kelass','siswas'));
         }else{
@@ -81,9 +83,15 @@ class AbsensiController extends Controller
         //     'hadir.*'   => 'required'
         // ]);
 
+        $date = Absensi::where('created_at', 'LIKE', date('Y-m-d').' %')->first();
+        $date = is_null($date) ? null : $date->created_at;
+
         for($i=0;$i<count($req->user_id);$i++){
 
-            $insert = Absensi::create([
+            $insert = Absensi::updateOrCreate([
+                'nis'           => $req->nis[$i],
+                'created_at'    => $date
+                ],[
                 'nis'           => $req->nis[$i],
                 'user_id'       => $req->user_id[$i],
                 'kelas_id'      => $req->kelas_id,
