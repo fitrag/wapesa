@@ -68,7 +68,7 @@
         
             <li class="menu-header">Jurnal</li>
             <li class="{{ request()->is('admin/jurnal-guru') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.jurnal-guru') }}"><i class="fas fa-book"></i> <span>Jurnal Mengajar</span></a></li>
-            <li class="{{ request()->is('admin/absensi/tambah') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-tambah') }}"><i class="fas fa-fingerprint"></i> <span>Lihat Absensi</span></a></li>
+            <li class="{{ request()->is('admin/absensi/tambah') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-tambah') }}"><i class="fas fa-fingerprint"></i> <span>Absensi Siswa</span></a></li>
             @if(auth()->user()->is_gurupiket)
                 <li class="{{ request()->is('admin/absensi/tambah') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-tambah') }}"><i class="fas fa-fingerprint"></i> <span>Tambah Absensi</span></a></li>
             @endif
@@ -82,7 +82,13 @@
                         <li class="{{ request()->is('admin/absensi/tahun-pelajaran') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-tahun-pelajaran') }}">Absensi Tahun Pelajaran</a></li>
                     </ul>
                 </li>
-                <li><a class="nav-link"><i class="fas fa-print"></i> <span>Cetak Absensi</span></a></li>
+                <li class="dropdown {{ request()->is('admin/cetak-absensi-tgl*') ? 'active' : '' }} || {{ request()->is('admin/cetak-absensi-bln*') ? 'active' : '' }}">
+                    <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Cetak Absensi</span></a>
+                    <ul class="dropdown-menu">
+                        <li class="{{ request()->is('admin/cetak-absensi-tgl*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('cetak-tgl-absensi') }}">Cetak Per-Tanggal</a></li>
+                        <li class="{{ request()->is('admin/cetak-absensi-bln*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('cetak-bln-absensi') }}">Cetak Per-Bulan</a></li>
+                    </ul>
+                </li>
             @endif
 
         @endif
