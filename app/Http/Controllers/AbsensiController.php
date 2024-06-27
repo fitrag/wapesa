@@ -85,8 +85,8 @@ class AbsensiController extends Controller
         // ]);
 
         $date = Absensi::where('created_at', 'LIKE', date('Y-m-d').' %')->first();
-        $date = is_null($date) ? null : $date->created_at;
-        
+        $date = is_null($date) ? now() : $date->created_at;
+
         for($i=0;$i<count($req->user_id);$i++){
 
             $insert = Absensi::updateOrCreate([
