@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('tmke');
             $table->string('status');
             $table->text('absensi');
-            $table->text('ket');
+            $table->text('ket')->nullable();
             $table->timestamps();
         });
     }

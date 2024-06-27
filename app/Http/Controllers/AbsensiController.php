@@ -10,6 +10,7 @@ class AbsensiController extends Controller
     public function scan(){
         return view('admin.absensi.scan');
     }
+    
 
     public function scanning(Request $req){
         $siswa = Siswa::with('kelas')->whereNis($req->siswa)->first();
@@ -85,7 +86,7 @@ class AbsensiController extends Controller
 
         $date = Absensi::where('created_at', 'LIKE', date('Y-m-d').' %')->first();
         $date = is_null($date) ? null : $date->created_at;
-
+        
         for($i=0;$i<count($req->user_id);$i++){
 
             $insert = Absensi::updateOrCreate([

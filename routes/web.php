@@ -62,11 +62,16 @@ Route::middleware(['auth'])->group(function () {
     ->name('store', 'admin.siswa.store')
     ->name('edit', 'admin.siswa.edit_siswa')
     ->name('update', 'admin.siswa.update')
-    ->name('destroy', 'admin.siswa.delete');
+    ->name('destroy', 'admin.siswa.delete')
+    ->name('show', 'admin.siswa.show');
     Route::post('admin/siswa/import', SiswaController::class.'@import')->name('admin.siswa.import');
+    Route::get('admin/siswa/naik_kelas', SiswaController::class.'@kelas')->name('admin.siswa.naik-kelas');
     Route::get('admin/{siswa:id}/delete', SiswaController::class.'@destroy')->name('admin.siswa.delete-ajax');
     Route::get('admin/{siswa:id}/qrcode', SiswaController::class.'@qrcode')->name('admin.siswa.qrcode');
-
+    Route::post('admin/siswa/update_kelas', SiswaController::class.'@update_kelas')->name('admin.update.kelas');
+    
+    
+    
     // Ajax Data Siswa
     Route::get('/admin/siswa-ajax', IndexController::class.'@siswaAjax')->name('siswa-ajax');
     Route::get('/admin/user-ajax', IndexController::class.'@userAjax')->name('user-ajax');
@@ -103,6 +108,7 @@ Route::middleware(['auth'])->group(function () {
     ->name('edit', 'admin.guru.edit')
     ->name('update', 'admin.guru.update')
     ->name('destroy', 'admin.guru.delete');
+    Route::post('admin/guru/import', GuruController::class.'@import')->name('admin.guru.import');
 
     //Guru Ajar
     Route::resource('admin/guru-ajar', GuruAjarController::class)
@@ -139,6 +145,7 @@ Route::middleware(['auth'])->group(function () {
 
     //absensi
     Route::get('/admin/absensi/scan', AbsensiController::class.'@scan')->name('scan-absensi');
+    // Route::get('/admin/absensi/kelas', AbsensiController::class.'@kelas')->name('admin.siswa.naik-kelas');
     Route::get('/admin/absensi/harian', AbsensiController::class.'@harian')->name('absensi-harian');
     Route::get('/admin/absensi/tambah', AbsensiController::class.'@tambah')->name('absensi-tambah');
     Route::post('/admin/absensi/tambah', AbsensiController::class.'@store')->name('absensi-store');

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\GuruImport;
 use Illuminate\Http\Request;
 use App\Models\{User, Guru};
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use File;
 
 class GuruController extends Controller
 {
@@ -70,17 +73,41 @@ class GuruController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Guru $guru)
     {
-        //
+        $user = User::all();
+        return view('admin.guru.edit_guru',compact('guru','user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Guru $guru)
     {
-        //
+        
+        $update = $guru->update($request->all());
+        if($update){
+            return redirect()->route('admin.guru')->with('success', 'Berhasil memperbarui data guru');
+        }else{
+            return redirect()->back()->with('success', 'Gagal memperbarui data guru');
+        }
+    }
+
+    public function import(Request $request){
+        $file = $request->file('file');
+
+        // membuat nama file unik
+        
+        if($request->hasFile('file')){
+            $nama_file = $file->getClientOriginalName();
+            $file_path = $file->move('excel/',$nama_file);
+            $import = Excel::import(new GuruImport, $file_path);
+
+            if($import){
+                 File::delete($file_path);
+                return redirect()->route('admin.guru')->with('success', 'Berhasil mengimport data');
+            }
+        }
     }
 
     /**

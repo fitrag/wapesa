@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('gurus', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('nip',15)->nullable();
-            $table->string('nuptk',15)->nullable();
+            $table->string('nip',20)->nullable();
+            $table->string('nuptk',18)->nullable();
             $table->string('nm_guru',200);
             $table->string('tmpt_lhr',100)->nullable();
             $table->date('tgl_lhr')->nullable();

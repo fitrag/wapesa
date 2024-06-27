@@ -33,7 +33,9 @@
             @endif
         <div class="card">
             <div class="p-3">
-            <button class="btn btn-primary float-right mb-4" data-target="#exampleModal" data-toggle="modal">Tambah guru</button>
+              <button class="btn btn-primary float-right mb-4" data-target="#exampleModal" data-toggle="modal">Tambah guru</button>
+              <a href="{{ url('')}}/format/guru.xlsx"  class="btn btn-info float-right mx-1"><i class="fa fa-download"></i>Download Format</a>
+                <button class="btn btn-success float-right mx-1" data-target="#importExcel" data-toggle="modal">Import via Excel</button>
             </div>
             <div class="card-body">
             <div class="table-responsive">
@@ -63,12 +65,14 @@
                             <td>{{ ($guru->user->is_walas) ? 'Iya' : 'Tidak' }}</td>
                             <td>{{ ($guru->user->is_gurupiket) ? 'Iya' : 'Tidak' }}</td>
                             <td>
-                                <a href="{{ route('admin.user.edit', ['user' => $guru->user->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
-                                <form action="{{ route('admin.guru.delete', ['guru' => $guru->id]) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger m-1"><i class="fas fa-trash"></i></button>
-                                </form>
+                              <div class="btn-group">
+                                  <a href="{{ route('admin.guru.edit', ['guru' => $guru->id]) }}" class="btn btn-primary m-1"><i class="fas fa-pencil-alt"></i></a>
+                                  <form action="{{ route('admin.guru.delete', ['guru' => $guru->id]) }}" method="post">
+                                      @csrf
+                                      @method('DELETE')
+                                      <button class="btn btn-danger m-1"><i class="fas fa-trash"></i></button>
+                                  </form>
+                              </div>
                             </td>
                         </tr>
                     @endforeach
@@ -81,6 +85,42 @@
     </div>
     </div>
 </section>
+
+<!-- Import Excel -->
+<div class="modal fade" tabindex="-1" role="dialog" id="importExcel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Import data via excel</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="{{ route('admin.guru.import') }}" class="needs-validation" novalidate="" enctype="multipart/form-data">
+          @csrf
+          <div class="form-group">
+            <label for="name">Pilih file</label>
+            <input id="file" type="file" class="form-control" name="file" tabindex="1" required>
+            @error('file')
+              <div class="alert alert-danger">Mohon di filenya</div>
+            @enderror
+            <div class="invalid-feedback">
+              Mohon di isi filenya
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-lg">
+              Tambah
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 
         <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
           <div class="modal-dialog modal-lg" role="document">

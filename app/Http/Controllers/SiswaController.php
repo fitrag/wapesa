@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Siswa;
 use App\Models\User;
 use File;
+use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Hash;
@@ -33,9 +34,45 @@ class SiswaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $req)
     {
-        //
+        $kelas = Kelas::orderBy('nm_kls')->get();
+        if($req->kls_id){
+
+            $siswa = DB::table('siswas')
+                    ->join('kelas','siswas.kelas_id','kelas.id')
+                    ->where('siswas.kelas_id',$req->kls_id)
+                    ->orderBy('siswas.nm_siswa')
+                    ->get();
+            
+            return view('admin.siswa.pilih_naik_kls', compact('kelas','siswa'));
+        }else{
+            $siswa = [];
+            return view('admin.siswa.pilih_naik_kls', compact('kelas','siswa'));
+            
+        }
+    }
+
+    public function update_kelas(Request $req)
+    {
+        $req->validate([
+            'kelas_id.*'      => 'required',
+            
+        ]);
+        for ($i=0; $i < count($req->nis); $i++)
+        {
+            DB::table('siswas')
+            ->where([
+                ['kelas_id','=', $req->kls_id],
+                ['nis', $req->nis[$i]]
+            ])
+            ->update([
+                'kelas_id'         => $req->kelas_id[$i],
+            ]);
+        }
+
+            return redirect()->route('admin.siswa')->with('success', 'Berhasil update data');
+       
     }
 
     public function import(Request $request){
@@ -49,7 +86,7 @@ class SiswaController extends Controller
             $import = Excel::import(new SiswaImport(), $file_path);
 
             if($import){
-                 File::delete($file_path);
+                File::delete($file_path);
                 return redirect()->route('admin.siswa')->with('success', 'Berhasil mengimport data');
             }
         }
@@ -96,9 +133,12 @@ class SiswaController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
+    public function kelas()
+    {
+        $kelas = Kelas::orderBy('nm_kls')->get();
+        return view('admin.siswa.pilih_naik_kls', compact('kelas'));
+    }
+
     public function show(string $id)
     {
         //
