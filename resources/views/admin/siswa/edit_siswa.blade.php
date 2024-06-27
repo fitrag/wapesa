@@ -91,41 +91,41 @@
                     </div>
                     <div class="row">
                         <div class="col-8">
-                        <div class="form-group">
-                            <label for="level">Agama</label>
-                            <select id="level" type="level" class="form-control" name="agama" tabindex="1">
-                                <option value="">-- Pilih agama --</option>
-                                <option value="islam" {{ $siswa->agama == 'islam' ? 'selected' : '' }}>Islam</option>
-                                <option value="kristen" {{ $siswa->agama == 'kristen' ? 'selected' : '' }}>Kristen</option>
-                                <option value="katolik" {{ $siswa->agama == 'katolik' ? 'selected' : '' }}>Katolik</option>
-                                <option value="hindu" {{ $siswa->agama == 'hindu' ? 'selected' : '' }}>Hindu</option>
-                                <option value="budha" {{ $siswa->agama == 'budha' ? 'selected' : '' }}>Budha</option>
-                            </select>
-                            @error('agama')
-                            <div class="alert alert-danger">Mohon di isi agama</div>
-                            @enderror
-                            <div class="invalid-feedback">
-                            Mohon di isi agama
+                            <div class="form-group">
+                                <label for="level">Agama</label>
+                                <select id="level" type="level" class="form-control" name="agama" tabindex="1">
+                                    <option value="">-- Pilih agama --</option>
+                                    <option value="islam" {{ $siswa->agama == 'islam' ? 'selected' : '' }}>Islam</option>
+                                    <option value="kristen" {{ $siswa->agama == 'kristen' ? 'selected' : '' }}>Kristen</option>
+                                    <option value="katolik" {{ $siswa->agama == 'katolik' ? 'selected' : '' }}>Katolik</option>
+                                    <option value="hindu" {{ $siswa->agama == 'hindu' ? 'selected' : '' }}>Hindu</option>
+                                    <option value="budha" {{ $siswa->agama == 'budha' ? 'selected' : '' }}>Budha</option>
+                                </select>
+                                @error('agama')
+                                <div class="alert alert-danger">Mohon di isi agama</div>
+                                @enderror
+                                <div class="invalid-feedback">
+                                Mohon di isi agama
+                                </div>
                             </div>
-                        </div>
                         </div>
                         <div class="col-4">
-                        <div class="form-group">
-                            <div class="d-block">
-                            <label for="password" class="control-label">Jenis Kelamin</label>
+                            <div class="form-group">
+                                <div class="d-block">
+                                <label for="password" class="control-label">Jenis Kelamin</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio1" name="jen_kel" value="L" class="custom-control-input" {{ $siswa->jen_kel == 'L' ? 'checked' : '' }}>
+                                <label class="custom-control-label" for="customRadio1">L</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio2" name="jen_kel" value="P" class="custom-control-input" {{ $siswa->jen_kel == 'P' ? 'checked' : '' }}>
+                                <label class="custom-control-label" for="customRadio2">P</label>
+                                </div>
+                                <div class="invalid-feedback">
+                                Mohon di isi jenis kelamin
+                                </div>
                             </div>
-                            <div class="custom-control custom-radio">
-                            <input type="radio" id="customRadio1" name="jen_kel" value="L" class="custom-control-input" {{ $siswa->jen_kel == 'L' ? 'checked' : '' }}>
-                            <label class="custom-control-label" for="customRadio1">L</label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                            <input type="radio" id="customRadio2" name="jen_kel" value="P" class="custom-control-input" {{ $siswa->jen_kel == 'P' ? 'checked' : '' }}>
-                            <label class="custom-control-label" for="customRadio2">P</label>
-                            </div>
-                            <div class="invalid-feedback">
-                            Mohon di isi jenis kelamin
-                            </div>
-                        </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -178,9 +178,9 @@
                         <div class="col-8">
                             <div class="form-group">
                                 <label for="name">Nama user (Jika tidak ada silahkan input di data user)</label>
-                                <select class="form-control" name="user_id" required="">
+                                <select class="form-control" name="user_id" required="" disabled>
                                     @foreach($user as $item)
-                                        <option value="{{$item->id}}" {{ old('user_id', $siswa->user_id)== $item->id? 'selected' : null}}>{{$item->name}}</option>
+                                        <option value="{{$item->id}}" {{ old('user_id', $siswa->user_id)== $item->id? 'selected' : null}} >{{$item->name}}</option>
                                     @endforeach
                                 </select>
                                 @error('user_id')

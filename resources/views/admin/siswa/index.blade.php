@@ -68,6 +68,7 @@
             @if(auth()->user()->level == 'admin')
               <div class="p-3">
                 <button class="btn btn-primary float-right mx-1" data-target="#exampleModal" data-toggle="modal">Tambah data siswa</button>
+                <a href="{{ route('siswa.create') }}"  class="btn btn-dark float-right mx-1"><i class="fa fa-up"></i>Naik Kelas</a>
                 <a href="{{ url('')}}/format/siswa.xlsx"  class="btn btn-info float-right mx-1"><i class="fa fa-download"></i>Download Format</a>
                 <button class="btn btn-success float-right mx-1" data-target="#importExcel" data-toggle="modal">Import via Excel</button>
               </div>

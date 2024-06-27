@@ -10,6 +10,7 @@ class AbsensiController extends Controller
     public function scan(){
         return view('admin.absensi.scan');
     }
+    
 
     public function scanning(Request $req){
         $siswa = Siswa::with('kelas')->whereNis($req->siswa)->first();

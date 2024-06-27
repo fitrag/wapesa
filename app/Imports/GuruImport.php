@@ -2,12 +2,13 @@
 
 namespace App\Imports;
 
-use App\Models\{Siswa, User};
-use Illuminate\Support\Facades\Hash;
+use App\Models\Guru;
+use App\Models\User;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class SiswaImport implements ToModel, WithHeadingRow
+class GuruImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -17,23 +18,21 @@ class SiswaImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         $user = User::create([
-            'name'      => $row['nm_siswa'],
-            'username'  => $row['nis'],
-            'password'  => Hash::make($row['nis']),
-            'level'     => 'siswa'
+            'name'      => $row['nm_guru'],
+            'username'  => $row['username'],
+            'password'  => Hash::make($row['username']),
+            'level'     => 'guru'
         ]);
-        return new Siswa([
-            'nis'           => $row['nis'],
-            'nisn'          => $row['nisn'],
-            'nm_siswa'      => $row['nm_siswa'],
+        return new Guru([
+            'nip'           => $row['nip'],
+            'nuptk'         => $row['nuptk'],
+            'nm_guru'       => $row['nm_guru'],
             'tmpt_lhr'      => $row['tmpt_lhr'],
             'tgl_lhr'       => $row['tgl_lhr'],
             'jen_kel'       => $row['jen_kel'],
             'agama'         => $row['agama'],
-            'almt_siswa'    => $row['almt_siswa'],
+            'almt'          => $row['almt'],
             'no_tlp'        => $row['no_tlp'],
-            'nm_ayah'       => $row['nm_ayah'],
-            'kelas_id'      => $row['kelas_id'],
             'user_id'       => $user->id,
         ]);
     }

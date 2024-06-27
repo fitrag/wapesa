@@ -38,10 +38,11 @@
                 <div class="alert alert-danger">{{ session('error') }}</div>
                 @endif
                 <div class="card">
-                    @foreach($datax as $item)
+                    
+                    @forelse($datax as $item)
 
                         <div class="form-group py-2 col-6">
-                            <a href="{{ url('cetak.jurnalpdf/'.$item->mapel_id.'/'.$item->guru_id.'/'.$item->kelas_id.'/'.$item->tp_id ) }}" class="btn btn-info btn-rounded btn-fw" target="_blank"><i class="fa fa-print"></i> Cetak- {{$item->alias}} - {{$item->nm_kls}} </a>
+                            <a href="{{ url('cetak.jurnalpdf/'.$item->mapel_id.'/'.$item->guru_id.'/'.$item->kelas_id.'/'.$item->tp_id ) }}" class="btn btn-info btn-rounded btn-fw" target="_blank"><i class="fa fa-print"></i> Cetak Jurnal Mapel- {{$item->alias}} - {{$item->nm_kls}} </a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -125,6 +126,8 @@
                                             ->get();
 
                                         @endphp
+
+                                        
                                     @foreach($data as $items)
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
@@ -144,7 +147,11 @@
                                 </table>
                             </div>
                         </div>
-                    @endforeach
+                        @empty
+                            <div class="card-body">
+                                <h5>Data tidak ada</h5>
+                            </div>
+                        @endforelse
                 </div>
             </div>
         </div>
