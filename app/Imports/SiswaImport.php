@@ -18,8 +18,8 @@ class SiswaImport implements ToModel, WithHeadingRow
     {
         $user = User::create([
             'name'      => $row['nm_siswa'],
-            'username'  => $row['nisn'],
-            'password'  => Hash::make($row['nisn']),
+            'username'  => $row['nis'],
+            'password'  => Hash::make($row['nis']),
             'level'     => 'siswa'
         ]);
         return new Siswa([
