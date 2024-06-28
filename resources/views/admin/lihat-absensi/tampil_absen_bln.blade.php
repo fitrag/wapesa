@@ -16,11 +16,11 @@
                 font-size: 10pt;
                 text-align: center;
                 vertical-align: middle;
-                font-family:'Arial Narow OS';
+                font-family:"Arial Narrow", Arial, sans-serif;
             }
             table td{
                 font-size: 10pt;
-                font-family:'Arial Narow OS';
+                font-family:"Arial Narrow", Arial, sans-serif;
             }
     </style>
 </head>
@@ -32,18 +32,21 @@
         ->get();
         
     @endphp
-    <center>
+    <div class="text-center">
+        <img src="{{asset('img/kop.png')}}" alt="" srcset="">
+        <br>
         <h5>Laporan Data Absensi</h5>
-        <h5>Kelas: {{ $datas[0]->nm_kls }} </h5>
-    </center>
+        <h5><p>Kelas: {{ $datas[0]->nm_kls }} </p></h5>
+        
+    </div>
 
-    <strong>Tanggal : {{ date('M-Y', strtotime($bln_awal))}} s.d {{ date('M-Y', strtotime($bln_akhir))}}</strong>
-    <table id="example1" class="table table-striped table-bordered " width="90%">
+    <h5><strong>Periode Bulan: {{ date('M-Y', strtotime($bln_awal))}} s.d {{ date('M-Y', strtotime($bln_akhir))}}</strong></h5>
+    <table id="example1" class="table table-striped table-bordered table-sm"  width="90%">
         <thead>
             <tr>
-                <th rowspan="3">No.</th>
-                <th rowspan="3">NIS</th>
-                <th rowspan="3">Nama</th>
+                <th rowspan="3" width="4%">No.</th>
+                <th rowspan="3" width="8%">NIS</th>
+                <th rowspan="3" width="18%">Nama</th>
             </tr>
             <tr>
                 @foreach($dataTgl as $tgl)
@@ -210,8 +213,9 @@
 
                             $prosentase = ($h/$hall) * 100;
                     @endphp
-                    <span class="badge bg-success">
-                        {{ round($prosentase) }}%
+                    <span class="">
+                        <b>{{ round($prosentase) }}%</b>
+                        
                     </span>
                 </td>
                 <td class="text-center">
@@ -225,7 +229,7 @@
                                 ->whereBetween('absensis.created_at',[$bln_awal, $bln_akhir])
                                 ->count();
                     @endphp
-                    <span class="badge bg-info">{{ $s }} </span>
+                    <span class=""><b>{{ $s }}</b> </span>
                 </td>
                 <td class="text-center">
                     @php
@@ -240,7 +244,7 @@
                             ->count();
                     
                     @endphp
-                    <span class="badge bg-warning">{{ $i }} </span>
+                    <span class=""><b>{{ $i }}</b> </span>
                 </td>
                 <td class="text-center">
                     @php
@@ -253,7 +257,7 @@
                             ->whereBetween('absensis.created_at',[$bln_awal, $bln_akhir])
                             ->count();
                     @endphp
-                    <span class="badge bg-danger">{{ $a }} </span>
+                    <span class=""><b>{{ $a }}</b> </span>
                 </td>
                 <td class="text-center">
                     @php
@@ -266,7 +270,7 @@
                             ->whereBetween('absensis.created_at',[$bln_awal, $bln_akhir])
                             ->count();
                     @endphp
-                    <span class="badge bg-secondary">{{ $al }} </span>
+                    <span class=""><b>{{ $al }}</b> </span>
                 </td>
 
             </tr>

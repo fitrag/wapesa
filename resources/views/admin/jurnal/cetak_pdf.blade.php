@@ -14,6 +14,7 @@
         table tr td,
         table tr th{
             font-size: 9pt;
+            font-family:"Arial Narrow", Arial, sans-serif;
         }
         
     </style>
@@ -27,7 +28,7 @@
             <div class="col-md-12">
                 <table class="table table-sm" width="90%">
                     <tr>
-                        <th colspan="3" width="10%">NAMA SEKOLAH</th>
+                        <th colspan="3" width="13%">NAMA SEKOLAH</th>
                         <th width="1%">:</th>
                         <th colspan="2" width="50%">
                             @foreach($pengaturan as $item)
