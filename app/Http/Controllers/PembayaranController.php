@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Siswa, Jenisbayar, Tp, Pembayaran};
+use App\Models\{Siswa, Jenisbayar, Tp, Pembayaran, Riwayatbayar};
 
 class PembayaranController extends Controller
 {
@@ -37,8 +37,17 @@ class PembayaranController extends Controller
                 'sisa_bayar'    => $jenisBayars[$i]->biaya-($req->bayar[$i]+$req->potongan[$i]),
                 'status'        => $jenisBayars[$i]->biaya==$req->bayar[$i]+$req->potongan[$i] ? 'lunas' : 'belum lunas',
             ]);
+
+            if($req->bayar[$i] > 0){
+                Riwayatbayar::create([
+                    'pembayaran_id'     => $bayar->id,
+                    'tgl'               => date('Y-m-d'),
+                    'jumlah_bayar'      => $req->bayar[$i]
+                ]);
+            }
         }
-        return redirect()->back();
+        return redirect()->back()->with('cetak',route('pembayaran-cetak', ['id' => $req->siswaId, 'bayar' => $req->uangBayar]));
+
     }
     public function edit(Request $req){
         $jenisBayars = Jenisbayar::whereIn('id', $req->idjenisbayar)->get();
@@ -49,8 +58,26 @@ class PembayaranController extends Controller
             $pembayaran->sisa_bayar     = $pembayaran->sisa_bayar-($req->bayar[$i]+$req->potongan[$i]);
             $pembayaran->status         = ($jenisBayars[$i]->biaya == $pembayaran->total_bayar+$pembayaran->potongan) ? 'lunas' : 'belum lunas';
             $pembayaran->save();
+
+            if($req->bayar[$i] > 0){
+                Riwayatbayar::create([
+                    'pembayaran_id'     => $req->idpembayaran[$i],
+                    'tgl'               => date('Y-m-d'),
+                    'jumlah_bayar'      => $req->bayar[$i]
+                ]);
+            }
+
         }
         // dd($pembayaran);
-        return redirect()->back();
+        return redirect()->back()->with('cetak',route('pembayaran-cetak', ['id' => $req->siswaId, 'bayar' => $req->uangBayar]));
+    }
+
+    public function cetak($id, $bayar){
+        $siswa = Siswa::with(['pembayarans' => function($query){
+            $query->whereDate('updated_at', date('Y-m-d'));
+            $query->where('total_bayar','!=', 0);
+        }])->find($id);
+        return view('admin.pembayaran.cetak', compact('siswa','bayar'));
     }
 }
+ 

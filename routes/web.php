@@ -156,6 +156,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/pembayaran/tambah/{siswa:id}', PembayaranController::class.'@form')->name('pembayaran-form');
     Route::post('/admin/pembayaran/store', PembayaranController::class.'@store')->name('pembayaran-store');
     Route::post('/admin/pembayaran/edit', PembayaranController::class.'@edit')->name('pembayaran-edit');
+    Route::get('/admin/pembayaran/cetak/{id}/{bayar}', PembayaranController::class.'@cetak')->name('pembayaran-cetak');
 
     // Ajax Routing
     Route::post('/ajax/get/siswa/all', AjaxController::class.'@siswaAll')->name('ajax-siswa-all');

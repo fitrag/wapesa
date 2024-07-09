@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class AjaxController extends Controller
 {
     public function siswaAll(Request $req){
-        $siswas = Siswa::where('nis','like', '%'.$req->keyword.'%')->orWhere('nm_siswa','like', '%'.$req->keyword.'%')->get();
+        $siswas = Siswa::with('kelas')->where('nis','like', '%'.$req->keyword.'%')->orWhere('nm_siswa','like', '%'.$req->keyword.'%')->get();
         return json_encode($siswas);
     }
 
