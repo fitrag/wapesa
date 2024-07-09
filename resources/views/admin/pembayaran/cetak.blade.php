@@ -12,19 +12,19 @@
 		} else if ($nilai < 100) {
 			$temp = penyebut($nilai/10)." puluh". penyebut($nilai % 10);
 		} else if ($nilai < 200) {
-			$temp = " seratus" . penyebut($nilai - 100);
+			$temp = " seratus rupiah" . penyebut($nilai - 100);
 		} else if ($nilai < 1000) {
 			$temp = penyebut($nilai/100) . " ratus" . penyebut($nilai % 100);
 		} else if ($nilai < 2000) {
-			$temp = " seribu" . penyebut($nilai - 1000);
+			$temp = " seribu rupiah" . penyebut($nilai - 1000);
 		} else if ($nilai < 1000000) {
-			$temp = penyebut($nilai/1000) . " ribu" . penyebut($nilai % 1000);
+			$temp = penyebut($nilai/1000) . " ribu rupiah" . penyebut($nilai % 1000);
 		} else if ($nilai < 1000000000) {
-			$temp = penyebut($nilai/1000000) . " juta" . penyebut($nilai % 1000000);
+			$temp = penyebut($nilai/1000000) . " juta rupiah" . penyebut($nilai % 1000000);
 		} else if ($nilai < 1000000000000) {
-			$temp = penyebut($nilai/1000000000) . " milyar" . penyebut(fmod($nilai,1000000000));
+			$temp = penyebut($nilai/1000000000) . " milyar rupiah" . penyebut(fmod($nilai,1000000000));
 		} else if ($nilai < 1000000000000000) {
-			$temp = penyebut($nilai/1000000000000) . " trilyun" . penyebut(fmod($nilai,1000000000000));
+			$temp = penyebut($nilai/1000000000000) . " trilyun rupiah" . penyebut(fmod($nilai,1000000000000));
 		}     
 		return $temp;
 	}
