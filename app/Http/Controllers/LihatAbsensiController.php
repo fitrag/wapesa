@@ -55,8 +55,7 @@ class LihatAbsensiController extends Controller
                         ->groupBy('absensis.nis','siswas.nm_siswa','absensis.kelas_id')
                         ->get();
         
-        // $nis = $data->nis; 
-        // dd($nis);
+        
         foreach ($data as $datas) {
             $nis = $datas->nis;
             $tgl = Absensi::select('created_at')
@@ -67,6 +66,7 @@ class LihatAbsensiController extends Controller
                     ->whereBetween('absensis.created_at',[$tgl_awal.' 00:00:00', $tgl_akhir.' 23:59:59'])
                     ->groupBy('absensis.created_at','absensis.hadir')
                     ->get();
+            
         
             $jmltgl = Absensi::select('created_at')
                     ->where([
@@ -77,15 +77,27 @@ class LihatAbsensiController extends Controller
                     ->groupBy('absensis.created_at','absensis.hadir')
                     ->count();
 
+                    $walas = Guru::select('gurus.nm_guru')
+                            ->join('wali_kelas','gurus.user_id','wali_kelas.user_id')
+                            ->where('wali_kelas.kelas_id','=', $id_kls)
+                            ->first();
+            if(count($tgl))
+            {
+                return view('admin.lihat-absensi.tampil_absen_tgl', compact('data','tgl','tgl_awal','tgl_akhir','jmltgl','id_kls','walas'));
+
+            }   
+            else
+            {
+                   
+            }     
+                    
                     
         }
-                // dd($tgl);
-            $walas = Guru::select('gurus.nm_guru')
-                    ->join('wali_kelas','gurus.user_id','wali_kelas.user_id')
-                    ->where('wali_kelas.kelas_id','=', $id_kls)
-                    ->first();
+
         
-        return view('admin.lihat-absensi.tampil_absen_tgl', compact('data','tgl','tgl_awal','tgl_akhir','jmltgl','id_kls','walas'));
+
+        
+        
         
     }
 

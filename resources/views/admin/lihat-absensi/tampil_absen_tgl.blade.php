@@ -16,14 +16,15 @@
 <style type="text/css">
         
         table tr th{
-            font-size: 10pt;
+            font-size: 11pt;
             text-align: center;
             vertical-align: middle;
-            font-family:'Arial Narow OS';
+            vertical-align:middle;
+            font-family:"Arial Narrow", Arial, sans-serif;
         }
         table td{
-            font-size: 10pt;
-            font-family:'Arial Narow OS';
+            font-size: 11pt;
+            font-family:"Arial Narrow", Arial, sans-serif;
         }
     </style>
     @php
@@ -32,30 +33,42 @@
         ->get();
         
     @endphp
-    <center>
-        <h5>SMK NEGERI 1 WAY PENGUBUAN</h5>
-        <h5>LAPORAN DATA ABSENSI
-         @foreach($kls as $item)  
-            KELAS: {{$item->nm_kls}}</h5>
-         @endforeach
-    </center>
-   <strong>Tanggal : {{ date('d-M-Y', strtotime($tgl_awal))}} s.d {{ date('d-M-Y', strtotime($tgl_akhir))}}</strong> 
-    <table id="example1" class="table table-striped table-bordered " width="90%">
+    <div class="text-center">
+        <img src="{{asset('img/kop.png')}}" alt="" srcset="">
+        <br>
+        <h5>LAPORAN DATA ABSENSI</h5>
+        <h5><p>
+            @foreach($kls as $item)  
+                KELAS: {{$item->nm_kls}}
+            @endforeach
+        </p>
+        </h5>
+    </div>
+    
+    
+   <h5><strong>Periode Tanggal : {{ date('d-M-Y', strtotime($tgl_awal))}} s/d {{ date('d-M-Y', strtotime($tgl_akhir))}}</strong> </h5>
+  
+    <table id="example1" class="table table-striped table-bordered table-sm" width="90%">
         <thead>
             <tr>
-                <th rowspan="3">No.</th>
-                <th rowspan="3">NIS</th>
-                <th rowspan="3">Nama</th>
+                <th rowspan="3" width="4%">No.</th>
+                <th rowspan="3" width="8%">NIS</th>
+                <th rowspan="3" width="18%">Nama</th>
             </tr>
+           
             <tr>  
-                <th colspan="{{ count($tgl) }}">Tanggal</th>
+                <th colspan="{{ count($tgl) }}">Hari/Tanggal</th>
                 <th colspan="5">Jumlah</th>
                 <th rowspan="2">Total</th>
            
             </tr>
+            
             <tr>
                 @foreach($tgl as $tampil)
-                <th>{{date('d/m', strtotime($tampil->created_at))}}</th>
+                    <th>
+                        {{ Carbon\Carbon::parse($tampil->created_at)->isoFormat('dd') }}/
+                        {{date('d/m', strtotime($tampil->created_at))}}
+                    </th>
                 @endforeach
                 <th>H</th>
                 <th>S</th>
@@ -63,13 +76,14 @@
                 <th>A</th>
                 <th>AL</th>
             </tr>
+            
         </thead>
         <tbody>
             @foreach ($data as $item)
                 
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->nis }}</td>
+                    <td class="text-center">{{ $loop->iteration }}</td>
+                    <td class="text-center">{{ $item->nis }}</td>
                     <td>{{ $item->nm_siswa }}</td>
                     @php
                     $tgl = App\Models\Absensi::select('created_at','hadir')
@@ -90,7 +104,7 @@
                             @elseif ($tanggal->hadir=='i')
                                 <span class="badge bg-warning">I</span>
                             @elseif ($tanggal->hadir=='s')
-                                <span class="badge bg-info">I</span>
+                                <span class="badge bg-info">S</span>
                             @else
                                 <strong>{{$tanggal->hadir}}</strong>
                             
@@ -111,7 +125,7 @@
                         $prosentase = ($hadir/$total_tgl) * 100;
 
                         @endphp
-                            <strong><span class="badge bg-success">{{ round($prosentase) }}% </span></strong> 
+                            <strong><span class="">{{ round($prosentase) }}% </span></strong> 
                     </td>
                     <td class="text-center">
                         @php
@@ -125,7 +139,7 @@
                         ->count();
                         @endphp
 
-                        <span class="badge bg-info">{{ $hadir }}</span>
+                        <span class="">{{ $hadir }}</span>
                     </td>
                     <td class="text-center">
                         @php
@@ -139,7 +153,7 @@
                         ->count();
                         @endphp
 
-                        <span class="badge bg-warning">{{ $hadir }}</span>
+                        <span class="">{{ $hadir }}</span>
                     </td>
                     <td class="text-center">
                         @php
@@ -153,7 +167,7 @@
                         ->count();
                         @endphp
 
-                        <span class="badge bg-danger">{{ $hadir }}</span> 
+                        <span class="">{{ $hadir }}</span> 
                     </td>
                     <td class="text-center">
                         @php
@@ -167,7 +181,7 @@
                         ->count();
                         @endphp
 
-                        <strong><span class="badge bg-secondary">{{ $hadir }}</span></strong>
+                        <strong><span class="">{{ $hadir }}</span></strong>
                     </td>
                     <td class="text-center">
                         @php
@@ -199,7 +213,7 @@
                         $total = $s+$i+$a;
                         @endphp
 
-                        <strong><span class="badge bg-primary">{{ $total }}</span></strong>
+                        <strong><span class="">{{ $total }}</span></strong>
                     </td>
                 </tr>
             @endforeach
