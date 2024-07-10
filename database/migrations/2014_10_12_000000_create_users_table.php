@@ -20,6 +20,8 @@ return new class extends Migration
             $table->enum('level',['admin','guru','siswa']);
             $table->boolean('is_walas')->default(0);
             $table->boolean('is_gurupiket')->default(0);
+            $table->boolean('is_bendahara')->default(0);
+            $table->boolean('is_kepsek')->default(0);
             $table->boolean('is_active')->default(1);
             $table->timestamps();
         });

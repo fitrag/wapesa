@@ -62,6 +62,7 @@
                     <select id="level" type="level" class="form-control" name="level" tabindex="1" required>
                         <option value="">-- Pilih level user --</option>
                         <option value="admin" {{ $user->level == 'admin' ? 'selected' : '' }}>Admin</option>
+                        <option value="siswa" {{ $user->level == 'siswa' ? 'selected' : '' }}>Siswa</option>
                         <option value="guru" {{ $user->level == 'guru' ? 'selected' : '' }}>Guru</option>
                     </select>
                     @error('level')
@@ -100,7 +101,23 @@
                       <label class="custom-control-label" for="guruPiket2">Iya</label>
                     </div>
                     <div class="invalid-feedback">
-                      Mohon di isi walas anda
+                      Mohon di isi status guru piket
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="d-block">
+                    	<label for="status" class="control-label">Status Akun</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" id="status1" name="is_active" value="0" class="custom-control-input" {{ $user->is_active == '0' ? 'checked' : '' }} required>
+                      <label class="custom-control-label" for="status1">Tidak aktif</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                      <input type="radio" id="status2" name="is_active" value="1" class="custom-control-input" {{ $user->is_active == '1' ? 'checked' : '' }} required>
+                      <label class="custom-control-label" for="status2">Aktif</label>
+                    </div>
+                    <div class="invalid-feedback">
+                      Mohon di isi status akun
                     </div>
                   </div>
 

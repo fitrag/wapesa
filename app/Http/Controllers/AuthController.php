@@ -19,7 +19,11 @@ class AuthController extends Controller
 
         if(Auth::attempt($credentials)){
             $req->session()->regenerate();
-            return redirect()->route('dashboard');
+            if(auth()->user()->level != 'siswa'){
+                return redirect()->route('dashboard');
+            }else{
+                return redirect()->route('siswa-dashboard');
+            }
         }
 
         return back()->with('error', 'Akun tidak ditemukan, silahkan hubungi administrator');

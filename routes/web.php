@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, GuruAjarController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, JurnalGuruController, LihatAbsensiController, SinkronisasiController, PengaturanController, WaliKelasController, PembayaranController, AjaxController, MapelController};
+use App\Http\Controllers\Siswa\SiswaController as Siswa;
 
 /*
 |--------------------------------------------------------------------------
@@ -161,6 +162,12 @@ Route::middleware(['auth'])->group(function () {
     // Ajax Routing
     Route::post('/ajax/get/siswa/all', AjaxController::class.'@siswaAll')->name('ajax-siswa-all');
     Route::post('/ajax/total', AjaxController::class.'@total')->name('ajax-total');
+
+    // Route Siswa Dashboard
+    Route::get('/siswa/dashboard', Siswa::class.'@index')->name('siswa-dashboard');
+    Route::get('/siswa/absensi', Siswa::class.'@absensi')->name('siswa-absensi');
+    Route::get('/siswa/pembayaran', Siswa::class.'@pembayaran')->name('siswa-pembayaran');
+    Route::get('/siswa/pembayaran/{id}/detail', Siswa::class.'@detailPembayaran')->name('siswa-detail-pembayaran');
 });
 
 Route::get('/qrcode', IndexController::class.'@qrcode');

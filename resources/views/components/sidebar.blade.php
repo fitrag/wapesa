@@ -4,7 +4,11 @@
     </div>
     <ul class="sidebar-menu">
         <li class="menu-header">Dashboard</li>
+        @if(auth()->user()->level != 'siswa')
         <li class="{{ request()->is('admin/dashboard') ? 'active' : '' }}"><a class="nav-link" href="{{ route('dashboard') }}"><i class="far fa-square"></i> <span>Dashboard</span></a></li>
+        @else
+        <li class="{{ request()->is('siswa/dashboard') ? 'active' : '' }}"><a class="nav-link" href="{{ route('siswa-dashboard') }}"><i class="far fa-square"></i> <span>Dashboard</span></a></li>
+        @endif
         @if(auth()->user()->level == 'admin')
         <li class="menu-header">Data Master</li>
         <li class="{{ request()->is('admin/user*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.user') }}"><i class="fas fa-users"></i> <span>Data User</span></a></li>
@@ -56,7 +60,7 @@
         
         
         @endif
-        @if(auth()->user()->level == 'guru')
+        @if(auth()->user()->level == 'guru' AND !auth()->user()->is_kepsek AND !auth()->user()->is_bendahara)
             
         @if(auth()->user()->is_walas AND auth()->user()->wali_kelass()->latest()->first())
             <li class="menu-header">Data</li>
@@ -65,13 +69,12 @@
 
             <li class="menu-header">Absensi</li>
             <li class="{{ request()->is('admin/absensi/scan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('scan-absensi') }}"><i class="fas fa-qrcode"></i> <span>Scan Kartu</span></a></li>
-        
-            <li class="menu-header">Jurnal</li>
-            <li class="{{ request()->is('admin/jurnal-guru') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.jurnal-guru') }}"><i class="fas fa-book"></i> <span>Jurnal Mengajar</span></a></li>
-            <li class="{{ request()->is('admin/absensi/tambah') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-tambah') }}"><i class="fas fa-fingerprint"></i> <span>Absensi Siswa</span></a></li>
             @if(auth()->user()->is_gurupiket)
                 <li class="{{ request()->is('admin/absensi/tambah') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-tambah') }}"><i class="fas fa-fingerprint"></i> <span>Tambah Absensi</span></a></li>
             @endif
+
+            
+            
         
             @if(auth()->user()->is_walas AND auth()->user()->wali_kelass()->latest()->first())
                 <li class="dropdown {{ request()->is('admin/absensi/harian') || request()->is('admin/absensi/bulanan') || request()->is('admin/absensi/tahun-pelajaran') ? 'active' : '' }}">
@@ -90,8 +93,25 @@
                     </ul>
                 </li>
             @endif
+            
+            <li class="menu-header">Jurnal</li>
+            <li class="{{ request()->is('admin/jurnal-guru') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.jurnal-guru') }}"><i class="fas fa-book"></i> <span>Jurnal Mengajar</span></a></li>
+            <!-- <li class="{{ request()->is('admin/absensi/tambah') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-tambah') }}"><i class="fas fa-fingerprint"></i> <span>Absensi Siswa</span></a></li> -->
+            
 
-        @endif
+            @endif
+            @if(auth()->user()->is_bendahara)
+                <li class="menu-header">Pembayaran</li>
+                <li class="{{ request()->is('admin/pembayaran/tambah') || request()->is('admin/pembayaran/tambah/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('pembayaran-tambah') }}"><i class="fas fa-credit-card"></i> <span>Tambah Pembayaran</span></a></li>
+            @endif
+
+            @if(auth()->user()->level == 'siswa')
+                <li class="menu-header">Absensi</li>
+                <li class="{{ request()->is('siswa/absensi*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('siswa-absensi') }}"><i class="fas fa-qrcode"></i> <span>Lihat Absensi</span></a></li>
+
+                <li class="menu-header">Pembayaran</li>
+                <li class="{{ request()->is('siswa/pembayaran*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('siswa-pembayaran') }}"><i class="fas fa-credit-card"></i> <span>Lihat Pembayaran</span></a></li>
+            @endif
     </ul>
 
     <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
