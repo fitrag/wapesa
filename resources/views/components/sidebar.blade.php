@@ -41,6 +41,9 @@
             </ul>
         </li>
 
+        <li class="menu-header">Prakerin</li>
+        <li class="{{ request()->is('admin/prakerin*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('admin.prakerin') }}"><i class="fas fa-home"></i> <span>Tempat Prakerin</span></a></li>
+
         <li class="menu-header">Pembayaran</li>
         <li class="{{ request()->is('admin/pembayaran/tambah') || request()->is('admin/pembayaran/tambah/*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('pembayaran-tambah') }}"><i class="fas fa-credit-card"></i> <span>Tambah Pembayaran</span></a></li>
 
@@ -72,9 +75,6 @@
             @if(auth()->user()->is_gurupiket)
                 <li class="{{ request()->is('admin/absensi/tambah') ? 'active' : '' }}"><a class="nav-link" href="{{ route('absensi-tambah') }}"><i class="fas fa-fingerprint"></i> <span>Tambah Absensi</span></a></li>
             @endif
-
-            
-            
         
             @if(auth()->user()->is_walas AND auth()->user()->wali_kelass()->latest()->first())
                 <li class="dropdown {{ request()->is('admin/absensi/harian') || request()->is('admin/absensi/bulanan') || request()->is('admin/absensi/tahun-pelajaran') ? 'active' : '' }}">

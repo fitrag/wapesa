@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, GuruAjarController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, JurnalGuruController, LihatAbsensiController, SinkronisasiController, PengaturanController, WaliKelasController, PembayaranController, AjaxController, MapelController};
+use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, GuruAjarController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, JurnalGuruController, LihatAbsensiController, SinkronisasiController, PengaturanController, WaliKelasController, PembayaranController, AjaxController, MapelController, PrakerinController};
 use App\Http\Controllers\Siswa\SiswaController as Siswa;
 
 /*
@@ -76,6 +76,8 @@ Route::middleware(['auth'])->group(function () {
     // Ajax Data Siswa
     Route::get('/admin/siswa-ajax', IndexController::class.'@siswaAjax')->name('siswa-ajax');
     Route::get('/admin/user-ajax', IndexController::class.'@userAjax')->name('user-ajax');
+    Route::get('/admin/prakerin-ajax', IndexController::class.'@prakerinAjax')->name('prakerin-ajax');
+    Route::get('/admin/siswa-prakerin-ajax', IndexController::class.'@siswaPrakerinAjax')->name('siswa-prakerin-ajax');
 
 
     // Data Kelas
@@ -168,6 +170,21 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/siswa/absensi', Siswa::class.'@absensi')->name('siswa-absensi');
     Route::get('/siswa/pembayaran', Siswa::class.'@pembayaran')->name('siswa-pembayaran');
     Route::get('/siswa/pembayaran/{id}/detail', Siswa::class.'@detailPembayaran')->name('siswa-detail-pembayaran');
+
+    // Prakerin
+    Route::get('/admin/prakerin', PrakerinController::class.'@index')->name('admin.prakerin');
+    Route::post('/admin/prakerin', PrakerinController::class.'@store')->name('admin.prakerin.store');
+    Route::get('/admin/prakerin/{prakerin:id}/edit', PrakerinController::class.'@edit')->name('admin.prakerin.edit');
+    Route::put('/admin/prakerin/{prakerin:id}/update', PrakerinController::class.'@update')->name('admin.prakerin.update');
+    Route::get('/admin/prakerin/{prakerin:id}/delete', PrakerinController::class.'@destroy')->name('admin.prakerin.delete-ajax');
+    Route::get('/admin/prakerin/{prakerin:id}/tambah-siswa', PrakerinController::class.'@tambahSiswa')->name('admin.prakerin.tambah-siswa');
+
+    Route::get('/admin/prakerin/siswa-prakerin', PrakerinController::class.'@siswaPrakerin')->name('admin.prakerin.siswa-prakerin');
+
+    // Prakerin Ajax
+    Route::post('/admin/prakerin/tambah-siswa', PrakerinController::class.'@tambahSiswaAjax')->name('admin.prakerin.tambahSiswaAjax');
+    Route::post('/admin/prakerin/siswa-prakerin/delete', PrakerinController::class.'@siswaPrakerinHapusAjax')->name('admin.prakerin.siswa-prakerin-hapus-ajax');
+    
 });
 
 Route::get('/qrcode', IndexController::class.'@qrcode');

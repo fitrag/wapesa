@@ -37,10 +37,11 @@
                     document.getElementById('hasil').innerHTML = 'Data tidak ditemukan'
                     document.getElementById('nama').innerHTML = 'Data tidak ditemukan'
                 }else{
-                    $('#errorAlert').addClass('d-none')
+                    $('#gagalAlert').addClass('d-none')
                     $('#berhasilAlert').addClass('d-none')
-                    $('#gagalAlert').removeClass('d-none')
+                    $('#errorAlert').removeClass('d-none')
                     $('#nis').val('')
+                    $('#errorAlert').html('Sudah absen')
                     sudahAudio();
                     document.getElementById('hasil').innerHTML = 'Sudah absen'
                     document.getElementById('nama').innerHTML = 'Sudah absen'
@@ -136,10 +137,11 @@
                         document.getElementById('hasil').innerHTML = 'Data tidak ditemukan'
                         document.getElementById('nama').innerHTML = 'Data tidak ditemukan'
                     }else{
-                        $('#errorAlert').addClass('d-none')
+                        $('#gagalAlert').addClass('d-none')
                         $('#berhasilAlert').addClass('d-none')
-                        $('#gagalAlert').removeClass('d-none')
+                        $('#errorAlert').removeClass('d-none')
                         $('#nis').val('')
+                        $('#errorAlert').html('Sudah absen')
                         sudahAudio();
                         document.getElementById('hasil').innerHTML = 'Sudah absen'
                         document.getElementById('nama').innerHTML = 'Sudah absen'
