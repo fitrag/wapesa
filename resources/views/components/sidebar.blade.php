@@ -107,7 +107,10 @@
 
             @if(auth()->user()->level == 'siswa')
                 <li class="menu-header">Absensi</li>
-                <li class="{{ request()->is('siswa/absensi*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('siswa-absensi') }}"><i class="fas fa-qrcode"></i> <span>Lihat Absensi</span></a></li>
+                @if(\App\Models\Pengaturan::find(1)->siswa_absen AND \App\Models\Pengaturan::find(1)->kelas_absen == auth()->user()->siswa->kelas->alias)
+                    <li class="{{ request()->is('siswa/absensi/scan') ? 'active' : '' }}"><a class="nav-link" href="{{ route('siswa-scan-absensi') }}"><i class="fas fa-qrcode"></i> <span>Scan Kartu</span></a></li>
+                @endif
+                    <li class="{{ request()->is('siswa/absensi') ? 'active' : '' }}"><a class="nav-link" href="{{ route('siswa-absensi') }}"><i class="fas fa-qrcode"></i> <span>Lihat Absensi</span></a></li>
 
                 <li class="menu-header">Pembayaran</li>
                 <li class="{{ request()->is('siswa/pembayaran*') ? 'active' : '' }}"><a class="nav-link" href="{{ route('siswa-pembayaran') }}"><i class="fas fa-credit-card"></i> <span>Lihat Pembayaran</span></a></li>

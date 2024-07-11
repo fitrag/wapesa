@@ -61,6 +61,27 @@
                                             <label for="" class="form-label">Alamat Sekolah</label>
                                             <textarea name="alamat_sekolah" class="form-control">{{ $pengaturan?->alamat_sekolah }}</textarea>
                                         </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Fitur Absen di Dashboard Siswa?</label>
+                                            <select name="absen_siswa" id="" class="form-control">
+                                                <option value="">-- Pilih --</option>
+                                                <option value="0" {{ !$pengaturan?->kelas_absen ? 'selected' : '' }}>Tidak aktif</option>
+                                                <option value="1" {{ $pengaturan?->kelas_absen ? 'selected' : '' }}>Aktif</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Kelas berapa yang bisa absen?</label>
+                                            <select name="kelas_absen" id="" class="form-control">
+                                                <option value="">-- Pilih Kelas --</option>
+                                                <option value="X" {{ $pengaturan?->kelas_absen == 'X' ? 'selected' : '' }}>X</option>
+                                                <option value="XI" {{ $pengaturan?->kelas_absen == 'XI' ? 'selected' : '' }}>XI</option>
+                                                <option value="XII" {{ $pengaturan?->kelas_absen == 'XII' ? 'selected' : '' }}>XII</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Radius absensi</label>
+                                            <input type="text" name="radius" value="{{ $pengaturan?->radius }}" class="form-control">
+                                        </div>
                                         <input type="submit" value="Simpan" class="btn btn-primary w-100">
                                     </div>
                                     <div class="col-lg-6 mb-4">
@@ -95,7 +116,7 @@
                         </form>
                       </div>
                       <div class="tab-pane fade" id="contact3" role="tabpanel" aria-labelledby="contact-tab3">
-                        Coming Soon
+                        Comingsoon
                       </div>
                 </div>
             </div>

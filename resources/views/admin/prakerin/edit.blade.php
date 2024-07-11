@@ -8,6 +8,21 @@
 <script src="{{ asset('modules/jquery-ui/jquery-ui.min.js') }}"></script>
 
 <script src="{{ asset('js/page/modules-datatables.js') }}"></script>
+
+<script>
+  function deteksiLokasi() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(lihatPosisi);
+        } else { 
+            x.innerHTML = "Browser tidak support GPS";
+        }
+    }
+
+    function lihatPosisi(posisi){
+        $('#latitude').val(posisi.coords.latitude)
+        $('#longitude').val(posisi.coords.longitude)
+    }
+</script>
 @endpush
 
 @section('content')
