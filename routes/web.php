@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, GuruAjarController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, JurnalGuruController, LihatAbsensiController, SinkronisasiController, PengaturanController, WaliKelasController, PembayaranController, AjaxController, MapelController, PrakerinController};
+use App\Http\Controllers\{IndexController, AuthController, UserController, AbsensiController, GuruAjarController, SiswaController, JenisBayarController, KelasController, TpController, GuruController, JurnalGuruController, LihatAbsensiController, SinkronisasiController, PengaturanController, WaliKelasController, PembayaranController, AjaxController, MapelController, PrakerinController, JadwalSekolahController};
 use App\Http\Controllers\Siswa\SiswaController as Siswa;
 
 /*
@@ -189,6 +189,13 @@ Route::middleware(['auth'])->group(function () {
     // Prakerin Ajax
     Route::post('/admin/prakerin/tambah-siswa', PrakerinController::class.'@tambahSiswaAjax')->name('admin.prakerin.tambahSiswaAjax');
     Route::post('/admin/prakerin/siswa-prakerin/delete', PrakerinController::class.'@siswaPrakerinHapusAjax')->name('admin.prakerin.siswa-prakerin-hapus-ajax');
+
+    // Jadwal Sekolah
+    Route::get('/admin/jadwal-sekolah', JadwalSekolahController::class.'@index')->name('admin.jadwal-sekolah');
+    Route::get('/admin/jadwal-sekolah/ajax', JadwalSekolahController::class.'@indexAjax')->name('admin.jadwal-sekolah.ajax');
+    Route::post('/admin/jadwal-sekolah/store', JadwalSekolahController::class.'@store')->name('admin.jadwal-sekolah.store');
+    Route::post('/admin/jadwal-sekolah/update', JadwalSekolahController::class.'@update')->name('admin.jadwal-sekolah.update');
+    Route::get('/admin/jadwal-sekolah/{id}/delete', JadwalSekolahController::class.'@destroy')->name('admin.jadwal-sekolah.delete');
     
 });
 

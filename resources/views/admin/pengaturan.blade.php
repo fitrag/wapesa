@@ -63,10 +63,10 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="" class="form-label">Fitur Absen di Dashboard Siswa?</label>
-                                            <select name="absen_siswa" id="" class="form-control">
+                                            <select name="siswa_absen" id="" class="form-control">
                                                 <option value="">-- Pilih --</option>
-                                                <option value="0" {{ !$pengaturan?->kelas_absen ? 'selected' : '' }}>Tidak aktif</option>
-                                                <option value="1" {{ $pengaturan?->kelas_absen ? 'selected' : '' }}>Aktif</option>
+                                                <option value="0" {{ !$pengaturan?->siswa_absen ? 'selected' : '' }}>Tidak aktif</option>
+                                                <option value="1" {{ $pengaturan?->siswa_absen ? 'selected' : '' }}>Aktif</option>
                                             </select>
                                         </div>
                                         <div class="mb-3">

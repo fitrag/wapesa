@@ -32,7 +32,7 @@ class PengaturanController extends Controller
                 'npsn'                  => $req->npsn,
                 'alamat_sekolah'        => $req->alamat_sekolah,
                 'kelas_absen'           => $req->kelas_absen,
-                'absen_siswa'           => $req->absen_siswa,
+                'siswa_absen'           => $req->siswa_absen,
                 'radius'                => $req->radius,
             ]);
         }
