@@ -7,10 +7,10 @@ return [
         'short_name' => 'SS',
         'start_url' => '/',
         'background_color' => '#ffffff',
-        'theme_color' => '#000000',
+        'theme_color' => '#6777ef',
         'display' => 'standalone',
         'orientation'=> 'any',
-        'status_bar'=> 'black',
+        'status_bar'=> '#6777ef',
         'icons' => [
             '72x72' => [
                 'path' => '/images/icons/icon-72x72.png',
