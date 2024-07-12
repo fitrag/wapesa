@@ -12,7 +12,7 @@
 
         <div class="section-body">
             <div class="row">
-            <div class="col-md-7">
+                <div class="col-md-7">
                     <div class="card card-hero">
                         <div class="card-header" style="background:linear-gradient(to top, #ff8d00, #fff700) !important">
                         <div class="card-icon" style="color:#f1f38c !important">
@@ -45,49 +45,77 @@
                     </div>
 
                     <div class="card">
-                <div class="card-header">
-                  <h4>Pembayaran Sekolah</h4>
-                  <div class="card-header-action">
-                    <a href="{{ route('siswa-pembayaran') }}" class="btn btn-danger">Selengkapnya <i class="fas fa-chevron-right"></i></a>
-                  </div>
-                </div>
-                <div class="card-body p-0">
-                    <div class="table-responsive table-invoice">
-                        <table class="table table-striped">
-                        <tbody><tr>
-                            <th>Jenis</th>
-                            <th>Nominal</th>
-                            <th>Sudah bayar</th>
-                            <th>Status</th>
-                        </tr>
-                        @if(!auth()->user()->siswa->pembayarans->isEmpty())
-                            @foreach(auth()->user()->siswa->pembayarans as $pembayaran)
-                            <tr>
-                                <td>{{ $pembayaran->jenisbayar->nm_jenis }}</td>
-                                <td>Rp {{ number_format($pembayaran->jenisbayar->biaya,0, ',','.') }}</td>
-                                <td>Rp {{ number_format($pembayaran->total_bayar,0, ',','.') }}</td>
-                                @if($pembayaran->status == 'lunas')
-                                    <td><div class="badge badge-success">Lunas</div></td>
-                                @else
-                                    <td><div class="badge badge-warning">Belum lunas</div></td>
-                                @endif
-                            </tr>
-                            @endforeach
-                        @elseif(auth()->user()->siswa->pembayarans->isEmpty())
+                        <div class="card-header">
+                        <h4>Jadwal Pelajaran Hari {{ \Carbon\Carbon::parse(date('Y-m-d'))->isoFormat('dddd') }}</h4>
+                        <div class="card-header-action">
+                            <!-- <a href="{{ route('siswa-pembayaran') }}" class="btn btn-danger">Selengkapnya <i class="fas fa-chevron-right"></i></a> -->
+                        </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-invoice">
+                                <table class="table table-striped">
+                                <tbody><tr>
+                                    <th>No</th>
+                                    <th>Mata Pelajaran</th>
+                                </tr>
+                                @forelse($jadwals as $jadwal)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $jadwal->mapel->nm_mapel }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td class="text-center" colspan="2">Belum ada data</td>
+                                    </tr>
+                                @endforelse
+                                </tbody></table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                        <h4>Pembayaran Sekolah</h4>
+                        <div class="card-header-action">
+                            <a href="{{ route('siswa-pembayaran') }}" class="btn btn-danger">Selengkapnya <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive table-invoice">
+                                <table class="table table-striped">
+                                <tbody><tr>
+                                    <th>Jenis</th>
+                                    <th>Nominal</th>
+                                    <th>Sudah bayar</th>
+                                    <th>Status</th>
+                                </tr>
+                                @if(!auth()->user()->siswa->pembayarans->isEmpty())
+                                    @foreach(auth()->user()->siswa->pembayarans as $pembayaran)
+                                    <tr>
+                                        <td>{{ $pembayaran->jenisbayar->nm_jenis }}</td>
+                                        <td>Rp {{ number_format($pembayaran->jenisbayar->biaya,0, ',','.') }}</td>
+                                        <td>Rp {{ number_format($pembayaran->total_bayar,0, ',','.') }}</td>
+                                        @if($pembayaran->status == 'lunas')
+                                            <td><div class="badge badge-success">Lunas</div></td>
+                                        @else
+                                            <td><div class="badge badge-warning">Belum lunas</div></td>
+                                        @endif
+                                    </tr>
+                                    @endforeach
+                                @elseif(auth()->user()->siswa->pembayarans->isEmpty())
 
-                            @foreach($jenis_bayars as $jenis_bayar)
-                            <tr>
-                                <td>{{ $jenis_bayar->nm_jenis }}</td>
-                                <td>Rp {{ number_format($jenis_bayar->biaya,0, ',','.') }}</td>
-                                <td>Rp 0</td>
-                                <td><div class="badge badge-warning">Belum lunas</div></td>
-                            </tr>
-                            @endforeach
-                        @endif
-                        </tbody></table>
+                                    @foreach($jenis_bayars as $jenis_bayar)
+                                    <tr>
+                                        <td>{{ $jenis_bayar->nm_jenis }}</td>
+                                        <td>Rp {{ number_format($jenis_bayar->biaya,0, ',','.') }}</td>
+                                        <td>Rp 0</td>
+                                        <td><div class="badge badge-warning">Belum lunas</div></td>
+                                    </tr>
+                                    @endforeach
+                                @endif
+                                </tbody></table>
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                </div>
                 </div> 
                 <div class="col-md-5">
                     <div class="card card-hero">

@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{Siswa, Absensi, Pembayaran, Tp};
+use App\Models\{Siswa, Absensi, Pembayaran, Tp, JadwalSekolah};
+use Carbon\Carbon;
 
 class SiswaController extends Controller
 {
     public function index(){
+        $jadwals = JadwalSekolah::whereKelasId(auth()->user()->siswa->kelas_id)->whereHari(Carbon::parse(date('Y-m-d'))->isoFormat('dddd'))->orderBy('updated_at')->get();
         $absensis = Absensi::with(['siswa'])->whereSiswaId(auth()->user()->siswa->id)->latest()->limit(5)->get();
-        return view('siswa.dashboard', compact('absensis'));
+        return view('siswa.dashboard', compact('absensis','jadwals'));
     }
     public function absensi(Request $req){
         if($req->bulan){
