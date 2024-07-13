@@ -31,6 +31,9 @@ class PengaturanController extends Controller
                 'nama_sekolah'          => $req->nama_sekolah,
                 'npsn'                  => $req->npsn,
                 'alamat_sekolah'        => $req->alamat_sekolah,
+                'kelas_absen'           => $req->kelas_absen,
+                'siswa_absen'           => $req->siswa_absen,
+                'radius'                => $req->radius,
             ]);
         }
         if($update){

@@ -82,7 +82,6 @@
               <div class="card-body">
                 <div class="py-3 text-right">
                     <a href="#" onclick="return window.history.back()" class="btn btn-dark">Kembali</a>
-                    <a href="#" class="btn btn-info">Cetak</a>
                 </div>
                  <table class="table table-bordered mb-3">
                     <tbody>
@@ -199,5 +198,13 @@
     </div>
     </div>
 </section>
+
+@if(session()->has('cetak')) 
+
+<script>
+    window.open('{{session()->get('cetak')}}', "_blank");
+</script>
+
+@endif
 
 @endsection

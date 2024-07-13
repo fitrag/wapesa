@@ -44,7 +44,10 @@
                         respon.forEach((data, index) => {
                             $('#hasil').append(`
                             <div class="d-flex justify-content-between bg-white p-3 mb-1 rounded align-items-center border">
-                                <div>${data.nm_siswa}</div>
+                                <div>
+                                    <div>${data.nm_siswa}</div>
+                                    <div>Kelas : ${data.kelas.nm_kls}</div>
+                                </div>
                                 <a href="{{ url('admin/pembayaran/tambah/${data.id}') }}" class="btn btn-primary">Pilih</a>
                             </div>
                             

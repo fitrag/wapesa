@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('npsn')->nullable();
             $table->string('nama_sekolah')->nullable();
             $table->text('alamat_sekolah')->nullable();
+            $table->boolean('siswa_absen')->default(0);
+            $table->string('kelas_absen')->nullable();
+            $table->integer('radius')->nullable();
             $table->timestamps();
         });
     }

@@ -26,4 +26,7 @@ class Siswa extends Model
     {
     	return $this->hasMany(Pembayaran::class);
     }
+    public function siswaprakerin(){
+        return $this->hasOne(SiswaPrakerin::class);
+    }
 }

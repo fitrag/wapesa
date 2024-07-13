@@ -2,17 +2,19 @@
 
 @push('scripts')
 <!-- JS Libraies -->
-<script type="text/javascript" src="{{ asset('instascan.min.js') }}"></script>
+<!-- <script type="text/javascript" src="{{ asset('instascan.min.js') }}"></script> -->
+<script type="text/javascript" src="{{ asset('html5-qrcode.min.js') }}"></script>
 <script type="text/javascript">
-    let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-    var videoSelect = document.querySelector('select#videoSource');
-    scanner.addListener('scan', function (content) {
-        $.ajax({
+    var resultContainer = document.getElementById('qr-reader-results');
+    var lastResult, countResults = 0;
+
+    function onScanSuccess(decodedText, decodedResult) {
+            $.ajax({
             url:"{{ route('scanning-absensi') }}",
             type:"POST",
             data:{
                 '_token':"{{ @csrf_token() }}",
-                'siswa':content
+                'siswa':decodedText
             },
             success:function(e){
                 const data = JSON.parse(e)
@@ -35,26 +37,74 @@
                     document.getElementById('hasil').innerHTML = 'Data tidak ditemukan'
                     document.getElementById('nama').innerHTML = 'Data tidak ditemukan'
                 }else{
-                    $('#errorAlert').addClass('d-none')
+                    $('#gagalAlert').addClass('d-none')
                     $('#berhasilAlert').addClass('d-none')
-                    $('#gagalAlert').removeClass('d-none')
+                    $('#errorAlert').removeClass('d-none')
                     $('#nis').val('')
+                    $('#errorAlert').html('Sudah absen')
                     sudahAudio();
                     document.getElementById('hasil').innerHTML = 'Sudah absen'
                     document.getElementById('nama').innerHTML = 'Sudah absen'
                 }
             }
         })
-    });
-    Instascan.Camera.getCameras().then(function (cameras) {       
-        if (cameras.length > 0) {
-            scanner.start(cameras[0]);
-        } else {
-            console.error('No cameras found.');
-        }
-    }).catch(function (e) {
-        console.error(e);
-    });
+    }
+
+    var html5QrcodeScanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: 250 });
+    html5QrcodeScanner.render(onScanSuccess);
+
+    // let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+    // var videoSelect = document.querySelector('select#videoSource');
+    // scanner.addListener('scan', function (content) {
+    //     $.ajax({
+    //         url:"{{ route('scanning-absensi') }}",
+    //         type:"POST",
+    //         data:{
+    //             '_token':"{{ @csrf_token() }}",
+    //             'siswa':content
+    //         },
+    //         success:function(e){
+    //             const data = JSON.parse(e)
+    //             const statusCode = data.statusCode
+    //             if(statusCode === 200){
+    //                 $('#berhasilAlert').removeClass('d-none')
+    //                 $('#gagalAlert').addClass('d-none')
+    //                 $('#errorAlert').addClass('d-none')
+    //                 berhasilAudio();
+    //                 $('#nis').val('')
+    //                 document.getElementById('hasil').innerHTML = data.data.nis
+    //                 document.getElementById('nama').innerHTML = data.data.nm_siswa
+    //             }else if(statusCode === 404){
+    //                 $('#berhasilAlert').addClass('d-none')
+    //                 $('#errorAlert').removeClass('d-none')
+    //                 $('#gagalAlert').addClass('d-none')
+    //                 gagalAudio();
+    //                 $('#errorAlert').html(data.message)
+    //                 $('#nis').val('')
+    //                 document.getElementById('hasil').innerHTML = 'Data tidak ditemukan'
+    //                 document.getElementById('nama').innerHTML = 'Data tidak ditemukan'
+    //             }else{
+    //                 $('#errorAlert').addClass('d-none')
+    //                 $('#berhasilAlert').addClass('d-none')
+    //                 $('#gagalAlert').removeClass('d-none')
+    //                 $('#nis').val('')
+    //                 sudahAudio();
+    //                 document.getElementById('hasil').innerHTML = 'Sudah absen'
+    //                 document.getElementById('nama').innerHTML = 'Sudah absen'
+    //             }
+    //         }
+    //     })
+    // });
+
+    // Instascan.Camera.getCameras().then(function (cameras) {       
+    //     if (cameras.length > 0) {
+    //         scanner.start(cameras[0]);
+    //     } else {
+    //         console.error('No cameras found.');
+    //     }
+    // }).catch(function (e) {
+    //     console.error(e);
+    // });
 
     $("#inputAbsen").submit(function(e){
         e.preventDefault();
@@ -87,10 +137,11 @@
                         document.getElementById('hasil').innerHTML = 'Data tidak ditemukan'
                         document.getElementById('nama').innerHTML = 'Data tidak ditemukan'
                     }else{
-                        $('#errorAlert').addClass('d-none')
+                        $('#gagalAlert').addClass('d-none')
                         $('#berhasilAlert').addClass('d-none')
-                        $('#gagalAlert').removeClass('d-none')
+                        $('#errorAlert').removeClass('d-none')
                         $('#nis').val('')
+                        $('#errorAlert').html('Sudah absen')
                         sudahAudio();
                         document.getElementById('hasil').innerHTML = 'Sudah absen'
                         document.getElementById('nama').innerHTML = 'Sudah absen'
@@ -152,8 +203,10 @@
             <div class="alert alert-danger d-none" id="gagalAlert">Gagal absen</div>
         <div class="card">
             <div class="card-body">
-                <div class="text-center">
-                    <video id="preview" class="mw-100"></video>
+                <div class="text-center d-flex justify-content-center">
+                    <!-- <video id="preview" class="mw-100"></video> -->
+                    <div id="qr-reader" style="width:500px"></div>
+                    <div id="qr-reader-results"></div>
                 </div>
                 <div class="my-2">
                     <table class="table table-bordered">
@@ -187,5 +240,7 @@
     </div>
     </div>
 </section>
+
+
 
 @endsection

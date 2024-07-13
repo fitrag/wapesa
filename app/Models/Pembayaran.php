@@ -17,4 +17,7 @@ class Pembayaran extends Model
     public function jenisbayar(){
         return $this->belongsTo(Jenisbayar::class);
     }
+    public function riwayatbayars(){
+        return $this->hasMany(Riwayatbayar::class);
+    }
 }

@@ -23,6 +23,7 @@
       float:right !important
     }
   </style>
+  @laravelPWA
   @stack('styles')
 <body>
   <div id="app">

@@ -13,4 +13,7 @@ class Mapel extends Model
     public function guru(){
         return $this->belongsTo(Guru::class);
     }
+    public function jadwal_sekolahs(){
+        return $this->hasMany(JadwalSekolah::class);
+    }
 }
