@@ -63,6 +63,8 @@ class JurnalGuruController extends Controller
                 return view('admin.jurnal.pilih_kls',compact('kelas','mapel','tp','tps'));
         }
     }
+
+    
     public function jurnal_mapel(Request $req)
     {
         if(auth()->user()->level == 'admin')
