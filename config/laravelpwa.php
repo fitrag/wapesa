@@ -4,7 +4,7 @@ return [
     'name' => 'SIMSkul',
     'manifest' => [
         'name' => env('APP_NAME', 'SIMSkul'),
-        'short_name' => 'SS',
+        'short_name' => 'SIMSkul',
         'start_url' => '/',
         'background_color' => '#ffffff',
         'theme_color' => '#6777ef',

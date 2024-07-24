@@ -53,7 +53,7 @@ $jenis_bayars = App\Models\Jenisbayar::whereKelas(auth()->user()->siswa->kelas->
                   <h4>Riwayat Pembayaran</h4>
                 </div>
                 <div class="card-body p-0">
-                    <div class="table-responsive table-invoice">
+                    <div class="table-invoice">
                         <table class="table table-striped">
                         <tbody>
                         <tr>

@@ -18,7 +18,7 @@ $('#kirimMapel').click(function(e){
     const mapel_id = $('#mapel_id').val();
     const hari = $('#hari').val();
     const kelas_id = "{{ request()->kelas_id }}"; // Mendapatkan nilai kelas_id dari PHP
-    const tp_id = "{{ \App\Models\Tp::where('status', 1)->first()->id }}"; // Mendapatkan nilai tp_id dari PHP
+    const tp_id = "{{ \App\Models\Tp::where('status', 1)->first()?->id }}"; // Mendapatkan nilai tp_id dari PHP
     
     $.ajax({
         url: "{{ route('admin.jadwal-sekolah.store') }}",

@@ -41,6 +41,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/admin/user/{user:id}/update', UserController::class.'@update')->name('admin.user.update');
     Route::delete('/admin/user/{user:id}/delete', UserController::class.'@destroy')->name('admin.user.delete');
     Route::get('/admin/user/{user:id}/delete', UserController::class.'@destroy')->name('admin.user.delete-ajax');
+
+    
+    Route::get('/profile/{user:username}', UserController::class.'@profile')->name('profile');
+    Route::put('/profile/{user:username}/update', UserController::class.'@profileUpdate')->name('profile-update');
     
     // Wali Kelas
     Route::get('/admin/wali-kelas', WaliKelasController::class.'@index')->name('admin.wali-kelas');
