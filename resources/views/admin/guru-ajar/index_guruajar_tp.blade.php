@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Jurnal Kelas'])
+@extends('layouts.app', ['title' => 'Jurnal Guru'])
 
 @push('scripts')
 <!-- JS Libraies -->
@@ -14,11 +14,13 @@
 
 <section class="section">
     <div class="section-header">
-    <h1>Jurnal Guru</h1>
+    <h1>Data Guru Mengajar :
+    
+   </h1>
     <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-        <div class="breadcrumb-item"><a href="#">Jurnal Mengajar</a></div>
-        <div class="breadcrumb-item"> <a href="{{ route('admin.jurnal-guru')}}">Jurnal Guru</a></div>
+        <div class="breadcrumb-item"><a href="">Guru Mengajar </a></div>
+       
     </div>
     </div>
 
@@ -35,25 +37,25 @@
             
             <div class="card-body">
                 <div class="table-responsive">
-                <table class="table table-striped table-hover" id="table-1">
+                <table class="table table-striped table-sm table-hover" id="table-1">
                     <thead>                                 
                         <tr>
                             <th class="text-center">#</th>
-                            <th>Mapel</th>
-                            <th>Kelas</th>
+                            <th>ID</th>
+                            <th>Tahun Pelajaran</th>
+                            <th>Semester</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>                                 
-                    @foreach($data as $item)
+                    @foreach($tp as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->id }}</td>                               
+                                <td>{{ $item->nm_tp}}</td>
+                                <td>{{ $item->semester}}</td>
                                 <td>
-                                        <a href="{{ route('admin.jurnal.tampil_jurnalkelas',  ['guru_ajar' => $item->mapel_id]) }}">{{$item->nm_mapel}}</a>
-                                </td>
-                                <td>{{ $item->nm_kls }}</td>
-                                <td>
-                                    <a href="{{ route('admin.jurnal.tampil_jurnalkelas', ['guru_ajar' => $item->mapel_id]) }}" class="btn btn-primary m-1 btn-sm"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ route('admin.guru.ajar-tp', $item->id) }}" class="btn btn-primary m-1 "><i class="fas fa-eye"></i></a>
                                 </td>
                             </tr>
                     @endforeach

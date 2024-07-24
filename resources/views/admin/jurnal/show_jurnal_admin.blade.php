@@ -59,10 +59,14 @@
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ $item->nm_guru }}</td>
                                 @php
-                                     
-                                    $mapel  =   App\Models\Guru_ajar::select('mapels.alias','guru_ajars.id','guru_ajars.mapel_id')
+                                    $mapel  =   App\Models\Guru_ajar::select('mapels.alias','guru_ajars.id','guru_ajars.mapel_id','kelas.nm_kls','guru_ajars.kelas_id')
                                                     ->join('mapels','guru_ajars.mapel_id','mapels.id')
-                                                    ->Where('guru_ajars.guru_id',$item->id)
+                                                    ->join('tps','guru_ajars.tp_id','tps.id')
+                                                    ->join('kelas','guru_ajars.kelas_id','kelas.id')
+                                                    ->Where([
+                                                        ['guru_ajars.guru_id',$item->id],
+                                                        ['guru_ajars.tp_id',$tp_id]
+                                                        ])
                                                     ->get();
                                 @endphp
                                 <td>
@@ -71,19 +75,17 @@
                                             $count_jurnal  =   App\Models\Jurnal::Where([
                                                     ['jurnals.mapel_id','=',$items->mapel_id],
                                                     ['jurnals.tp_id','=',$tp_id],
+                                                    ['jurnals.kelas_id','=',$items->kelas_id],
                                                 ])
                                                     ->count();
                                         @endphp
-                                            {{ $items->alias}} / <b>({{$count_jurnal}}-Pertemuan)</b>; 
+                                            {{ $items->alias}}({{$items->nm_kls}}) / <b>({{$count_jurnal}}-Pertemuan)</b>; 
                                     @endforeach
                                 </td>
                                 <td>
                                     <a href="{{ url('admin/jurnal/tampil_jurnal_admin/'.$item->id.'/'.$tp_id)}}" class="btn btn-primary m-1 "><i class="fas fa-eye"></i></a>
                                 </td>
                             </tr>
-                                
-                            
-                            
                         @endforeach
                     </tbody>
                   </table>
