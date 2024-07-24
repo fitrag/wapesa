@@ -121,7 +121,9 @@ Route::middleware(['auth'])->group(function () {
     ->name('update', 'admin.guru-ajar.update')
     ->name('destroy', 'admin.guru-ajar.delete')
     ->name('show', 'admin.guru-ajar.show');
-    
+    Route::get('admin/guru-ajar-tp/{tp_id}', GuruAjarController::class.'@tampil_ajar_tp')->name('admin.guru.ajar-tp');
+    Route::get('admin/tampil-guru-ajar/{id}/{tp_id}', GuruAjarController::class.'@tampil')->name('admin.guru.ajar');
+
     //Mapel
     Route::resource('admin/mapel', MapelController::class);
     

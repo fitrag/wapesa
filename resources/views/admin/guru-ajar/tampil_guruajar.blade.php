@@ -14,8 +14,7 @@
 
 <section class="section">
     <div class="section-header">
-    <h1> 
-        Nama Guru : {{ $guru->nm_guru}}
+    <h1> Guru Mengajar dari : {{ $guru->nm_guru}}
        
     </h1>
     <div class="section-header-breadcrumb">
@@ -46,7 +45,8 @@
                         <tr>
                             <th class="text-center">#</th>
                             <th>Nama Mapel</th>
-                            <th></th>
+                            <th>TP</th>
+                            <th>Kelas</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -55,7 +55,8 @@
                             <tr>
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ $item->nm_mapel }}</td>
-                                <td></td>
+                                <td>{{ $item->nm_tp }}</td>
+                                <td>{{ $item->nm_kls }}</td>
                                 <td>
                                     <div class="btn-group">
                                         
@@ -105,6 +106,36 @@
                 @enderror
                 <div class="invalid-feedback">
                     Mohon di isi kelas
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">TP</label>
+                    <select class="form-control" name="tp_id" required="">
+                        <option value="">--Pilih--</option>
+                        @foreach($tp as $item)
+                            <option value="{{$item->id}}">{{$item->nm_tp}}</option>
+                        @endforeach
+                </select>
+                @error('tp_id')
+                    <div class="alert alert-danger">nama TP</div>
+                @enderror
+                <div class="invalid-feedback">
+                    Mohon di isi nama tp
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name">Kelas</label>
+                    <select class="form-control" name="kelas_id" required="">
+                        <option value="">--Pilih--</option>
+                        @foreach($kelas as $item)
+                            <option value="{{$item->id}}">{{$item->nm_kls}}</option>
+                        @endforeach
+                </select>
+                @error('kelas_id')
+                    <div class="alert alert-danger">nama kelas</div>
+                @enderror
+                <div class="invalid-feedback">
+                    Mohon di isi nama kelas
                 </div>
             </div>
             

@@ -32,7 +32,8 @@ class JurnalGuruController extends Controller
                     ->join('gurus','guru_ajars.guru_id','=','gurus.id')
                     ->join('mapels','guru_ajars.mapel_id','=','mapels.id')
                     ->join('users','gurus.user_id','=','users.id')
-                    ->select('guru_ajars.*','mapels.nm_mapel')
+                    ->join('kelas','guru_ajars.kelas_id','=','kelas.id')
+                    ->select('guru_ajars.*','mapels.nm_mapel','kelas.nm_kls')
                     ->where('users.id','=',$user)
                     ->get();   
         

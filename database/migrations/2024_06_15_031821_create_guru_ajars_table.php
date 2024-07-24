@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('guru_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('mapel_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreignId('tp_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }
